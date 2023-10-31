@@ -20,7 +20,7 @@
 		display: flex;
 		gap: 1em;
 		color: #f2f3f7;
-		font-family: sans-serif;
+		font-family: Poppins;
 	}
 }
 
@@ -30,4 +30,5 @@
 	padding: 1.3em;
 	margin: 2em 2em;
 	color: #f2f3f7;
+	font-family: Poppins;
 }
