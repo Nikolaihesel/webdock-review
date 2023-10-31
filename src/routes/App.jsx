@@ -1,8 +1,8 @@
-import './App.css'
-import './index.css'
+import '../App.css'
+import '../index.css'
 
 //components
-import Nav from './assets/components/Nav'
+import Nav from '../assets/components/Nav'
 
 
 function App() {

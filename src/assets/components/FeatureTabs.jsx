@@ -2,10 +2,11 @@ import React from 'react'
 import '../stylesheet/nav.css'
 
 function FeatureTabs({Title}) {
-  return (
-    <div className="tabs">
+  return (<>
+     <div className="tabs">
         <p>{Title}</p>
     </div>
+    </>
   )
 }
 
