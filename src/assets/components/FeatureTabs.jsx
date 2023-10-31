@@ -3,7 +3,7 @@ import '../stylesheet/nav.css'
 
 function FeatureTabs({Title}) {
   return (
-    <div Classname="tabs">
+    <div className="tabs">
         <p>{Title}</p>
     </div>
   )

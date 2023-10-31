@@ -14,7 +14,7 @@ function Nav() {
     <div className="nav">
         <img src={Logo} alt="Logo" />
 
-        <div >
+        <div>
             <p>Login</p>
             <p>Sign up</p>
         </div>
@@ -23,7 +23,7 @@ function Nav() {
         </div>
 
     <div className="tab-container">
-        <Tabs  Title="Roadmap"  className="active" />
+        <Tabs Title="Roadmap"  className="active" />
         <Tabs Title="Feature request" />
         <Tabs Title="My Request" />
      </div>
