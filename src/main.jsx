@@ -9,7 +9,7 @@ import App from './routes/App'
 import './index.css'
 import ErrorPage from './error-page';
 import Roadmap from './routes/Roadmap';
-import featureRequest from './routes/featureRequest';
+import FeatureRequest from './routes/featureRequest';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "featurerequest",
-        element: <featureRequest/>,
+        element: <FeatureRequest />,
       }
     ],
   },

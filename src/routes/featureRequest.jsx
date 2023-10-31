@@ -1,9 +1,9 @@
 import React from 'react'
 
-function featureRequest() {
+function FeatureRequest() {
   return (
     <div>Feature request</div>
   )
 }
 
-export default featureRequest
+export default FeatureRequest
