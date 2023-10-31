@@ -9,6 +9,7 @@ import '../stylesheet/nav.css'
 //Components
 import Tabs from '../components/FeatureTabs'
 import Roadmap from "../../routes/Roadmap";
+import FeatureRequest from "../../routes/featureRequest"
 
 function Nav() {
   return (
@@ -28,8 +29,10 @@ function Nav() {
     <div className="tab-container">
     <NavLink to="roadmap"  > 
       <Tabs Title="Roadmap" />
-    </NavLink>  
+    </NavLink>
+    <NavLink to="featurerequest"  >
         <Tabs Title="Feature request" />
+      </NavLink>
         <Tabs Title="My Request" />
      </div>
     </div>
