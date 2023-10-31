@@ -1,0 +1,33 @@
+.container {
+	background: green;
+}
+
+.nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100vw;
+	padding: 1em;
+
+	background: green;
+
+	> img {
+		height: 2em;
+	}
+
+	& div {
+		display: flex;
+		gap: 1em;
+		color: #f2f3f7;
+		font-family: sans-serif;
+	}
+}
+
+.tab-container {
+	display: flex;
+	gap: 3em;
+	padding: 1.3em;
+	margin: 2em 2em;
+	color: #f2f3f7;
+}
