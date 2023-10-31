@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from '../webdock-logo-hvid.svg'
+import Banner from '../banner.jpg'
 
 //Css
 import '../stylesheet/nav.css'
