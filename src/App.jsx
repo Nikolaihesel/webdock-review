@@ -1,14 +1,19 @@
 import './App.css'
 import './index.css'
 
+//components
+import Nav from './assets/components/Nav'
+
+
 function App() {
 
 
   return (
     <>
-     <div>
-      <h1>Hello</h1>
-     </div>
+     <main>
+      <Nav />
+      
+     </main>
     </>
   )
 }
