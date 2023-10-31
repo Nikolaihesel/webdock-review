@@ -1,5 +1,6 @@
 .container {
 	background-image: url(../banner.jpg);
+	background-size: cover;
 
 }
 
