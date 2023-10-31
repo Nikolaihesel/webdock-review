@@ -10,6 +10,7 @@ import './index.css'
 import ErrorPage from './error-page';
 import Roadmap from './routes/Roadmap';
 import FeatureRequest from './routes/featureRequest';
+import MyRequest from './routes/MyRequest';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "featurerequest",
         element: <FeatureRequest />,
+      },
+      {
+        path: "myrequest",
+        element: <MyRequest />,
       }
     ],
   },
