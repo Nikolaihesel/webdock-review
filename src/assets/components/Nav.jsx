@@ -1,7 +1,9 @@
 import { NavLink, Outlet } from "react-router-dom";
 import React from 'react'
+
+// Img
 import Logo from '../webdock-logo-hvid.svg'
-import Banner from '../banner.jpg'
+
 
 //Css
 import '../stylesheet/nav.css'
@@ -15,7 +17,7 @@ import MyRequest from "../../routes/MyRequest";
 
 function Nav() {
   return (
-    <div className="nav-container">
+<div className="nav-container">
 <div className="container">
     <div className="nav">
         <img src={Logo} alt="Logo" />
@@ -28,20 +30,20 @@ function Nav() {
         
         </div>
 
-    <div className="tab-container">
+<div className="tab-container">
     <NavLink to="roadmap"  > 
-      <Tabs Title="Roadmap" />
-    </NavLink>
+        <Tabs Title="Roadmap" />
+</NavLink>
     <NavLink to="featurerequest"  >
         <Tabs Title="Feature request" />
-      </NavLink>
+        </NavLink>
       <NavLink to="myrequest">
         <Tabs Title="My Request" />
-      </NavLink>
+</NavLink>
      </div>
     </div>
     <Outlet />
-  </div>
+    </div>
   )
 }
 

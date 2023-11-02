@@ -1,7 +1,6 @@
 .container {
 	background-image: url(../banner.jpg);
 	background-size: cover;
-
 }
 
 .nav {
@@ -11,8 +10,6 @@
 	align-items: center;
 	width: 100vw;
 	padding: 1em;
-
-	
 
 	> img {
 		height: 2em;
@@ -28,13 +25,33 @@
 
 .tab-container {
 	display: flex;
-	gap: 3em;
-	padding: 1.3em;
-	margin: 2em 2em;
+	gap: 2em;
+
+	margin: 2em 0 0 0;
 	color: #f2f3f7;
 	font-family: Poppins;
+
+	& a {
+		text-decoration: none;
+		color: #f2f3f7;
+	}
+}
+
+.tabs-bg {
+	min-width: 15ch;
+	text-align: center;
+	padding: 0.5em 0;
+
+	& a {
+		text-decoration: none;
+	}
 }
 
 .active {
-	border: 1px solid red;
+	background: #fff;
+	border-radius: 20px 20px 0 0;
+
+	& p {
+		color: #272727;
+	}
 }
