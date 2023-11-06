@@ -1,0 +1,35 @@
+.roadmap-container {
+	width: 100vw;
+	min-height: 100vh;
+}
+
+.feature-container {
+	max-width: 35cqh;
+	border: solid #272727 1px;
+	border-radius: 10px;
+	height: 80vh;
+	overflow: auto;
+
+	& h3 {
+		padding: 1em;
+		text-align: center;
+		background: grey;
+		border-radius: 10px 10px 0 0;
+		overflow: hidden;
+	}
+	& hr {
+		width: 100%;
+		height: 1px;
+		background: #272727;
+		border: 1px solid #272727;
+		border-radius: 20px;
+		justify-self: center;
+	}
+}
+
+.feature-request {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
