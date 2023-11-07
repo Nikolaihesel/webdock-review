@@ -13,7 +13,6 @@
     justify-content: flex-start;
     gap: 10%;
     width: 50%;
-    background: --info;
 
     & div {
         display: flex;
@@ -25,7 +24,7 @@
 }
 
 select {
-    border: .5px solid --info;
+    border: .5px solid var(--info);
     border-radius: 5px;
     padding: 2px;
     background-color: #f2f3f7;
