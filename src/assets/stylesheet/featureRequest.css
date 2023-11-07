@@ -8,6 +8,10 @@
 
 @import url(../../index.css);
 
+.body {
+    font-family: var(--prim-font);
+}
+
 .filter {
     display: flex;
     justify-content: flex-start;

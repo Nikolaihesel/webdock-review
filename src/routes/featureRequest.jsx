@@ -1,5 +1,6 @@
 import React from 'react'
 import DropdownMenu from '../assets/components/Dropdown'
+import FeatureReqContainer from '../assets/components/FeatureReqContainer'
 
 //css
 import "../index.css"
@@ -22,8 +23,9 @@ function FeatureRequest() {
         <input type="search" className="" placeholder='Search' />
         <button type='submit'>Search</button>
         </div>  
-      
-    </div>
+      <FeatureReqContainer />
+    </div> 
+
   )
 }
 
