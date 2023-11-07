@@ -12,18 +12,28 @@ function Roadmap() {
   
   return (
     <div className="roadmap-container"> 
-      <div className="triple-container">
-     <FeatureContainer title="Most Liked" />
+        <div className="triple-container">
+            <div className='mostLiked'>
+                <FeatureContainer title="Most Liked" />
+            </div>
 
-     <FeatureContainer title="Coming Soon" />
+            <div className='comingSoon'>
+                <FeatureContainer title="Coming Soon" />
+            </div>
 
-     <FeatureContainer title="New In" />
-    </div>
+            <div className='newIn'>
+                <FeatureContainer title="New In" />
+            </div>
+        </div>
 
-     <div className="ImpleRequest">
-      <FeatureContainer title="Implemented request" />
-     </div>
-      <RequestButton />
+        <div className="ImpleRequest">
+            <FeatureContainer title="Implemented request" />
+        </div>
+
+        <div className="CenterButton">
+            <RequestButton /> 
+        </div>
+      
      </div>
 
   )
