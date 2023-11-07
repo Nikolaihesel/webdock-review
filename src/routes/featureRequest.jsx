@@ -8,6 +8,7 @@ import "../assets/stylesheet/featureRequest.css"
 
 function FeatureRequest() {
   return (
+    <div className="fr-req-container">
     <div className='filter-nav'>
       <div className='filter'>
           <div className="">
@@ -23,8 +24,13 @@ function FeatureRequest() {
         <input type="search" className="" placeholder='Search' />
         <button type='submit'>Search</button>
         </div>  
-      <FeatureReqContainer />
+
     </div> 
+    <div className="card-request">
+          <FeatureReqContainer />
+    </div>
+
+    </div>
 
   )
 }
