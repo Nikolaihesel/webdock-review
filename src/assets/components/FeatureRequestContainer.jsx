@@ -3,7 +3,6 @@ import React from 'react'
 //Components
 import Post from './RoadmapPost'
 
-import '../stylesheet/roadmap.css'
 
 function FeatureRequestContainer({title}) {
 
