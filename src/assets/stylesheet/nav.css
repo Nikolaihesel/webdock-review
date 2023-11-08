@@ -40,6 +40,7 @@
 	min-width: 15ch;
 	text-align: center;
 	padding: 0.5em 0;
+	font-weight: 600;
 
 	& a {
 		text-decoration: none;
