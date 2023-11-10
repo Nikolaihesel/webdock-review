@@ -1,5 +1,4 @@
 import React from 'react'
-import CreatePost from 'CreatePost'
 
 //css
 import "../stylesheet/roadmap.css" 

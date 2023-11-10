@@ -1,16 +1,28 @@
 import React from 'react'
-
+import { useState } from 'react'
 
 //Components
 import FeatureContainer from '../assets/components/FeatureRequestContainer'
-
-import '../assets/stylesheet/roadmap.css'
+import CreatePost from '../assets/components/CreatePost'
 import RequestButton from '../assets/components/RequestButton'
+
+//Css
+import '../assets/stylesheet/roadmap.css'
+
+const RequestPost = () => {
+        const [isModalOpen, setIsModalOpen] = useState(false);
+      
+        const toggleModal = () => {
+          setIsModalOpen(!prev => !prev);
+        };
+    }
 
 function Roadmap() {
 
+    
   
   return (
+    
     <div className="roadmap-container"> 
         <div className="triple-container">
             <div className='mostLiked'>
@@ -31,7 +43,8 @@ function Roadmap() {
         </div>
 
         <div className="CenterButton">
-            <RequestButton /> 
+            <button onClick={toggleModal}>Open Modal</button>
+            <CreatePost isOpen={isModalOpen} onClose={toggleModal} />
         </div>
       
      </div>
