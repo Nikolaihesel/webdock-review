@@ -2,8 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 
 
-function CreatePost() {
-    const CreateRequest = ({ isOpen, onClose }) => {
+    const CreatePost = ({ isOpen, onClose }) => {
         const [inputValue, setInputValue] = useState('');
       
         const handleSubmit = (e) => {
@@ -15,27 +14,30 @@ function CreatePost() {
         };
    
         return isOpen ? (
-          <div className="modal-overlay">
+          <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content">
-              <span className="close-btn" onClick={onClose}>
-                &times;
-              </span>
-              <form onSubmit={handleSubmit}>
-                <label>
-                  Enter something:
-                  <input
-                    type="text"
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                  />
-                </label>
-                <button type="submit">Submit</button>
-              </form>
+              <div className="modal-header">
+                <span className="close-btn" onClick={onClose}>
+                  &times;
+                </span>
+              </div>
+              <div className="modal-body">
+                <form onSubmit={handleSubmit}>
+                  <label>
+                    Enter something:
+                    <input
+                      type="text"
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                    />
+                  </label>
+                  <button type="submit">Submit</button>
+                </form>
+              </div>
             </div>
           </div>
         ) : null;
       };
 
-}
 
 export default CreatePost

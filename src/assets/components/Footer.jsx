@@ -72,7 +72,7 @@ function Footer() {
                 </li>
             </ul>
                 <h2>webdock.io</h2>
-            <div class="google-play">
+            <div className="google-play">
                 <img src={GooglePlay} 
                     style={{
                     height: 40,
