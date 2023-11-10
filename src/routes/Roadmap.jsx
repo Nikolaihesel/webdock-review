@@ -13,7 +13,7 @@ const RequestPost = () => {
         const [isModalOpen, setIsModalOpen] = useState(false);
       
         const toggleModal = () => {
-          setIsModalOpen(!prev => !prev);
+          setIsModalOpen(prev => !prev);
         };
     }
 
