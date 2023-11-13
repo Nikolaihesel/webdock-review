@@ -1,3 +1,5 @@
+@import url(../../index.css);
+
 .roadmap-container {
 	min-height: 100vh;
 	display: block;
@@ -27,7 +29,7 @@
 		padding: 1em;
 		overflow: hidden;
 		background: #f5f5f5;
-		border: 2px solid #6CD345;
+		border: 2px solid var(--clr-done);
 		border-radius: 10px 10px 0 0;
 		top: 0;
 	}
@@ -45,19 +47,19 @@
 
 .mostLiked {
 	& h3 {
-		border-color: #fcb330;
+		border-color: var(--clr-trending);
 	}
 }
 
 .comingSoon {
 	& h3 {
-		border-color: #c17aff;
+		border-color: var(--clr-progress);
 	}
 }
 
 .newIn {
 	& h3 {
-		border-color: #00a1a1;
+		border-color: var(--clr-review);
 	}
 }
 
@@ -75,7 +77,7 @@
 		
 		}
 		& h3 {
-			border-color: #6CD345;
+			border-color: var(--clr-done);
 		}
 
 }
