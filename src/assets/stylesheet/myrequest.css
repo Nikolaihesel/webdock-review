@@ -1,0 +1,22 @@
+.mr-container{
+    min-height: 100vh;
+}
+
+.double-container{
+    display: flex;
+    justify-content: center;
+    gap: 4em;
+    margin-top: 4em;
+}
+
+.mr-boxes{
+    display: flex;
+
+    & .feature-container{
+        width: 60cqh;
+    }
+
+    & h3 {
+        border-color: #00A1A1;
+    }
+}
