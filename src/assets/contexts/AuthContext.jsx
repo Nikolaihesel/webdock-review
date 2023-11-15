@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-export const AuthContext = createContext(null) //global værdi
+export const AuthContext = createContext("") //global værdi
 
 export const AuthProvider = ({children}) => { 
 
