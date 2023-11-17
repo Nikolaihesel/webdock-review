@@ -1,54 +1,10 @@
 import React from 'react'
 
 //Components
-import Post from './RoadmapPost'
-
+import RoadmapPost from './RoadmapPost'
+import Data from '../../data/post.json'
 
 function FeatureRequestContainer({title}) {
-
-    const post = [{
-    userID: "nikolai",
-    title: "Dns shit",
-    description: "noget om hvad der står og sådan noget",
-    category: "Dns shit",
-    
-  }, {
-   userID: "Bella",
-    title: "noget om hunde",
-    description: "noget om hvad der står og sådan noget",
-    category: "Dns shit",
-  },
-   {
-   userID: "Bella",
-    title: "noget om hunde",
-    description: "noget om hvad der står og sådan noget",
-    category: "Dns shit",
-  },
-   {
-   userID: "Bella",
-    title: "noget om hunde",
-    description: "noget om hvad der står og sådan noget",
-    category: "Dns shit",
-  },
-   {
-   userID: "Bella",
-    title: "noget om hunde",
-    description: "noget om hvad der står og sådan noget",
-    category: "Dns shit",
-  },
-   {
-   userID: "Bella",
-    title: "noget om hunde",
-    description: "noget om hvad der står og sådan noget",
-    category: "Dns shit",
-  },
-   {
-   userID: "Bella",
-    title: "noget om hunde",
-    description: "noget om hvad der står og sådan noget",
-    category: "Dns shit",
-  },
-]
 
   return (
 
@@ -57,7 +13,20 @@ function FeatureRequestContainer({title}) {
          <div className="feature-container">
         <h3 className="feature-titles">{title}</h3>
         
-        <div className="feature-requests">     
+      {
+        Data.post.map((post, index) => (
+          <RoadmapPost
+            key={index}
+            title={post.title}
+            status={post.status}
+            classStatus={post.status}
+            description={post.describe}
+          />
+
+        ))
+      }
+
+     {/*  <div className="feature-requests">     
         {post.map((post, index) => (
           <div className="feature-request" key={index}>
               <p className="feature-post-user">{post.user}</p>
@@ -69,7 +38,7 @@ function FeatureRequestContainer({title}) {
 
             </div>
         ))}
-        </div>
+        </div> */}
       </div>
     </div>
   )
