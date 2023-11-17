@@ -12,7 +12,10 @@ import ErrorPage from './error-page';
 import Roadmap from './routes/Roadmap';
 import FeatureRequest from './routes/featureRequest';
 import MyRequest from './routes/MyRequest';
-import { AuthProvider } from './assets/contexts/AuthContext';
+//import { AuthProvider } from './assets/contexts/AuthContext';
+import SsoLogin from './assets/components/ssoComponents/SsoLogin'
+import SsoCallback from './assets/components/ssoComponents/SsoCallback';
+import { TokenProvider } from './assets/contexts/TokenContext';
 
 const router = createBrowserRouter([
   {
@@ -20,10 +23,10 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      {
-        index: true,
-        element: <Navigate to="/roadmap" replace /> /* redirect så default side er roadmap tab */
-      },
+       {
+         index: true,
+         element: <Navigate to="/roadmap" replace /> /* redirect så default side er roadmap tab */
+       },
 
       {
         path: "roadmap",
@@ -36,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "myrequest",
         element: <MyRequest />,
+      },
+      {
+        path: 'ssologin',
+        element: <SsoLogin />
+      },
+      {
+        path: 'ssocallback',
+        element: <SsoCallback />
       }
     ],
 
@@ -47,8 +58,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
+    <TokenProvider >
+
       <RouterProvider router={router} /> {/* child, alt inde i den kan tilgå authprovider, sørger for tabs på siden */}
-    </AuthProvider> {/* state wrapped i context */}
+
+  </TokenProvider>
   </React.StrictMode>,
 )

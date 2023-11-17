@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useRouteLoaderData } from "react-router-dom";
 import React, { useContext, useEffect } from 'react'
 
 // Img
@@ -13,15 +13,15 @@ import Tabs from '../components/FeatureTabs'
 import Roadmap from "../../routes/Roadmap";
 import FeatureRequest from "../../routes/featureRequest"
 import MyRequest from "../../routes/MyRequest";
-import { AuthContext } from "../contexts/AuthContext";
+import { TokenContext } from "../contexts/TokenContext";
 
 
 function Nav() {
-  const {user, setUser} = useContext(AuthContext)
+  const {token, setToken} = useContext(TokenContext)
+
+
+
 //function body = body af en function
-  useEffect(() => {
-    console.log(user)
-  }, [user])
   return (
     <div className="nav-container">
       <div className="container">
@@ -29,14 +29,18 @@ function Nav() {
           <img src={Logo} alt="Logo" />
 
           <div> {/*Ternary = hvis den først er true tage den statement før : hvis false den efter - kortere else/if */}
-            {!!user ? (
-              <p onClick={() => setUser(null)}>Log out</p>
+      
+            {!!token ? (
+              <p >Log out</p>
             ) : (
               <> {/* fragment */}
-                <p onClick={() => setUser({name: 'Preben'})}>Login</p>
+           
+                      <NavLink to="ssologin"><p>Login</p>   </NavLink>  
                 <p>Sign up</p>
+
               </>
             )}
+
             
           </div>
 
@@ -50,7 +54,7 @@ function Nav() {
           <NavLink to="featurerequest"  >
             <Tabs Title="Feature request" />
           </NavLink>
-          {!!user && ( //truthy and falsy - testes i "if" - hvis user er et object = true hvis null = false - når du rammer noget ikke er sandt stopper den med at kigge efter det
+          {!!token && ( //truthy and falsy - testes i "if" - hvis user er et object = true hvis null = false - når du rammer noget ikke er sandt stopper den med at kigge efter det
             <NavLink to="myrequest">
               <Tabs Title="My Request" />
             </NavLink>
