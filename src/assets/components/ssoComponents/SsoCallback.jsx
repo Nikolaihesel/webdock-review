@@ -8,7 +8,6 @@ function SsoCallback() {
 
  const [userData, setUserData] = useState(null); // Initialize userData state as null
 
-
  const TokenDataContext = createContext(null);
 
 const fetchData = async () => { 
@@ -39,14 +38,13 @@ const fetchData = async () => {
     }
   };
 
+
   
   useEffect(() => {
       if (!userData) {
         fetchData();
         window.location.href = "/roadmap"
-      } else {
-        console.log("data already here")
-      }
+      } 
   }, []);
 
 
