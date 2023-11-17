@@ -28,11 +28,9 @@ const fetchData = async () => {
       const fetchedUserData = await response.json();
       if (!userData) {
         setUserData(fetchedUserData);
-
-           localStorage.setItem('token', ssoToken);
-
-      }
-
+ }
+   localStorage.setItem('token', ssoToken);
+   
     } catch (error) {
       console.error("Error fetching data:", error);
     }
