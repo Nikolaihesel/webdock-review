@@ -1,16 +1,16 @@
 import React from 'react'
 
 // Img
-import Banner from '../banner.jpg'
-import Youtube from '../youtube.svg'
-import Instagram from '../instagram.svg'
-import Tiktok from '../tiktok.svg'
-import Linkedin from '../Linkedin.svg'
-import Facebook from '../facebook-f.svg'
-import GooglePlay from '../play_store.png'
+import Banner from '../../img/banner.jpg'
+import Youtube from '../../img/youtube.svg'
+import Instagram from '../../img/instagram.svg'
+import Tiktok from '../../img/tiktok.svg'
+import Linkedin from '../../img/Linkedin.svg'
+import Facebook from '../../img/facebook-f.svg'
+import GooglePlay from '../../img/play_store.png'
 
 //Css
-import '../stylesheet/footer.css'
+import './footer.css'
 
 
 function Footer() {

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../stylesheet/nav.css'
+import './nav.css'
 
 function FeatureTabs({Title}) {
   return (<>

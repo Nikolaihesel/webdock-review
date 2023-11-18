@@ -2,7 +2,7 @@ import React from 'react'
 import '../assets/stylesheet/myrequest.css'
 
 //Components
-import FeatureContainer from '../assets/components/FeatureRequestContainer'
+import FeatureContainer from '../assets/components/RoadmapInfoBox'
 
 function MyRequest() {
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 
 //Components
-import RoadmapPost from './RoadmapPost'
+import RoadmapPost from './PostMarkup'
 import Data from '../../data/post.json'
 
 function FeatureRequestContainer({title}) {
@@ -25,20 +25,6 @@ function FeatureRequestContainer({title}) {
 
         ))
       }
-
-     {/*  <div className="feature-requests">     
-        {post.map((post, index) => (
-          <div className="feature-request" key={index}>
-              <p className="feature-post-user">{post.user}</p>
-              <p className="feature-post-title">{post.title}</p>
-              <p className="feature-post-desc">{post.description}</p>
-              <p className="feature-post-catergory">{post.category}</p>
-
-              <hr />
-
-            </div>
-        ))}
-        </div> */}
       </div>
     </div>
   )

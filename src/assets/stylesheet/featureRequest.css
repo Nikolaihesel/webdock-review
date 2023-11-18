@@ -43,15 +43,14 @@ select {
 }
 
 /* Posts */
-.card-request {
+.card-post {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
-	width: 80%;
+	width: 90vw;
 	height: 70vh;
 	overflow: auto;
-	/*border: 0.5px solid #272727; */
 	border-radius: 15px;
 	padding: 2em;
 	margin: 4em 2em;
@@ -59,6 +58,9 @@ select {
 	box-shadow: 3px 4px 8px #2727279d;
 }
 
+.post-container {
+	width: 100%;
+}
 .request-title {
 	font-size: 1.3rem;
 	margin-bottom: 0.1em;
@@ -75,9 +77,35 @@ select {
 }
 .request-description {
 	color: var(--clr-desc-txt);
+	max-width: 80ch;
 }
 
 .post-end-line {
 	margin: 1em;
 	border: 1px solid #27272729;
+}
+
+.post {
+	width: 100%;
+}
+/* test */
+
+.post-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.likes {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-right: 1em;
+}
+
+.placeholder-img {
+	height: 50px;
+	width: 40px;
+	background: gray;
 }

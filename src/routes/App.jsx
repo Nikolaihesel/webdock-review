@@ -1,8 +1,8 @@
 import '../App.css'
 import '../index.css'
-import Footer from '../assets/components/Footer'
+import Footer from '../assets/components/footer/Footer'
 //components
-import Nav from '../assets/components/Nav'
+import Nav from '../assets/components/nav/Nav'
 
 
 function App() {

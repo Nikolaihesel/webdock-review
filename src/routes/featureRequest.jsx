@@ -1,6 +1,6 @@
 import React from 'react'
-import DropdownMenu from '../assets/components/Dropdown'
-import FeatureReqContainer from '../assets/components/FeatureReqContainer'
+import DropdownMenu from '../assets/components/dropDown/Dropdown'
+import Post from '../assets/components/PostData'
 
 //css
 import "../index.css"
@@ -26,8 +26,8 @@ function FeatureRequest() {
         </div>  
 
     </div> 
-    <div className="card-request">
-          <FeatureReqContainer />
+    <div className="card-post">
+          <Post />
     </div>
 
     </div>

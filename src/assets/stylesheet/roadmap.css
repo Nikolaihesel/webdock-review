@@ -8,7 +8,7 @@
 	align-items: center;
 }
 
-.triple-container{
+.triple-container {
 	display: flex;
 	justify-content: center;
 	gap: 4em;
@@ -28,7 +28,6 @@
 		overflow: auto;
 		max-width: 100%;
 	}
-	
 
 	& h3 {
 		padding: 1em;
@@ -46,8 +45,6 @@
 		border-radius: 20px;
 		justify-self: center;
 	}
-
-	
 }
 
 .mostLiked {
@@ -68,23 +65,19 @@
 	}
 }
 
-.ImpleRequest{
-	
+.ImpleRequest {
 	margin: 4em 0;
 	display: flex;
 	justify-content: center;
 
-		& .feature-container{
+	& .feature-container {
 		width: 145cqh;
 		border-radius: 10px;
 		height: 40vh;
-		
-		
-		}
-		& h3 {
-			border-color: var(--clr-done);
-		}
-
+	}
+	& h3 {
+		border-color: var(--clr-done);
+	}
 }
 
 .feature-request {
@@ -99,18 +92,6 @@
 	justify-content: center;
 }
 
-.RequestButton {
-	display: flex;
-	justify-content: center;
-	background-color: #28a745;
-	color: #fff;
-	font-family: Poppins;
-	padding: 0.5em 2.5em;
-	border: none;
-	border-radius: 2em;
-	font-size: 16px;
-}
-
 .modal-overlay {
 	display: flex;
 	justify-content: center;
@@ -121,7 +102,7 @@
 	right: 0;
 	bottom: 0;
 	backdrop-filter: blur(4px);
-	background-color: rgba(0,0,0,0.2);
+	background-color: rgba(0, 0, 0, 0.2);
 }
 
 .modal-content {
@@ -137,7 +118,7 @@
 	justify-content: flex-end;
 	font-size: 30px;
 	line-height: 1;
-	
+
 	& span {
 		cursor: pointer;
 	}

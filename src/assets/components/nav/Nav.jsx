@@ -2,18 +2,18 @@ import { NavLink, Outlet, useRouteLoaderData } from "react-router-dom";
 import React, { useContext, useEffect } from 'react'
 
 // Img
-import Logo from '../webdock-logo-hvid.svg'
+import Logo from '../../img/webdock-logo-hvid.svg'
 
 
 //Css
-import '../stylesheet/nav.css'
+import './nav.css'
 
 //Components
-import Tabs from '../components/FeatureTabs'
-import Roadmap from "../../routes/Roadmap";
-import FeatureRequest from "../../routes/featureRequest"
-import MyRequest from "../../routes/MyRequest";
-import { TokenContext } from "../contexts/TokenContext";
+import Tabs from './FeatureTabs'
+import Roadmap from "../../../routes/Roadmap";
+import FeatureRequest from "../../../routes/featureRequest"
+import MyRequest from "../../../routes/MyRequest";
+import { TokenContext } from "../../contexts/TokenContext";
 
 
 function Nav() {

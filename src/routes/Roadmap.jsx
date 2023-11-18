@@ -2,9 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 
 //Components
-import FeatureContainer from '../assets/components/FeatureRequestContainer'
+import FeatureContainer from '../assets/components/RoadmapInfoBox'
 import CreatePost from '../assets/components/CreatePost'
-import {Button} from '../assets/components/Button'
+import {Button} from '../assets/components/button/Button'
 
 //Css
 import '../assets/stylesheet/roadmap.css'

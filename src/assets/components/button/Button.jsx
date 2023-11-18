@@ -1,7 +1,7 @@
 import React from 'react'
 
 //css
-import "../stylesheet/roadmap.css" 
+import "./button.css" 
 
 export function Button({ onClick, title }) { 
   return (

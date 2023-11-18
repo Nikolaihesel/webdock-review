@@ -2,6 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 
 
+//denne skal deles op i komponenter som Modal og Form eller requestForm
+
+
     const CreatePost = ({ isOpen, onClose }) => {
         const [inputValue, setInputValue] = useState('');
       
@@ -12,7 +15,7 @@ import { useState } from 'react'
           // Close the modal
           onClose();
         };
-   
+            
         return isOpen ? (
           <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content">

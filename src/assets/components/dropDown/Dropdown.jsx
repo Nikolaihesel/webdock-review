@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 //css
-import "../stylesheet/featureRequest.css"
+import '../../../index.css'
 
 function DropdownMenu({option1, option2, option3}) {
   const [selectedOption, setSelectedOption] = useState('');
