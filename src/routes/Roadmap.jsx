@@ -52,10 +52,27 @@ function Roadmap() {
 
            <div className="roadmap-mainside">
             <Routes >
-                <Route path="/mostliked"  element={<Post />}/>
-                <Route path="/inprogress" element={<Post />}/>
-                <Route path="underreview" element={<Post />} />
-                <Route path="implemented" element={<Post />}/>
+                <Route path="/mostliked" 
+                 element={<Post 
+                 MenuHeading={"Most liked requests"} 
+                 hrClass={"hr-active"}/>}
+                 />
+                <Route
+                 path="/inprogress" 
+                 element={<Post 
+                    MenuHeading={"Requests in progress"}  hrClass={"hr-active"} />}
+                />
+             
+                <Route path="underreview" 
+                  element={<Post 
+                  MenuHeading={"Requests under review"}  hrClass={"hr-active"}
+                 
+                 />} />
+                <Route path="implemented" 
+                  element={<Post 
+                  MenuHeading={"Implemented requests"}  hrClass={"hr-active"}
+                 
+                 />} />
             </Routes>
             </div>
             

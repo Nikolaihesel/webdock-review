@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     children: [
        {
          index: true,
-         element: <Navigate to="/roadmap" replace /> /* redirect så default side er roadmap tab */
+         element: <Navigate to="/roadmap/mostliked" replace /> /* redirect så default side er roadmap tab */
        },
 
       {

@@ -9,6 +9,7 @@ function RoadmapPost({id, user, title, description, category, status, userType, 
 
   return (
     <>
+
     <div className='post-wrapper'>
     <div className='post'>
 

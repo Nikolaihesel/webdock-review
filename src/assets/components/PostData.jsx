@@ -5,10 +5,10 @@ import Data from "../../data/post.json";
 
 //css
 import '../stylesheet/featureRequest.css'
-function PostData() {
-
-
+function PostData({MenuHeading, hrClass}) {
   const [posts, setPosts] = useState([])
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 3; 
 
   useEffect(() => {
     const addIdsToPosts = () => {
@@ -30,12 +30,33 @@ const handleUpvote = (postId) => {
   );
 };
 
+ const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
 
 
 
   return (
     <div className="post-container">
-      {posts.map((post) => (
+      <div className="post-container-heading">
+       <h2>{MenuHeading}</h2> {/* Pagination btn starts here*/}
+      <ul className="pagination">
+        {Array.from({ length: Math.ceil(posts.length / postsPerPage) }).map(
+          (_, index) => (
+            <li key={index}>
+              <button 
+                className={currentPage === index + 1 ? 'current-btn' : ''}
+              onClick={() => paginate(index + 1)}>{index + 1}</button>
+            </li>
+          )
+        )}
+      </ul>
+      </div>
+       <hr className={`${hrClass}`}/>
+      {currentPosts.map((post) => (
         <PostMarkup
           key={post.id}
           title={post.title}
@@ -47,6 +68,8 @@ const handleUpvote = (postId) => {
            BtnFunction={() => handleUpvote(post.id)}
         />
       ))}
+
+     
     </div>
   );
 }

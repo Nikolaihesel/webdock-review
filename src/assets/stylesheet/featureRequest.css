@@ -1,5 +1,9 @@
 @import url(../../index.css);
-
+hr {
+	opacity: 0;
+	height: 0;
+	border: none;
+}
 .body {
 	font-family: var(--prim-font);
 }
@@ -49,8 +53,7 @@ select {
 	justify-content: flex-start;
 	align-items: flex-start;
 	width: 90vw;
-	height: 70vh;
-	overflow: auto;
+	height: 80vh;
 	border-radius: 15px;
 	padding: 2em;
 	margin: 4em 2em;
@@ -83,6 +86,8 @@ select {
 .post-end-line {
 	margin: 1em;
 	border: 1px solid #27272729;
+	opacity: 100%;
+	/* skal fixes ordentligt */
 }
 
 .post {
@@ -94,6 +99,7 @@ select {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	min-height: 140px;
 }
 
 .likes {
@@ -108,4 +114,24 @@ select {
 	height: 50px;
 	width: 40px;
 	background: gray;
+}
+.post-container-heading {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+.pagination {
+	display: flex;
+
+	& button {
+		min-width: 1em;
+		padding: 1em;
+		border-radius: 20px;
+		border: none;
+		color: #272727;
+	}
+}
+.current-btn {
+	background-color: var(--clr-planned);
+	color: #f2f3f7;
 }
