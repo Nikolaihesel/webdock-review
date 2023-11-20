@@ -9,6 +9,7 @@ function PostData() {
 
 
   const [posts, setPosts] = useState([])
+
   useEffect(() => {
     const addIdsToPosts = () => {
       const createPostId = Data.post.map((post, index) => ({
@@ -21,6 +22,13 @@ function PostData() {
 
     addIdsToPosts();
   }, []);
+const handleUpvote = (postId) => {
+  setPosts((prevPosts) =>
+    prevPosts.map((post) =>
+      post.id === postId ? { ...post, upvotes: post.upvotes + 1 } : post
+    )
+  );
+};
 
 
 
@@ -36,6 +44,7 @@ function PostData() {
           description={post.description.substring(0,200)}
     
           Upvotes={post.upvotes}
+           BtnFunction={() => handleUpvote(post.id)}
         />
       ))}
     </div>

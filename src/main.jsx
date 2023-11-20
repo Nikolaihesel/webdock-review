@@ -29,8 +29,11 @@ const router = createBrowserRouter([
        },
 
       {
-        path: "roadmap",
+        path: "/roadmap/*",
         element: <Roadmap />,
+        children: [
+
+        ]
       },
       {
         path: "featurerequest",

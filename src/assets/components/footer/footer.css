@@ -27,13 +27,15 @@ ul {
 	list-style-type: none;
 	gap: 1em;
 
-	& li {
+	/* 
+	alle li border bliver sat, skal fixes
+	> li {
 		border: 1px solid #ffffff;
 		border-radius: 50%;
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-	}
+	} */
 }
 
 li:hover {

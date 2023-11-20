@@ -3,7 +3,7 @@ import React from 'react'
 import '../stylesheet/featureRequest.css'
 import '../stylesheet/dynamicClasses.css'
 
-function RoadmapPost({id, user, title, description, category, status, userType, classStatus, Upvotes}) {
+function RoadmapPost({id, user, title, description, category, status, userType, classStatus, Upvotes, BtnFunction}) {
 
 
 
@@ -22,7 +22,7 @@ function RoadmapPost({id, user, title, description, category, status, userType, 
 
     <div className="likes">
         <p className="upvotes">{Upvotes}</p>
-      <div className="placeholder-img"></div>
+      <button onClick={BtnFunction} className="placeholder-img">Like</button>
     </div>
     
 
