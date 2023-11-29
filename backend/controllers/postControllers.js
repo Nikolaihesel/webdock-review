@@ -25,7 +25,21 @@ const getPost = async (req, res) => {
   res.status(200).json(post);
 };
 
+// create a new post
+const createPost = async (req, res) => {
+  const {title, featureStatus, bodyText, user, comments} = req.body
+
+  // add to the database
+  try {
+    const post = await postMarkup.create({ title, featureStatus, bodyText, user, comments })
+    res.status(200).json(post)
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
+}
+
 module.exports = {
   getPosts,
   getPost,
+  createPost,
 };

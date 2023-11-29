@@ -9,7 +9,7 @@ const postSchema = new Schema(
 			required: true,
 		},
 
-		status: {
+		featureStatus: {
 			type: String,
 			required: true,
 		},
