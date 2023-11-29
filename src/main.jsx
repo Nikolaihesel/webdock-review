@@ -16,6 +16,7 @@ import MyRequest from './routes/MyRequest';
 import SsoLogin from './assets/components/ssoComponents/SsoLogin'
 import SsoCallback from './assets/components/ssoComponents/SsoCallback';
 import { TokenProvider } from './assets/contexts/TokenContext';
+import TestBackend from './routes/TestBackend';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "myrequest",
         element: <MyRequest />,
+      },
+      {
+        path: "backendtest",
+        element: <TestBackend />
       },
       {
         path: 'ssologin',

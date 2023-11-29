@@ -54,6 +54,9 @@ function Nav() {
           <NavLink to="featurerequest"  >
             <Tabs Title="Feature request" />
           </NavLink>
+          <NavLink to="backendtest"  >
+            <Tabs Title="Test Backend" />
+          </NavLink>
           {!!token && ( //truthy and falsy - testes i "if" - hvis user er et object = true hvis null = false - når du rammer noget ikke er sandt stopper den med at kigge efter det
             <NavLink to="myrequest">
               <Tabs Title="My Request" />
