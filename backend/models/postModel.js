@@ -18,12 +18,16 @@ const postSchema = new Schema(
 			required: true,
 		},
 		user: {
-			type: Array,
+			type: Object,
 			required: true,
+		},
+		comments: {
+			type: Array,
+			required: false,
 		},
 	},
 	{ timestamps: true }
 );
 
 //mongoose pluralises module names, therefor the missing 's'
-module.exports = mongoose.model('Workout', workoutSchema);
+module.exports = mongoose.model('postModel', postSchema);
