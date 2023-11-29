@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
 
 //css
-import "./button.css" 
+import "./button.css";
 
-export function Button({ onClick, title }) { 
+//dette er en knap
+
+export function Button({ onClick, title }) {
   return (
-    <button className='RequestButton' onClick={onClick}>{title}</button>
-  )
+    <button className="RequestButton" onClick={onClick}>
+      {title}
+    </button>
+  );
 }
-
