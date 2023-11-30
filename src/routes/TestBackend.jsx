@@ -1,83 +1,141 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from 'react';
 
-import "./testdata.css";
+import './testdata.css';
 
+import PostMarkup from '../assets/components/PostMarkup'
 function TestBackend() {
-  const user = { email: "hej@hej.dk", id: 251030, name: "Charlie-Preben" };
 
-  const [title, setTitle] = useState("");
-  const [status, setStatus] = useState("");
-  const [text, setText] = useState("");
-  const [error, setError] = useState(null);
+	const myUser = {
+		email: "someemail.edu.dk",
+		id: "821022",
+		name: "Nikolai"
+	}
 
-  const submitForm = async (e) => {
-    e.preventDefault();
+	const postStatus= "under review"
 
-    const post = { title, status, text };
+	const [title, setTitle] = useState('')
+	const [featureStatus, setFeatureStatus] = useState('')
+	const [bodyText, setBodyText] = useState('')
+	const [error, setError] = useState(null)
+	const [user, setUser] = useState('')
 
-    const response = await fetch("http://localhost:4000/api/posts/", {
-      method: "POST",
-      body: JSON.stringify(post),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const json = await response.json();
+
+
+
+	const submitForm = async (e) => {
+		 e.preventDefault()
+
+    const post = {title, featureStatus, bodyText, user}
+
+    const response = await fetch('http://localhost:4000/api/posts/', {
+        method: 'POST',
+        body: JSON.stringify(post),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const json = await response.json()
 
     if (!response.ok) {
-      setError(json.error);
+        setError(json.error)
+    } if (response.ok) {
+        setError(null)
+        setTitle('')
+        setText('')
+		setFeatureStatus('')
+		setUser({})
+
+
+        console.log("new post added")
+
     }
-    if (response.ok) {
-      setError(null);
-      setTitle("");
-      setStatus("");
-      setText("");
-      console.log("new post added");
-    }
-  };
+	}
 
-  return (
-    <div className="test-data">
-      <div className="form-data-wrapper">
-        <div className="form-wrapper">
-          <form onSubmit={submitForm} className="test-form">
-            <input
-              className="test-input "
-              type="text"
-              name="title"
-              placeholder="Title"
-              onChange={(e) => setTitle(e.target.value)}
-              value={title}
-            />
 
-            {title}
-            <input
-              className="test-input "
-              type="text"
-              name="featureStatus"
-              placeholder="Status"
-              value="under review"
-              onChange={(e) => setStatus(e.target.value)}
-            />
-            <textarea
-              className="test-input "
-              type="text"
-              name="bodyText"
-              placeholder="Text"
-              onChange={(e) => setText(e.target.value)}
-              value={text}
-            />
 
-            <button>Submit</button>
-          </form>
-        </div>
 
-        <div className="data-wrapper">
-          <h1>Data goes here</h1>
-        </div>
-      </div>
-    </div>
-  );
+	const [fetchedPosts, setFetchedPosts ] = useState([])
+
+
+   useEffect(() => {
+      const fetchPosts = async () => {
+        const response = await fetch('http://localhost:4000/api/posts')
+        const json = await response.json()
+
+        if (response.ok) {
+            setFetchedPosts(json)
+            console.log(fetchedPosts)
+
+        }
+      }
+
+      fetchPosts()
+    }, [] )
+
+
+
+	return (
+		<div className='test-data'>
+			<div className='form-data-wrapper'>
+				<div className='form-wrapper'>
+					<form onSubmit={submitForm} className='test-form'>
+						<input
+							className='test-input '
+							type='text' name="title"
+							placeholder='Title'
+							 onChange={(e) => setTitle(e.target.value)}
+                     value={title} 
+						/>
+
+						{title}
+
+
+						{/* //skal udskiftes med  <selcect/> */}
+						<input
+							className='test-input '
+							type='text' name="featureStatus"
+							placeholder='Status'
+							onChange={(e) => setFeatureStatus(e.target.value)}
+							value={featureStatus}
+							
+                   			
+						/>
+
+						
+						<textarea
+							className='test-input '
+							type='text' name="bodyText"
+							placeholder='Text'
+							onChange={(e) => setBodyText(e.target.value)}
+                     		value={bodyText}  />
+
+
+					 <input
+							className='test-input '
+							type='text' name="featureStatus"
+							placeholder='Status' 
+							value={myUser.name}
+						
+                   			
+						/>
+				
+				
+
+							<button>Submit</button>
+			{error}
+							
+				
+					</form>
+				</div>
+
+				<div className='data-wrapper'>
+				{fetchedPosts && fetchedPosts.map((post) => (
+					<PostMarkup key={post.id} /> 
+				))}
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default TestBackend;

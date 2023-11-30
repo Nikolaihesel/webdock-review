@@ -8,20 +8,27 @@ import '../stylesheet/featureRequest.css'
 function PostData({MenuHeading, hrClass}) {
   const [posts, setPosts] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 3; 
+  const postsPerPage = 3;
 
-  useEffect(() => {
-    const addIdsToPosts = () => {
-      const createPostId = Data.post.map((post, index) => ({
-        ...post,
-        id: index + 1, 
-      }));
+  
+    
 
-      setPosts(createPostId); 
-    };
+  // useEffect(() => {
+  //   const addIdsToPosts = () => {
+  //     const createPostId = Data.post.map((post, index) => ({
+  //       ...post,
+  //       id: index + 1, 
+  //     }));
 
-    addIdsToPosts();
-  }, []);
+  //     setPosts(createPostId); 
+  //   };
+
+  //   addIdsToPosts();
+  // }, []);
+
+
+
+  //upvote
 const handleUpvote = (postId) => {
   setPosts((prevPosts) =>
     prevPosts.map((post) =>
