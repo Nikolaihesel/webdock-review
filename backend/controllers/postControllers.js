@@ -27,7 +27,7 @@ const getPost = async (req, res) => {
 
 // create a new post
 const createPost = async (req, res) => {
-	const { title, featureStatus, bodyText, user, comments } = req.body;
+	const { title, featureStatus, bodyText, user, comments, upvotes } = req.body;
 
 	// add post to the database
 	try {
@@ -37,6 +37,7 @@ const createPost = async (req, res) => {
 			bodyText,
 			user,
 			comments,
+			upvotes,
 		});
 		res.status(200).json(post);
 	} catch (error) {
