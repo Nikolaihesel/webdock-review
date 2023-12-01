@@ -10,3 +10,6 @@ function PostDetail() {
     <div></div>
   )
 }
+
+
+export default PostDetail;
