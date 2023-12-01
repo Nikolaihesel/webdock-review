@@ -5,6 +5,7 @@ import './testdata.css';
 //components
 import PostMarkup from '../assets/components/PostMarkup';
 import PostForm from '../services/PostForm';
+import SendPosts from '../services/SendPosts';
 
 function TestBackend() {
 	// get posts
@@ -26,6 +27,7 @@ function TestBackend() {
 
 	return (
 		<div className='test-data'>
+			<SendPosts />
 			<div>
 				<div className='data-wrapper'>
 					{fetchedPosts &&
