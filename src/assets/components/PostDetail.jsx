@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { Routes, Route, useParams } from 'react-router-dom';
-import TestBackend from '../../routes/TestBackend';
+
 
 function PostDetail() {
   // Get the userId param from the URL.
-  let { postId } = useParams();
-  
+  let { id } = useParams();
+  console.log(id)
   return (
     <div></div>
   )
 }
+
 
 
 export default PostDetail;

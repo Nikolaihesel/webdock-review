@@ -1,11 +1,11 @@
 import React from 'react'
-
+import { useNavigate } from 'react-router-dom';
 import '../stylesheet/featureRequest.css'
 import '../stylesheet/dynamicClasses.css'
 
 function RoadmapPost({id, user, title, description, category, status, userType, classStatus, Upvotes, BtnFunction}) {
 
-
+  const navigate = useNavigate();
 
   return (
     <>
@@ -13,7 +13,7 @@ function RoadmapPost({id, user, title, description, category, status, userType, 
     <div className='post-wrapper'>
     <div className='post'>
 
-      <h1 className="request-title">{title}</h1>
+      <h1 className="request-title" onClick={() => navigate ("/backendtest/post/"+id, {state: {postId: id }})} >{title}</h1>
       <p className={`request-status ${classStatus}`}>{status}</p>
       <p className="request-category">{category}</p>
       <p className="request-description">{description}...</p>

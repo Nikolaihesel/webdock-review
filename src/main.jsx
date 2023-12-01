@@ -48,12 +48,6 @@ const router = createBrowserRouter([
       {
         path: "backendtest",
         element: <TestBackend />,
-        children: [
-          {
-            path: "/post/:id",
-            element: <PostDetail />,
-          }
-        ],
       },
       {
         path: "ssologin",
@@ -62,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "ssocallback",
         element: <SsoCallback />,
+      },
+      {
+        path: "backendtest/post/:id",
+        element: <PostDetail />,
       },
     ],
   },
