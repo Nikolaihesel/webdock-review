@@ -1,22 +1,23 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
 } from "react-router-dom";
 
-import App from './routes/App'
-import './index.css'
-import ErrorPage from './error-page';
-import Roadmap from './routes/Roadmap';
-import FeatureRequest from './routes/featureRequest';
-import MyRequest from './routes/MyRequest';
+import App from "./routes/App";
+import "./index.css";
+import ErrorPage from "./error-page";
+import Roadmap from "./routes/Roadmap";
+import FeatureRequest from "./routes/featureRequest";
+import MyRequest from "./routes/MyRequest";
 //import { AuthProvider } from './assets/contexts/AuthContext';
-import SsoLogin from './assets/components/ssoComponents/SsoLogin'
-import SsoCallback from './assets/components/ssoComponents/SsoCallback';
-import { TokenProvider } from './assets/contexts/TokenContext';
-import TestBackend from './routes/TestBackend';
+import SsoLogin from "./assets/components/ssoComponents/SsoLogin";
+import SsoCallback from "./assets/components/ssoComponents/SsoCallback";
+import { TokenProvider } from "./assets/contexts/TokenContext";
+import TestBackend from "./routes/TestBackend";
+import PostDetail from "./assets/components/PostDetail";
 
 const router = createBrowserRouter([
   {
@@ -24,17 +25,17 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-       {
-         index: true,
-         element: <Navigate to="/roadmap/mostliked" replace /> /* redirect så default side er roadmap tab */
-       },
+      {
+        index: true,
+        element: (
+          <Navigate to="/roadmap/mostliked" replace />
+        ) /* redirect så default side er roadmap tab */,
+      },
 
       {
         path: "/roadmap/*",
         element: <Roadmap />,
-        children: [
-
-        ]
+        children: [],
       },
       {
         path: "featurerequest",
@@ -46,30 +47,31 @@ const router = createBrowserRouter([
       },
       {
         path: "backendtest",
-        element: <TestBackend />
+        element: <TestBackend />,
+        children: [
+          {
+            path: "/post/:id",
+            element: <PostDetail />,
+          }
+        ],
       },
       {
-        path: 'ssologin',
-        element: <SsoLogin />
+        path: "ssologin",
+        element: <SsoLogin />,
       },
       {
-        path: 'ssocallback',
-        element: <SsoCallback />
-      }
+        path: "ssocallback",
+        element: <SsoCallback />,
+      },
     ],
-
-
-    
   },
-  
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <TokenProvider >
-
-      <RouterProvider router={router} /> {/* child, alt inde i den kan tilgå authprovider, sørger for tabs på siden */}
-
-  </TokenProvider>
-  </React.StrictMode>,
-)
+    <TokenProvider>
+      <RouterProvider router={router} />{" "}
+      {/* child, alt inde i den kan tilgå authprovider, sørger for tabs på siden */}
+    </TokenProvider>
+  </React.StrictMode>
+);
