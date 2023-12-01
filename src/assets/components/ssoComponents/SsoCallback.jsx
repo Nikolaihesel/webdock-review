@@ -1,44 +1,57 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 function SsoCallback() {
-  const [userData, setUserData] = useState(null); // Initialize userData state as null
-
-  const TokenDataContext = createContext(null);
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
 
   const fetchData = async () => {
     try {
       const urlParams = new URLSearchParams(window.location.search);
-
-      const ssoToken = urlParams.get("ssoToken");
-
-      const response = await fetch("http://localhost:3000/verify", {
-        method: "POST",
+      const ssoToken = urlParams.get('ssoToken');
+      const response = await fetch('http://localhost:3000/verify', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({ ssoToken }),
       });
 
-      const fetchedUserData = await response.json();
-      if (!userData) {
-        setUserData(fetchedUserData);
+      if (!response.ok) {
+        throw new Error('Failed to fetch');
       }
-      localStorage.setItem("token", ssoToken);
+
+      const fetchedUserData = await response.json();
+      setUserData(fetchedUserData);
+      localStorage.setItem('token', ssoToken);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error('Error fetching data:', error);
+      setError(error.message || 'Failed to fetch data');
     }
   };
 
   useEffect(() => {
-    if (!userData) {
+    const token = localStorage.getItem('token');
+    if (!userData && !token) {
       fetchData();
-      window.location.href = "/roadmap";
+    } else if (token) {
+     // window.location.href = '/roadmap';
+	 console.log(userData)
     }
-  }, []);
+  }, [userData]);
 
-  return <div></div>;
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      {/* Your component JSX */}
+    </div>
+  );
 }
-
 export default SsoCallback;
