@@ -11,6 +11,13 @@ function TestBackend() {
 		name: "Nikolai"
 	}
 
+	const myAdmin = {
+		email: "someemail.edu.dk",
+		id: "821022",
+		name: "Sara",
+		isAdmin: true //define user as admin
+	}
+
 	const postStatus= "under review"
 
 	const [title, setTitle] = useState('')
@@ -19,6 +26,7 @@ function TestBackend() {
 	const [error, setError] = useState(null)
 	const [user, setUser] = useState('')
 	const [upvotes, setUpvotes] = useState(0)
+	const [isAdmin, setIsAdmin] = useState(false) //input
 
 
 
@@ -53,7 +61,7 @@ function TestBackend() {
 			setFeatureStatus('')
 			setUser({})
 			setUpvotes(0)
-
+			setIsAdmin('')
 
 			console.log("new post added")
 
@@ -81,7 +89,17 @@ function TestBackend() {
       fetchPosts()
     }, [] )
 
-
+// Function to change the post status if user is admin	
+function handleStatusChange(newStatus) {
+	if (myAdmin.isAdmin) {
+		setFeatureStatus(newStatus);
+	} else {
+		alert(
+			'You dont have the permission to change the status'
+		); 
+	}
+}
+console.log(myAdmin.isAdmin)
 
 	return (
 		<div className='test-data'>
@@ -138,11 +156,20 @@ function TestBackend() {
  
 
 							<button>Submit</button>
-			{error}
-							
-				
-					</form>
+						{error}
+							</form>
 				</div>
+
+				{/* Vises kun, hvis brugeren er admin */}
+				{isAdmin && (
+         		 <div>
+					<button onClick={() => handleStatusChange('Under review')}>Under review</button>
+					<button onClick={() => handleStatusChange('Planned')}>Planned</button>
+					<button onClick={() => handleStatusChange('In progress')}>In progress</button>
+					<button onClick={() => handleStatusChange('Completed')}>Completed</button>
+					<button onClick={() => handleStatusChange('Closed')}>Closed</button>
+				</div>
+       			 )}
 
 				<div className='data-wrapper'>
 				{fetchedPosts && fetchedPosts.map((post) => (
