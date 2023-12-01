@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../stylesheet/featureRequest.css'
 import '../stylesheet/dynamicClasses.css'
 
-function RoadmapPost({id, user, title, description, category, status, userType, classStatus, Upvotes, BtnFunction}) {
+function PostMarkup({id, user, title, description, category, status, userType, classStatus, Upvotes, BtnFunction}) {
 
   const navigate = useNavigate();
 
@@ -33,4 +33,4 @@ function RoadmapPost({id, user, title, description, category, status, userType, 
   )
 }
 
-export default RoadmapPost
+export default PostMarkup

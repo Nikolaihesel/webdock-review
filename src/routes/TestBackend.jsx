@@ -133,13 +133,15 @@ function TestBackend() {
           {fetchedPosts &&
             fetchedPosts.map((post) => (
               <PostMarkup
-                key={post.id}
+                key={post._id}
                 title={post.title}
                 description={post.bodyText}
                 status={post.featureStatus}
                 upvotes={post.upvotes}
+                id={post._id}
               />
             ))}
+            {console.log(fetchedPosts)}
         </div>
       </div>
     </div>

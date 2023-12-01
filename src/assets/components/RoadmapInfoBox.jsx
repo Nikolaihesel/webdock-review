@@ -1,8 +1,8 @@
 import React from 'react'
 
 //Components
-import RoadmapPost from './PostMarkup'
 import Data from '../../data/post.json'
+import PostMarkup from './PostMarkup'
 
 function FeatureRequestContainer({title}) {
 
@@ -15,12 +15,13 @@ function FeatureRequestContainer({title}) {
         
       {
         Data.post.map((post, index) => (
-          <RoadmapPost
+          <PostMarkup
             key={index}
             title={post.title}
             status={post.status}
             classStatus={post.status}
             description={post.describe}
+            id={post.id}
           />
 
         ))
