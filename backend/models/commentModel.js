@@ -15,7 +15,7 @@ const commentSchema = new Schema(
 
     post: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Post",
+      ref: "postModel",
     },
   },
   { timestamps: true }

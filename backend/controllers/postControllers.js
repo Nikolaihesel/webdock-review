@@ -1,7 +1,6 @@
 const postModel = require("../models/postModel");
 const commentModel = require("../models/commentModel");
 const mongoose = require("mongoose");
-const { post } = require("../routes/posts");
 
 // Hent alle posts
 const getPosts = async (req, res) => {
@@ -18,7 +17,7 @@ const getPost = async (req, res) => {
     return res.status(404).json({ error: "No such post found" });
   }
 
-  const post = await postModel.findById(id);
+  const post = await postModel.findById(id).populate("comments");
 
   if (!post) {
     return res.status(404).json({ error: "No such post found" });

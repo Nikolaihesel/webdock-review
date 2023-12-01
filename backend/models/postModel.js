@@ -25,7 +25,7 @@ const postSchema = new Schema(
       //array siger der er flere comments
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment",
+        ref: "commentModel",
       },
     ],
     upvotes: {
