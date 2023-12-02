@@ -11,13 +11,14 @@ function PostData({MenuHeading, hrClass}) {
   const postsPerPage = 3;
 
   
-    
+
 
   // useEffect(() => {
   //   const addIdsToPosts = () => {
   //     const createPostId = Data.post.map((post, index) => ({
   //       ...post,
   //       id: index + 1, 
+  //       upvoted: false, // Track whether the post has been upvoted by the user   
   //     }));
 
   //     setPosts(createPostId); 
@@ -32,10 +33,14 @@ function PostData({MenuHeading, hrClass}) {
 const handleUpvote = (postId) => {
   setPosts((prevPosts) =>
     prevPosts.map((post) =>
-      post.id === postId ? { ...post, upvotes: post.upvotes + 1 } : post
+      post.id === postId && !post.upvoted 
+        ? { ...post, upvotes: post.upvotes + 1, upvoted: true } 
+        : post
     )
   );
 };
+
+
 
  const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
