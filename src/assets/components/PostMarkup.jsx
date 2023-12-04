@@ -23,7 +23,7 @@ function PostMarkup({id, user, title, description, category, status, userType, c
 
     <div className="likes">
         <p className="upvotes">{Upvotes}</p>
-      <button onClick={BtnFunction} className="placeholder-img">Like</button>
+      <button onClick={BtnFunction} className="placeholder-img" disabled={BtnFunction === null}>Like</button>
     </div>
     
 
