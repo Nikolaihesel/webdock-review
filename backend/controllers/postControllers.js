@@ -86,7 +86,6 @@ const updatePost = async (req, res) => {
 
 module.exports = {
 	getPosts,
-	getUsersPosts,
 	getPost,
 	createPost,
 	deletePost,

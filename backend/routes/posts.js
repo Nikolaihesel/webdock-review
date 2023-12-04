@@ -1,16 +1,13 @@
 const express = require('express');
 const {
 	getPosts,
-	getUsersPosts,
+
 	getPost,
 	createPost,
 	deletePost,
 	updatePost,
 } = require('../controllers/postControllers');
 const router = express.Router();
-
-//Get users posts
-router.get('/posts/user/userId', getUsersPosts);
 
 // Get single post
 router.get('/:id', getPost);
