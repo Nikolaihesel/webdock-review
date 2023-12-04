@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../stylesheet/featureRequest.css";
 import "../stylesheet/dynamicClasses.css";
 
-function RoadmapPost({
+function PostMarkup({
   id,
   user,
   title,
