@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './testdata.css';
 import PostMarkup from '../assets/components/PostMarkup';
-import PostForm from '../assets/components/postform/PostForm';
 import SendPosts from '../services/SendPosts';
 
 const TestBackend = () => {

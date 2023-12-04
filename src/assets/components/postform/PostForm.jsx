@@ -10,14 +10,7 @@ function PostForm({ onSubmit }) {
 
 	//User Data set
 	const { token } = useContext(TokenContext);
-	let User = {};
-	if (token) {
-		User = {
-			id: token.id,
-			name: token.name,
-			email: token.email,
-		};
-	}
+
 	const submitForm = async (e) => {
 		e.preventDefault();
 
@@ -25,7 +18,11 @@ function PostForm({ onSubmit }) {
 			title,
 			featureStatus: 'Under Review',
 			bodyText,
-			user: User,
+			user: {
+				id: token.id,
+				name: token.name,
+				email: token.email,
+			},
 			upvotes: 0,
 		};
 		onSubmit(post);

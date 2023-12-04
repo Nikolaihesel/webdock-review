@@ -9,3 +9,27 @@
 	border-radius: 2em;
 	font-size: 16px;
 }
+
+.modal-post {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+	background: #272727ad;
+
+	.modal-center {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		justify-content: center;
+		align-items: center;
+
+		.modal-bg {
+			background: white;
+			padding: 3em;
+			border-radius: 4px;
+		}
+	}
+}

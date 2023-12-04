@@ -2,25 +2,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Routes, Route, NavLink, Link, Outlet } from 'react-router-dom';
 //Components
-import FeatureContainer from '../assets/components/RoadmapInfoBox';
-import CreatePost from '../assets/components/CreatePost';
-import { Button } from '../assets/components/button/Button';
 import Post from '../assets/components/PostData';
-import { jwtDecode } from 'jwt-decode';
+import ModalButton from '../assets/components/button/Button';
+import PostFrom from '../assets/components/postform/PostForm';
 //Css
 import '../assets/stylesheet/roadmap.css';
 
 function Roadmap() {
-	const [isModalOpen, setIsModalOpen] = useState(false);
-
-	const handleModalOpen = () => {
-		setIsModalOpen(true);
-	};
-
-	const handleModalClose = () => {
-		setIsModalOpen(false);
-	};
-
 	return (
 		<div className='roadmap-container'>
 			<div className='roadmap-nav'>
@@ -49,6 +37,8 @@ function Roadmap() {
 						to='/roadmap/implemented'>
 						<li>Implemented</li>
 					</NavLink>
+
+					<ModalButton />
 				</ul>
 			</div>
 
@@ -93,12 +83,6 @@ function Roadmap() {
 					/>
 				</Routes>
 			</div>
-
-			{/* <div className="CenterButton">
-                <Button onClick={handleModalOpen} title='Request' />
-                <CreatePost isOpen={isModalOpen} onClose={handleModalClose} />
-            </div>
-         */}
 		</div>
 	);
 }
