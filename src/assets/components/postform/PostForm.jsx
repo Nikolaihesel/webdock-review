@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 
 //User details
-import { TokenContext } from '../assets/contexts/TokenContext';
+import { TokenContext } from '../../contexts/TokenContext';
 
 function PostForm({ onSubmit }) {
 	// States for inputs

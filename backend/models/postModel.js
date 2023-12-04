@@ -24,12 +24,11 @@ const postSchema = new Schema(
 		comments: {
 			type: Array,
 			required: false,
-		}, 
+		},
 		upvotes: {
 			type: Number,
 			required: true,
 		},
-
 	},
 	{ timestamps: true }
 );

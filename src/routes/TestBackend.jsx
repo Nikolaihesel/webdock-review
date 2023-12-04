@@ -4,7 +4,7 @@ import './testdata.css';
 
 //components
 import PostMarkup from '../assets/components/PostMarkup';
-import PostForm from '../services/PostForm';
+import PostForm from '../assets/components/postform/PostForm';
 import SendPosts from '../services/SendPosts';
 
 function TestBackend() {
@@ -25,6 +25,27 @@ function TestBackend() {
 		fetchPosts();
 	}, []);
 
+	const handleDelete = async (postId) => {
+		try {
+			const response = await fetch(
+				`http://localhost:4000/api/posts/${postId}`,
+				{
+					method: 'DELETE',
+				}
+			);
+
+			if (response.ok) {
+				const updatedPosts = fetchedPosts.filter((post) => post._id !== postId);
+				setFetchedPosts(updatedPosts);
+				console.log('Post deleted successfully');
+			} else {
+				console.log('Failed to delete post');
+			}
+		} catch (error) {
+			console.error('Error deleting post:', error);
+		}
+	};
+
 	return (
 		<div className='test-data'>
 			<SendPosts />
@@ -33,11 +54,12 @@ function TestBackend() {
 					{fetchedPosts &&
 						fetchedPosts.map((post) => (
 							<PostMarkup
-								key={post.id}
+								key={post._id}
 								title={post.title}
 								description={post.bodyText}
 								status={post.featureStatus}
 								upvotes={post.upvotes}
+								DeletePost={() => handleDelete(post._id)}
 							/>
 						))}
 				</div>

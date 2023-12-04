@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 //Components
-import PostForm from './PostForm';
+import PostForm from '../assets/components/postform/PostForm';
 
 function SendPosts() {
 	const [error, setError] = useState(null);
