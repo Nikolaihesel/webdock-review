@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         children: [],
       },
       {
-        path: "featurerequest",
+        path: "/featurerequest",
         element: <FeatureRequest />,
       },
       {
@@ -57,10 +57,6 @@ const router = createBrowserRouter([
         path: "ssocallback",
         element: <SsoCallback />,
       },
-      {
-        path: "backendtest/post/:id",
-        element: <PostDetail />,
-      },
     ],
   },
 ]);
@@ -68,8 +64,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <TokenProvider>
-      <RouterProvider router={router} />{" "}
-      {/* child, alt inde i den kan tilgå authprovider, sørger for tabs på siden */}
+      <RouterProvider router={router} />
     </TokenProvider>
   </React.StrictMode>
 );

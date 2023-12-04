@@ -1,44 +1,53 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 function SsoCallback() {
-  const [userData, setUserData] = useState(null); // Initialize userData state as null
+	const [userData, setUserData] = useState(null);
+	const [error, setError] = useState(null);
 
-  const TokenDataContext = createContext(null);
+	const fetchData = async () => {
+		try {
+			const urlParams = new URLSearchParams(window.location.search);
+			const ssoToken = urlParams.get('ssoToken');
+			const response = await fetch('http://localhost:3000/verify', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+				},
+				body: JSON.stringify({ ssoToken }),
+			});
 
-  const fetchData = async () => {
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
+			if (!response.ok) {
+				throw new Error('Failed to fetch');
+			}
 
-      const ssoToken = urlParams.get("ssoToken");
+			const fetchedUserData = await response.json();
+			setUserData(fetchedUserData);
+			localStorage.setItem('token', ssoToken);
+		} catch (error) {
+			console.error('Error fetching data:', error);
+			setError(error.message || 'Failed to fetch data');
+		}
+	};
 
-      const response = await fetch("http://localhost:3000/verify", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({ ssoToken }),
-      });
+	useEffect(() => {
+		const token = localStorage.getItem('token');
+		if (!userData && !token) {
+			fetchData();
+		} else if (token) {
+			window.location.href = '/roadmap';
+			console.log(userData);
+		}
+	}, [userData]);
 
-      const fetchedUserData = await response.json();
-      if (!userData) {
-        setUserData(fetchedUserData);
-      }
-      localStorage.setItem("token", ssoToken);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+	if (error) {
+		return <div>Error: {error}</div>;
+	}
 
-  useEffect(() => {
-    if (!userData) {
-      fetchData();
-      window.location.href = "/roadmap";
-    }
-  }, []);
+	if (!userData) {
+		return <div>Loading...</div>;
+	}
 
-  return <div></div>;
+	return <div></div>;
 }
-
 export default SsoCallback;
