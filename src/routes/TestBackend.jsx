@@ -13,7 +13,7 @@ function TestBackend() {
 
 	const myAdmin = {
 		email: "someemail.edu.dk",
-		id: "821022",
+		id: "821024",
 		name: "Sara",
 		isAdmin: true //define user as admin
 	}
