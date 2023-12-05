@@ -11,6 +11,7 @@ const {
 } = require('../controllers/postControllers');
 const router = express.Router();
 
+//get all specific user posts
 router.get('/user/:userId', getUsersPost);
 
 // Get single post

@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const getUsersPost = async (req, res) => {
 	const { userId } = req.params;
 
+	//GET all posts of user with ID
 	try {
 		const userPosts = await postModel.find({ 'user.id': userId });
 		res.json(userPosts);

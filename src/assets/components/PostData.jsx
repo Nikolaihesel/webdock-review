@@ -1,14 +1,30 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import PostMarkup from './PostMarkup';
+
+import { TokenContext } from '../contexts/TokenContext';
 
 //css
 import '../stylesheet/featureRequest.css';
-function PostData({ MenuHeading, hrClass }) {
+function PostData({ MenuHeading, hrClass, Url }) {
 	const [posts, setPosts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [fetchedPosts, setFetchedPosts] = useState([]);
 	const postsPerPage = 3;
+
+	//User Data set
+	const { token } = useContext(TokenContext);
+
+	let user = {};
+	if (token) {
+		user = {
+			id: token.id,
+			name: token.name,
+			email: token.email,
+		};
+	}
+
+	console.log(user);
 
 	//upvote
 	const handleUpvote = (postId) => {
@@ -21,17 +37,18 @@ function PostData({ MenuHeading, hrClass }) {
 
 	useEffect(() => {
 		const fetchPosts = async () => {
-			const response = await fetch('http://localhost:4000/api/posts');
+			const response = await fetch(`http://localhost:4000/api/${Url}`);
 			const json = await response.json();
 
 			if (response.ok) {
 				setFetchedPosts(json);
-				console.log(fetchedPosts);
 			}
 		};
 
 		fetchPosts();
 	}, []);
+
+	console.log(fetchedPosts);
 
 	//deletePost
 	const handleDelete = async (postId) => {

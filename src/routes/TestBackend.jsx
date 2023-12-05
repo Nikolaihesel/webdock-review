@@ -1,16 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './testdata.css';
 import PostMarkup from '../assets/components/PostMarkup';
 import SendPosts from '../services/SendPosts';
+
+import { TokenContext } from '../assets/contexts/TokenContext';
 
 const TestBackend = () => {
 	const [upvotes, setUpvotes] = useState(0);
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [fetchedPosts, setFetchedPosts] = useState([]);
 
+	//User Data set
+	const { token } = useContext(TokenContext);
+
+	let user = {};
+	if (token) {
+		user = {
+			id: token.id,
+			name: token.name,
+			email: token.email,
+		};
+	}
+
+	console.log(user);
+
 	useEffect(() => {
 		const fetchPosts = async () => {
-			const response = await fetch('http://localhost:4000/api/posts');
+			const response = await fetch(
+				`http://localhost:4000/api/posts/user/${user.id}`
+			);
 			const json = await response.json();
 
 			if (response.ok) {

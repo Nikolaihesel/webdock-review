@@ -14,7 +14,6 @@ const postSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		// Reference to the user who created the post
 		user: {
 			id: {
 				type: String,
