@@ -10,31 +10,34 @@ const TestBackend = () => {
 	const [upvotes, setUpvotes] = useState(0);
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [fetchedPosts, setFetchedPosts] = useState([]);
-	const {token} = useContext(TokenContext); 
+	const { token } = useContext(TokenContext);
 
-	let user = {}
+	let user = {};
 	if (token) {
 		user = {
-			id: token.id, 
+			id: token.id,
 			name: token.name,
 			email: token.email,
-		}
-	};
+		};
+	}
 
-	console.log(user.id)
+	console.log(user.id);
 
 	const handleLike = async (postId) => {
 		try {
-			const response = await fetch(`http://localhost:4000/api/posts/${postId}/likes`, {
-				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ userId: user.id }),
-			});
-	
+			const response = await fetch(
+				`http://localhost:4000/api/posts/${postId}/likes`,
+				{
+					method: 'PATCH',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ userId: user.id }),
+				}
+			);
+
 			if (response.ok) {
-				const updatedPosts = fetchedPosts.map(post => {
+				const updatedPosts = fetchedPosts.map((post) => {
 					if (post._id === postId) {
 						return { ...post, upvotes: post.likes + 1 };
 					}
@@ -54,18 +57,6 @@ const TestBackend = () => {
 			console.error('Error liking post:', error);
 		}
 	};
-
-	//User Data set
-	const { token } = useContext(TokenContext);
-
-	let user = {};
-	if (token) {
-		user = {
-			id: token.id,
-			name: token.name,
-			email: token.email,
-		};
-	}
 
 	console.log(user);
 
