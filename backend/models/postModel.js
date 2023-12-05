@@ -39,6 +39,11 @@ const postSchema = new mongoose.Schema(
 			default: 0,
 			required: true,
 		},
+		likes: [
+            {
+                type: String, // Type might vary based on the SSO user identifier
+            },
+        ],
 	},
 	{ timestamps: true }
 );

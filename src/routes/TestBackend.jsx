@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import './testdata.css';
 import PostMarkup from '../assets/components/PostMarkup';
 import SendPosts from '../services/SendPosts';
+import { TokenContext } from '../assets/contexts/TokenContext';
 
 import { TokenContext } from '../assets/contexts/TokenContext';
 
@@ -9,6 +10,50 @@ const TestBackend = () => {
 	const [upvotes, setUpvotes] = useState(0);
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [fetchedPosts, setFetchedPosts] = useState([]);
+	const {token} = useContext(TokenContext); 
+
+	let user = {}
+	if (token) {
+		user = {
+			id: token.id, 
+			name: token.name,
+			email: token.email,
+		}
+	};
+
+	console.log(user.id)
+
+	const handleLike = async (postId) => {
+		try {
+			const response = await fetch(`http://localhost:4000/api/posts/${postId}/likes`, {
+				method: 'PATCH',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ userId: user.id }),
+			});
+	
+			if (response.ok) {
+				const updatedPosts = fetchedPosts.map(post => {
+					if (post._id === postId) {
+						return { ...post, upvotes: post.likes + 1 };
+					}
+					return post;
+				});
+				setFetchedPosts(updatedPosts);
+				console.log('Post liked successfully');
+			} else if (response.status === 404) {
+				console.log('Post not found');
+			} else if (response.status === 400) {
+				console.log('User already liked the post');
+			} else {
+				console.log('Failed to like post');
+				console.log(response);
+			}
+		} catch (error) {
+			console.error('Error liking post:', error);
+		}
+	};
 
 	//User Data set
 	const { token } = useContext(TokenContext);
@@ -84,6 +129,7 @@ const TestBackend = () => {
 									status={post.featureStatus}
 									upvotes={post.upvotes}
 									DeletePost={() => handleDelete(post._id)}
+									BtnFunction={() => handleLike(post._id)}
 								/>
 							))}
 					</div>
