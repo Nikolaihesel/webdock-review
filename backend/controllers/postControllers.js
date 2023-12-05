@@ -13,6 +13,36 @@ const getUsersPost = async (req, res) => {
 	}
 };
 
+const addLikeToPost = async (req, res) => {
+	const { id } = req.params;
+	const { userId } = req.body;
+
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.status(404).json({ error: 'No such post found' });
+	}
+
+	try {
+		let post = await postModel.findById(id);
+
+		if (!post) {
+			return res.status(404).json({ error: 'No such post found' });
+		}
+
+		if (post.likes.includes(userId)) {
+			return res.status(400).json({ error: 'User already liked the post' });
+		}
+
+		post.likes.push(userId);
+		post.upvotes += 1;
+		post = await post.save();
+
+		res.status(200).json({ message: 'Post liked successfully', post });
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
+};
+
+
 // Hent alle posts
 const getPosts = async (req, res) => {
 	const posts = await postModel.find({}).sort({ createdAt: -1 });
@@ -122,4 +152,5 @@ module.exports = {
 	updatePost,
 	createPostComment,
 	getUsersPost,
+	addLikeToPost,
 };
