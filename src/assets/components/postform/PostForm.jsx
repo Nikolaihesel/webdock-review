@@ -1,5 +1,8 @@
 import { useState, useContext } from 'react';
 
+// CSS
+import './postform.css'
+
 //User details
 import { TokenContext } from '../../contexts/TokenContext';
 
