@@ -37,7 +37,7 @@ function PostData({ MenuHeading, hrClass, Url }) {
 
 	useEffect(() => {
 		const fetchPosts = async () => {
-			const response = await fetch(`http://localhost:4000/api/${Url}`);
+			const response = await fetch(`http://localhost:4000/api/posts`);
 			const json = await response.json();
 
 			if (response.ok) {

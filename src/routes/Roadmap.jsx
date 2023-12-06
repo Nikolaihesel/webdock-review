@@ -66,7 +66,6 @@ function Roadmap() {
 							<Post
 								MenuHeading={'Most liked requests'}
 								hrClass={'hr-active'}
-								Url={`posts/user/${user.id}`}
 							/>
 						}
 					/>
