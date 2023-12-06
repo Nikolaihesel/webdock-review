@@ -19,7 +19,11 @@ import { TokenContext } from "../../contexts/TokenContext";
 function Nav() {
   const {token, setToken} = useContext(TokenContext)
 
-
+  const handleLogout = () => {
+    // Clear token from localStorage
+    localStorage.removeItem('token');
+    window.location.href = '/roadmap';
+  };
 
 //function body = body af en function
   return (
@@ -31,7 +35,7 @@ function Nav() {
           <div> {/*Ternary = hvis den først er true tage den statement før : hvis false den efter - kortere else/if */}
       
             {!!token ? (
-              <p >Log out</p>
+              <p onClick={handleLogout}>Log out</p>
             ) : (
               <> {/* fragment */}
            
