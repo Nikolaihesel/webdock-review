@@ -11,10 +11,8 @@ export const Button = () => {
 	const handleModal = () => {
 		if (!modal) {
 			setModal(true);
-			console.log(modal);
 		} else {
 			setModal(false);
-			console.log(modal);
 		}
 	};
 	return (

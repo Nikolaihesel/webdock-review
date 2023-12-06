@@ -43,6 +43,23 @@ const addLikeToPost = async (req, res) => {
 	}
 };
 
+const getSearchRequest = async (req, res) => {
+	const searchTerm = req.query.q; // get search term from the query parameter
+
+	try {
+		const matchedPosts = await postModel.find({
+			$text: { $search: searchTerm }, // use mongoDB text index
+		});
+
+		if (matchedPosts.length === 0) {
+			return res.status(404).json({ error: 'No posts found' });
+		}
+
+		res.json(matchedPosts);
+	} catch (err) {
+		res.status(500).json({ error: err.message });
+	}
+};
 
 // Hent alle posts
 const getPosts = async (req, res) => {
@@ -154,4 +171,5 @@ module.exports = {
 	createPostComment,
 	getUsersPost,
 	addLikeToPost,
+	getSearchRequest,
 };

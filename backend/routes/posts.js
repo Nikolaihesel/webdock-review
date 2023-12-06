@@ -9,6 +9,7 @@ const {
 	createPostComment,
 	getUsersPost,
 	addLikeToPost,
+	getSearchRequest,
 } = require('../controllers/postControllers');
 const router = express.Router();
 
@@ -16,6 +17,8 @@ const router = express.Router();
 router.get('/user/:userId', getUsersPost);
 
 router.patch('/:id/likes', addLikeToPost);
+
+router.get('/search', getSearchRequest);
 
 // Get single post
 router.get('/:id', getPost);
