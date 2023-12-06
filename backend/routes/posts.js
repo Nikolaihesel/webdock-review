@@ -9,12 +9,14 @@ const {
 	createPostComment,
 	getUsersPost,
 	addLikeToPost,
+	handleStatusChange,
 } = require('../controllers/postControllers');
 const router = express.Router();
 
 //get all specific user posts
 router.get('/user/:userId', getUsersPost);
 
+//Add likes
 router.patch('/:id/likes', addLikeToPost);
 
 // Get single post
@@ -34,5 +36,8 @@ router.patch('/:id', updatePost);
 
 //CREATE comment
 router.post('/:id/comment', createPostComment);
+
+//CHANGE status
+router.patch('/:id/status', handleStatusChange)
 
 module.exports = router;

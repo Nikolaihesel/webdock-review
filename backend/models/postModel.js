@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		featureStatus: {
+		status: {
 			type: String,
 			required: true,
 		},
