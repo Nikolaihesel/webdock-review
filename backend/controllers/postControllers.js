@@ -43,6 +43,42 @@ const addLikeToPost = async (req, res) => {
   }
 };
 
+// Function to add tags to the post
+const addTagsToPost = async (postId, tags) => {
+	if (!mongoose.Types.ObjectId.isValid(postId)) {
+	  throw new Error("Invalid post ID");
+	}
+  
+	try {
+	  const post = await postModel.findById(postId);
+  
+	  if (!post) {
+		throw new Error("No such post found");
+	  }
+  
+	  post.tags = tags;
+	  await post.save();
+  
+	  return post;
+	} catch (error) {
+	  throw new Error(error.message);
+	}
+};
+
+// update tags of a post, for admin later
+const updatePostTags = async (req, res) => {
+	const { id } = req.params;
+	const { tags } = req.body;
+  
+	try {
+	  const updatedPost = await addTagsToPost(id, tags);
+  
+	  res.status(200).json(updatedPost);
+	} catch (error) {
+	  res.status(500).json({ error: error.message });
+	}
+};
+
 const getSearchRequest = async (req, res) => {
   const searchTerm = req.query.q; // get search term from the query parameter
 
@@ -87,7 +123,7 @@ const getPost = async (req, res) => {
 
 // create a new post
 const createPost = async (req, res) => {
-  const { title, status, bodyText, user, comments, upvotes } = req.body;
+  const { title, status, bodyText, user, comments, upvotes, tags } = req.body;
 
   // add post to the database
   try {
@@ -98,6 +134,7 @@ const createPost = async (req, res) => {
       user,
       comments,
       upvotes,
+	  tags,
     });
     res.status(200).json(post);
   } catch (error) {
@@ -189,6 +226,8 @@ const handleStatusChange = async (req, res) => {
   }
 };
 
+
+
 module.exports = {
   getPosts,
   getPost,
@@ -200,4 +239,6 @@ module.exports = {
   addLikeToPost,
   handleStatusChange,
   getSearchRequest,
+  addTagsToPost,
+  updatePostTags,
 };

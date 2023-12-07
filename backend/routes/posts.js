@@ -11,6 +11,8 @@ const {
   addLikeToPost,
   handleStatusChange,
   getSearchRequest,
+  addTagsToPost,
+  updatePostTags,
 } = require("../controllers/postControllers");
 const router = express.Router();
 
@@ -20,6 +22,13 @@ router.get("/user/:userId", getUsersPost);
 //Add likes
 router.patch("/:id/likes", addLikeToPost);
 
+// Add tags to post
+router.post("/:id/tags", addTagsToPost);
+
+// Update tags of a post
+router.patch("/:id/tags", updatePostTags);
+
+// Search
 router.get("/search", getSearchRequest);
 
 // Get single post
@@ -42,5 +51,7 @@ router.post("/:id/comment", createPostComment);
 
 //CHANGE status
 router.patch("/:id/status", handleStatusChange);
+
+
 
 module.exports = router;
