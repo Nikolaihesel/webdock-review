@@ -29,6 +29,22 @@ export function usePostManagement() {
 		}
 	};
 
+	const fetchPostsById = async () => {
+		try {
+			const response = await fetch(
+				`http://localhost:4000/api/posts/user/22786`
+			);
+			if (response.ok) {
+				const json = await response.json();
+				setFetchedPosts(json);
+			} else {
+				console.log('Failed to fetch posts');
+			}
+		} catch (error) {
+			console.error('Error fetching posts:', error);
+		}
+	};
+
 	// const fetchPostsUnderReview = async () => {
 	// 	try {
 	// 		const response = await fetch(
@@ -103,5 +119,6 @@ export function usePostManagement() {
 		user,
 		handleLike,
 		handleDelete,
+		fetchPostsById,
 	};
 }

@@ -6,7 +6,7 @@ import { TokenContext } from '../assets/contexts/TokenContext';
 
 const TestBackend = () => {
 	const [upvotes, setUpvotes] = useState(0);
-	const [isAdmin, setIsAdmin] = useState(false);
+	const [isAdmin, setIsAdmin] = useState(true);
 	const [fetchedPosts, setFetchedPosts] = useState([]);
 	const { token } = useContext(TokenContext);
 
