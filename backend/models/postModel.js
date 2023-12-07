@@ -14,6 +14,10 @@ const postSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		tags: {
+			type: String,
+			required: true,
+		},
 		user: {
 			id: {
 				type: String,
