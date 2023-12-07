@@ -9,6 +9,7 @@ const TestBackend = () => {
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [fetchedPosts, setFetchedPosts] = useState([]);
 	const { token } = useContext(TokenContext);
+	const [newStatus, setNewStatus] = useState('');
 
 	let user = {};
 	if (token) {
@@ -91,13 +92,34 @@ const TestBackend = () => {
 		}
 	};
 
-	const handleStatusChange = (newStatus) => {
+	const handleStatusChange = async () => {
+		try {
+		  const response = await fetch(`http://localhost:3000/api/posts/${postId}/status`, {
+			method: 'PATCH',
+			headers: {
+			  'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ newStatus }),
+		  });
+	
+		  if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		  }
+	
+		  const data = await response.json();
+		  console.log(data); // Log the response from the server
+		} catch (error) {
+		  console.error('Error updating post status:', error.message);
+		}
+	  };
+
+	/*const handleStatusChange = (newStatus) => {
 		if (isAdmin) {
 			console.log('Changing status to:', newStatus);
 		} else {
 			alert('You do not have permission to change the status');
 		}
-	};
+	};*/
 
 	return (
 		<div className='wrapper'>
