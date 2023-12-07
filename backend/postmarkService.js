@@ -44,6 +44,6 @@ const fetchPostsFromClient = async (userId) => {
 };
 
 module.exports = {
-  sendEmail,
-  fetchPostsFromClient
-};
+    sendEmail,
+    fetchPostsFromClient
+  };

@@ -3,7 +3,8 @@ import './testdata.css';
 import PostMarkup from '../assets/components/PostMarkup';
 import SendPosts from '../services/SendPosts';
 import { TokenContext } from '../assets/contexts/TokenContext';
-import { sendEmail, fetchPostsFromClient } from '../../backend/postmarkService'; 
+import { sendEmail } from '../../backend/postmarkService';
+import { fetchPostsFromClient } from '../../backend/postmarkService';
 
 const TestBackend = () => {
 	const [upvotes, setUpvotes] = useState(0);
