@@ -87,13 +87,13 @@ const getPost = async (req, res) => {
 
 // create a new post
 const createPost = async (req, res) => {
-  const { title, featureStatus, bodyText, user, comments, upvotes } = req.body;
+  const { title, status, bodyText, user, comments, upvotes } = req.body;
 
   // add post to the database
   try {
     const post = await postModel.create({
       title,
-      featureStatus,
+      status,
       bodyText,
       user,
       comments,
