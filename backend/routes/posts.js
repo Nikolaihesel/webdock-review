@@ -35,4 +35,7 @@ router.patch('/:id', updatePost);
 //CREATE comment
 router.post('/:id/comment', createPostComment);
 
+//GET an email
+router.get('') // skal tilføjes
+
 module.exports = router;
