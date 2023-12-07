@@ -1,29 +1,25 @@
-// function for sending emails and fetching posts using Postmark's API
-
-const axios = require('axios');
-
 const postmarkToken = 'c3d41965-18a4-479f-a591-4369b7f5952c';
-const postmarkAPI = 'https://api.postmarkapp.com';
+const postmarkAPI = 'https://api.postmarkapp.com/';
 
 const sendEmail = async (recipient, subject, body) => {
   try {
-    const response = await axios.post(
-      `${postmarkAPI}/email`,
-      {
+    const response = await fetch(`${postmarkAPI}/email`, {
+      method: 'POST',
+      headers: {
+        'X-Postmark-Server-Token': postmarkToken,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
         From: 'uclfeedback@webdock.io',
         To: recipient,
         Subject: subject,
         HtmlBody: body
-      },
-      {
-        headers: {
-          'X-Postmark-Server-Token': postmarkToken,
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-    console.log('Email sent:', response.data);
-    return response.data;
+      })
+    });
+
+    const responseData = await response.json();
+    console.log('Email sent:', responseData);
+    return responseData;
   } catch (error) {
     console.error('Error sending email:', error);
     throw error;
@@ -32,18 +28,18 @@ const sendEmail = async (recipient, subject, body) => {
 
 const fetchPostsFromClient = async (userId) => {
   try {
-    // Your logic to fetch posts from the client or database
-    // Return the relevant posts data here
-    // For example:
-    const response = await axios.get(`http://localhost:4000/api/posts/user/${userId}`);
-    return response.data;
+    const response = await fetch(`http://localhost:4000/api/posts/user/${userId}`);
+    const responseData = await response.json();
+
+    console.log('Fetched posts:', responseData);
+    return responseData;
   } catch (error) {
     console.error('Error fetching posts:', error);
     throw error;
   }
 };
 
-module.exports = {
-    sendEmail,
-    fetchPostsFromClient
-  };
+export {
+  sendEmail,
+  fetchPostsFromClient
+};
