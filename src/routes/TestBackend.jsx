@@ -3,7 +3,7 @@ import './testdata.css';
 import PostMarkup from '../assets/components/PostMarkup';
 import SendPosts from '../services/SendPosts';
 import { TokenContext } from '../assets/contexts/TokenContext';
-import { sendEmail, fetchPostsFromClient } from '../backend/postmarkService.js'; 
+import { sendEmail, fetchPostsFromClient } from '../../backend/postmarkService'; 
 
 const TestBackend = () => {
 	const [upvotes, setUpvotes] = useState(0);
@@ -37,7 +37,7 @@ const TestBackend = () => {
 
 		fetchPosts();
 	}, [user.id]); // Include user.id as a dependency
-	
+
 	console.log(user.id);
 
 	const handleLike = async (postId) => {
