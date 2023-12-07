@@ -1,30 +1,14 @@
 import React from 'react';
 import { useState, useEffect, useContext } from 'react';
 import { Routes, Route, NavLink, Link, Outlet } from 'react-router-dom';
+
 //Components
 import Post from '../assets/components/PostData';
 import ModalButton from '../assets/components/button/Button';
-import PostFrom from '../assets/components/postform/PostForm';
 //Css
 import '../assets/stylesheet/roadmap.css';
 
-import { TokenContext } from '../assets/contexts/TokenContext';
-
 function Roadmap() {
-	//User Data set
-	const { token } = useContext(TokenContext);
-
-	let user = {};
-	if (token) {
-		user = {
-			id: token.id,
-			name: token.name,
-			email: token.email,
-		};
-	}
-
-	console.log(user.id);
-
 	return (
 		<div className='roadmap-container'>
 			<div className='roadmap-nav'>
