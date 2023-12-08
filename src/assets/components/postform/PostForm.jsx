@@ -17,13 +17,16 @@ function PostForm({ onSubmit }) {
 		const post = {
 			title,
 			featureStatus: 'Under Review',
+			// status: 'Under Review',
 			bodyText,
+
 			user: {
 				id: token.id,
 				name: token.name,
 				email: token.email,
 			},
 			upvotes: 0,
+			tags: ['første', 'anden'],
 		};
 		onSubmit(post);
 		setTitle('');

@@ -10,13 +10,17 @@ const postSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		status: {
+		// status: {
+		// 	type: String,
+		// 	required: false,
+		// },
+		featureStatus: {
 			type: String,
 			required: true,
 		},
 		tags: {
-			type: String,
-			required: true,
+			type: Array,
+			required: false,
 		},
 		user: {
 			id: {
