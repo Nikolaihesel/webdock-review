@@ -56,7 +56,4 @@ router.post("/:id/comment", createPostComment);
 //CHANGE status
 router.patch("/:id/status", handleStatusChange);
 
-//GET an email
-router.get(""); // skal tilføjes
-
 module.exports = router;
