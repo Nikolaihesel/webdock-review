@@ -12,6 +12,7 @@ const {
   addLikeToPost,
   handleStatusChange,
   getSearchRequest,
+  getPostStatus,
 } = require("../controllers/postControllers");
 const router = express.Router();
 
@@ -19,10 +20,14 @@ const router = express.Router();
 router.get("/user/:userId", getUsersPost);
 router.get("/user/:userId", getUsersPost);
 
-//Add likes
+//add like to post
 router.patch("/:id/likes", addLikeToPost);
 
+//search for specific post
 router.get("/search", getSearchRequest);
+
+//sort by featurestatus
+router.get("/featureStatus", getPostStatus);
 
 // Get single post
 router.get("/:id", getPost);

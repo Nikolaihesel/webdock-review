@@ -7,7 +7,7 @@ import { sendEmail, fetchPostsFromClient } from "../../backend/postmarkService";
 
 const TestBackend = () => {
   const [upvotes, setUpvotes] = useState(0);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
   const [fetchedPosts, setFetchedPosts] = useState([]);
   const { token } = useContext(TokenContext);
 
@@ -64,20 +64,13 @@ const TestBackend = () => {
         });
         setFetchedPosts(updatedPosts);
         console.log("Post liked successfully");
-      } else if (response.status === 404) {
-        console.log("Post not found");
-      } else if (response.status === 400) {
-        console.log("User already liked the post");
       } else {
         console.log("Failed to like post");
-        console.log(response);
       }
     } catch (error) {
       console.error("Error liking post:", error);
     }
   };
-
-  console.log(user);
 
   useEffect(() => {
     const fetchPosts = async () => {

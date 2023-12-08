@@ -1,71 +1,21 @@
 import React from 'react';
 import { useState, useEffect, useContext } from 'react';
 import PostMarkup from './PostMarkup';
-
 import { TokenContext } from '../contexts/TokenContext';
-
+import { usePostManagement } from '../../services/PostManagement';
 //css
 import '../stylesheet/featureRequest.css';
 function PostData({ MenuHeading, hrClass, Url }) {
 	const [posts, setPosts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [fetchedPosts, setFetchedPosts] = useState([]);
 	const postsPerPage = 3;
 
-	//User Data set
-	const { token } = useContext(TokenContext);
-
-	let user = {};
-	if (token) {
-		user = {
-			id: token.id,
-			name: token.name,
-			email: token.email,
-		};
-	}
-
-	//upvote
-	const handleUpvote = (postId) => {
-		setPosts((prevPosts) =>
-			prevPosts.map((post) =>
-				post.id === postId ? { ...post, upvotes: post.upvotes + 1 } : post
-			)
-		);
-	};
+	const { fetchedPosts, fetchPosts, user, handleLike, handleDelete } =
+		usePostManagement();
 
 	useEffect(() => {
-		const fetchPosts = async () => {
-			const response = await fetch(`http://localhost:4000/api/posts`);
-			const json = await response.json();
-
-			if (response.ok) {
-				setFetchedPosts(json);
-			}
-		};
-
 		fetchPosts();
 	}, []);
-
-	//deletePost
-	const handleDelete = async (postId) => {
-		try {
-			const response = await fetch(
-				`http://localhost:4000/api/posts/${postId}`,
-				{
-					method: 'DELETE',
-				}
-			);
-
-			if (response.ok) {
-				const updatedPosts = fetchedPosts.filter((post) => post._id !== postId);
-				setFetchedPosts(updatedPosts);
-			} else {
-				console.log('Failed to delete post');
-			}
-		} catch (error) {
-			console.error('Error deleting post:', error);
-		}
-	};
 
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -100,7 +50,7 @@ function PostData({ MenuHeading, hrClass, Url }) {
 					status={post.featureStatus}
 					description={post.bodyText}
 					Upvotes={post.upvotes}
-					BtnFunction={() => handleUpvote(post.id)}
+					BtnFunction={() => handleLike(post._id)}
 					DeletePost={() => handleDelete(post._id)}
 				/>
 			))}

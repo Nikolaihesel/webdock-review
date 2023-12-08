@@ -2,10 +2,10 @@ const postModel = require("../models/postModel");
 const commentModel = require("../models/commentModel");
 const mongoose = require("mongoose");
 
+//GET all posts of user with ID
 const getUsersPost = async (req, res) => {
   const { userId } = req.params;
 
-  //GET all posts of user with ID
   try {
     const userPosts = await postModel.find({ "user.id": userId });
     res.json(userPosts);
@@ -14,6 +14,19 @@ const getUsersPost = async (req, res) => {
   }
 };
 
+//GET all posts with status being x
+const getPostStatus = async (req, res) => {
+  const { featureStatus } = req.query;
+
+  try {
+    const userPosts = await postModel.find({ featureStatus: featureStatus });
+    res.json(userPosts);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+//add like to post
 const addLikeToPost = async (req, res) => {
   const { id } = req.params;
   const { userId } = req.body;
@@ -43,6 +56,7 @@ const addLikeToPost = async (req, res) => {
   }
 };
 
+//Search request
 const getSearchRequest = async (req, res) => {
   const searchTerm = req.query.q; // get search term from the query parameter
 
@@ -200,4 +214,5 @@ module.exports = {
   addLikeToPost,
   handleStatusChange,
   getSearchRequest,
+  getPostStatus,
 };
