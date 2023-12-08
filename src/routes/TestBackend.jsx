@@ -10,6 +10,7 @@ const TestBackend = () => {
   const [isAdmin, setIsAdmin] = useState(true);
   const [fetchedPosts, setFetchedPosts] = useState([]);
   const { token } = useContext(TokenContext);
+  const [newTags, setNewTags] = useState("");
 
   let user = {};
   if (token) {
@@ -107,10 +108,41 @@ const TestBackend = () => {
     }
   };
 
+  // update tags
+  const handleTagsChange = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:4000/api/posts/${postId}/tags`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ tags }),
+        }
+      );
+
+      if (response.ok) {
+        const updatedPosts = fetchedPosts.map((post) => {
+          if (post._id === postId) {
+            return { ...post, tags: tags };
+          }
+          return post;
+        });
+        setFetchedPosts(updatedPosts);
+        console.log("Tags updated successfully");
+      } else {
+        console.log("Failed to update tags");
+      }
+    } catch (error) {
+      console.error("Error updating tags:", error);
+    }
+  };
+
   const handleStatusChange = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/posts/${postId}/status`,
+        `http://localhost:4000/api/posts/${postId}/status`,
         {
           method: "PATCH",
           headers: {
@@ -151,7 +183,8 @@ const TestBackend = () => {
                   key={post._id}
                   title={post.title}
                   description={post.bodyText}
-                  status={post.featureStatus}
+                  status={post.status}
+                  tags={post.tags}
                   upvotes={post.upvotes}
                   DeletePost={() => handleDelete(post._id)}
                   BtnFunction={() => handleLike(post._id)}
