@@ -14,6 +14,10 @@ const postSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		tags: {
+			type: String,
+			required: true,
+		},
 		user: {
 			id: {
 				type: String,
@@ -40,12 +44,14 @@ const postSchema = new mongoose.Schema(
 			required: true,
 		},
 		likes: [
-            {
-                type: String, // Type might vary based on the SSO user identifier
-            },
-        ],
+			{
+				type: String, // Type might vary based on the SSO user identifier
+			},
+		],
 	},
 	{ timestamps: true }
 );
+
+postSchema.index({ title: 'text' });
 
 module.exports = mongoose.model('postModel', postSchema);

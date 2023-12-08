@@ -24,8 +24,6 @@ function PostData({ MenuHeading, hrClass, Url }) {
 		};
 	}
 
-	console.log(user);
-
 	//upvote
 	const handleUpvote = (postId) => {
 		setPosts((prevPosts) =>
@@ -47,8 +45,6 @@ function PostData({ MenuHeading, hrClass, Url }) {
 
 		fetchPosts();
 	}, []);
-
-	console.log(fetchedPosts);
 
 	//deletePost
 	const handleDelete = async (postId) => {
