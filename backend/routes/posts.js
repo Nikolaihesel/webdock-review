@@ -13,12 +13,15 @@ const {
 	getSearchRequest,
 	addTagsToPost,
 	updatePostTags,
+	getPostStatus,
 } = require('../controllers/postControllers');
 
 const router = express.Router();
 
 //get all specific user posts
 router.get('/user/:userId', getUsersPost);
+
+router.get('/featureStatus', getPostStatus)
 
 //add like to post
 router.patch('/:id/likes', addLikeToPost);
@@ -55,5 +58,7 @@ router.post('/:id/comment', createPostComment);
 
 // //CHANGE status
 // router.patch('/:id/status', handleStatusChange);
+
+
 
 module.exports = router;

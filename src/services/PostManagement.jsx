@@ -29,6 +29,7 @@ export function usePostManagement() {
 		}
 	};
 
+	// skal laves til dynamisk ID
 	const fetchPostsById = async () => {
 		try {
 			const response = await fetch(
@@ -45,21 +46,24 @@ export function usePostManagement() {
 		}
 	};
 
-	// const fetchPostsUnderReview = async () => {
-	// 	try {
-	// 		const response = await fetch(
-	// 			`http://localhost:4000/api/posts/featureStatus?featureStatus=Under%20Review`
-	// 		);
-	// 		if (response.ok) {
-	// 			const json = await response.json();
-	// 			setFetchedPosts(json);
-	// 		} else {
-	// 			console.log('Failed to fetch posts');
-	// 		}
-	// 	} catch (error) {
-	// 		console.error('Error fetching posts:', error);
-	// 	}
-	// };
+	const fetchPostsWithStatus = async (status) => {
+		try {
+			const encodedStatus = encodeURIComponent(status);
+			const response = await fetch(
+				`http://localhost:4000/api/posts/?featureStatus=${encodedStatus}`
+			);
+			if (response.ok) {
+				const json = await response.json();
+				setFetchedPosts(json);
+			} else {
+				console.log('Failed to fetch posts');
+			}
+		} catch (error) {
+			console.error('Error fetching posts:', error);
+		}
+	};
+	
+	
 
 	const handleLike = async (postId) => {
 		try {
@@ -120,5 +124,6 @@ export function usePostManagement() {
 		handleLike,
 		handleDelete,
 		fetchPostsById,
+		fetchPostsWithStatus,
 	};
 }

@@ -7,6 +7,7 @@ import Post from '../assets/components/PostData';
 import ModalButton from '../assets/components/button/Button';
 //Css
 import '../assets/stylesheet/roadmap.css';
+import RoadmapKPI from '../assets/components/roadmapSidenav/RoadmapKPI';
 
 function Roadmap() {
 	return (
@@ -47,9 +48,8 @@ function Roadmap() {
 					<Route
 						path='/mostliked'
 						element={
-							<Post
-								MenuHeading={'Most liked requests'}
-								hrClass={'hr-active'}
+							<RoadmapKPI
+								
 							/>
 						}
 					/>
