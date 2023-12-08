@@ -13,6 +13,7 @@ const {
 	getSearchRequest,
 	getPostStatus,
 } = require('../controllers/postControllers');
+
 const router = express.Router();
 
 //get all specific user posts

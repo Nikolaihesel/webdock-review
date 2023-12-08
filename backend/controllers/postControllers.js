@@ -1,3 +1,4 @@
+require('dotenv').config();
 const postModel = require('../models/postModel');
 const commentModel = require('../models/commentModel');
 const mongoose = require('mongoose');
@@ -116,6 +117,7 @@ const createPost = async (req, res) => {
 			comments,
 			upvotes,
 		});
+
 		await client.sendEmail({
 			From: 'uclfeedback@webdock.io',
 			To: 'nikolaihesel@icloud.com',
