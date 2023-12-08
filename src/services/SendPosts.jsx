@@ -8,7 +8,7 @@ function SendPosts(UrlInput) {
 
 	// create post, send database
 	const submitForm = async (post) => {
-		const response = await fetch(`http://localhost:4000/api/${UrlInput}`, {
+		const response = await fetch(`http://localhost:4000/api/posts`, {
 			method: 'POST',
 			body: JSON.stringify(post),
 			headers: {

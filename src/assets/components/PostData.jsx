@@ -6,7 +6,7 @@ import { TokenContext } from '../contexts/TokenContext';
 
 //css
 import '../stylesheet/featureRequest.css';
-function PostData({ MenuHeading, hrClass, Url }) {
+function PostData({ MenuHeading, hrClass }) {
 	const [posts, setPosts] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [fetchedPosts, setFetchedPosts] = useState([]);
@@ -37,7 +37,7 @@ function PostData({ MenuHeading, hrClass, Url }) {
 
 	useEffect(() => {
 		const fetchPosts = async () => {
-			const response = await fetch(`http://localhost:4000/api/${Url}`);
+			const response = await fetch(`http://localhost:4000/api/posts`);
 			const json = await response.json();
 
 			if (response.ok) {

@@ -1,6 +1,8 @@
 const postModel = require('../models/postModel');
 const commentModel = require('../models/commentModel');
 const mongoose = require('mongoose');
+const postmark = require('postmark');
+const client = new postmark.ServerClient(process.env.POSTMARK_KEY);
 
 const getUsersPost = async (req, res) => {
 	const { userId } = req.params;
@@ -43,7 +45,6 @@ const addLikeToPost = async (req, res) => {
 	}
 };
 
-
 // Hent alle posts
 const getPosts = async (req, res) => {
 	const posts = await postModel.find({}).sort({ createdAt: -1 });
@@ -82,6 +83,14 @@ const createPost = async (req, res) => {
 			comments,
 			upvotes,
 		});
+
+		await client.sendEmail({
+			From: 'uclfeedback@webdock.io',
+			To: 'nikolaihesel@icloud.com',
+			Subject: 'New Post Created',
+			TextBody: `A new post "${title}" has been created.`,
+		});
+
 		res.status(200).json(post);
 	} catch (error) {
 		res.status(400).json({ error: error.message });

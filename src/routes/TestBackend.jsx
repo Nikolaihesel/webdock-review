@@ -3,14 +3,13 @@ import './testdata.css';
 import PostMarkup from '../assets/components/PostMarkup';
 import SendPosts from '../services/SendPosts';
 import { TokenContext } from '../assets/contexts/TokenContext';
-import { sendEmail, fetchPostsFromClient  } from '../../backend/postmarkService';
 
 const TestBackend = () => {
 	const [upvotes, setUpvotes] = useState(0);
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [fetchedPosts, setFetchedPosts] = useState([]);
 	const { token } = useContext(TokenContext);
-	
+
 	let user = {};
 	if (token) {
 		user = {
@@ -23,7 +22,9 @@ const TestBackend = () => {
 	useEffect(() => {
 		const fetchPosts = async () => {
 			try {
-				const response = await fetch(`http://localhost:4000/api/posts/user/${user.id}`);
+				const response = await fetch(
+					`http://localhost:4000/api/posts/user/${user.id}`
+				);
 				const json = await response.json();
 
 				if (response.ok) {
