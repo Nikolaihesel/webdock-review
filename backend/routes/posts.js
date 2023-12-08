@@ -13,7 +13,7 @@ const {
   getSearchRequest,
   addTagsToPost,
   updatePostTags,
-  getPostStatus,
+  handleStatusChange,
 } = require("../controllers/postControllers");
 
 const router = express.Router();
