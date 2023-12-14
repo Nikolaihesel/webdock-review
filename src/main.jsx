@@ -27,13 +27,13 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        index: true,
+        element: <Navigate to="/mostliked" />,
+      },
+      {
         path: "/",
         element: <Dashboard />,
         children: [
-          {
-            index: true,
-            element: <Navigate to="/mostliked" />,
-          },
           {
             path: "/mostliked", // Relative path to '/dashboard'
             element: <AllPostsRoute />,
