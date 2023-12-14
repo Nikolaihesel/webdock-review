@@ -1,6 +1,6 @@
 import { Routes, Route, Router, Outlet } from 'react-router-dom';
 
-import '../featurePosts/featurePosts.css';
+import './featurePosts.css';
 
 function FeaturePosts() {
 	return (

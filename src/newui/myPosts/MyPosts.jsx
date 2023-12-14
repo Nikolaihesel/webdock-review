@@ -3,7 +3,7 @@ import { usePostManagement } from '../../services/PostManagement';
 import PostMarkup from '../postMarkup/PostMarkup';
 
 //style
-import '../myPosts/myPosts.css';
+import './myPosts.css';
 //icon
 
 function MyPosts() {

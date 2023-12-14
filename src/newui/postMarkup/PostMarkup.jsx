@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 //style
-import '../postMarkup/postMarkup.css';
+import './postMarkup.css';
 function PostMarkup({
 	FirstLetter,
 	Title,
