@@ -4,13 +4,15 @@ import { IconContext } from "react-icons";
 import "../sideNav/sideNav.scss";
 import { IoIosHome } from "react-icons/io";
 import { MdAddCircle } from "react-icons/md";
-import Logo from "../../assets/img/webdock-logo.png";
+import Logo from "../../assets/img/wdwhite.png";
 
 function SideNav() {
   return (
     <div className="side-nav">
       <div className="logo">
-        <img src={Logo} alt="Webdocks Logo" />
+        <NavLink to="https://webdock.io/en">
+          <img src={Logo} alt="Webdocks Logo" />
+        </NavLink>
       </div>
       <IconContext.Provider
         value={{
