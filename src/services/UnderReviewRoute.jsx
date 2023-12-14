@@ -11,7 +11,7 @@ const UnderReviewRoute = ({ featureStatus }) => {
 		}
 		return text;
 	}
-	const { fetchPostsWithStatus, fetchedPosts } =
+	const { fetchPostsWithStatus, fetchedPosts, handleLike } =
 		usePostManagement(featureStatus);
 	const [currentPage, setCurrentPage] = useState(1);
 	const postsPerPage = 4;
@@ -43,14 +43,20 @@ const UnderReviewRoute = ({ featureStatus }) => {
 
 			{currentPosts ? (
 				currentPosts.map((post) => (
-					<div className='post-preview'>
+					<div
+						className='post-preview'
+						key={post._id}>
 						<p className='post-title'>{post.title}</p>
 						<p className='post-author'>{post.user.name}</p>
 						<p className='post-preview-text'>
 							{truncateText(post.bodyText, 150)}
 						</p>
 						<div className='post-details'>
-							<button className='upvote-button'>Upvote ({post.upvotes})</button>
+							<button
+								onClick={() => handleLike(post._id)}
+								className='upvote-button'>
+								Upvote ({post.upvotes})
+							</button>
 							<div className='post-meta'>
 								<p className='post-comments'>{post.comments.length} Comments</p>
 								<p className='post-tag'>{post.tag}</p>

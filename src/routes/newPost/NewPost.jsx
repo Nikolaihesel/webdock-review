@@ -42,32 +42,38 @@ function NewPost() {
 			</div>
 
 			<div className='all-posts'>
-				<input
-					type='text'
-					value={searchTerm}
-					onChange={(e) => setSearchTerm(e.target.value)}
-					placeholder='Search posts...'
-				/>
-				<button onClick={handleSearch}>Search</button>
-				<button onClick={clearSearch}>Search</button>
+				<div className='all-posts-container'>
+					<input
+						type='text'
+						value={searchTerm}
+						onChange={(e) => setSearchTerm(e.target.value)}
+						placeholder='Search posts...'
+					/>
+					<button onClick={handleSearch}>Search</button>
+					<button onClick={clearSearch}>Search</button>
 
-				<h3>All feature Request</h3>
-				{fetchedPosts.map((post) => (
-					<div className='post-preview'>
-						<p className='post-title'>{post.title}</p>
-						<p className='post-author'>{post.user.name}</p>
-						<p className='post-preview-text'>
-							{truncateText(post.bodyText, 150)}
-						</p>
-						<div className='post-details'>
-							<button className='upvote-button'>Upvote ({post.upvotes})</button>
-							<div className='post-meta'>
-								<p className='post-comments'>{post.comments.length} Comments</p>
-								<p className='post-tag'>{post.tag}</p>
+					<h3>All feature Request</h3>
+					{fetchedPosts.map((post) => (
+						<div className='post-preview'>
+							<p className='post-title'>{post.title}</p>
+							<p className='post-author'>{post.user.name}</p>
+							<p className='post-preview-text'>
+								{truncateText(post.bodyText, 150)}
+							</p>
+							<div className='post-details'>
+								<button className='upvote-button'>
+									Upvote ({post.upvotes})
+								</button>
+								<div className='post-meta'>
+									<p className='post-comments'>
+										{post.comments.length} Comments
+									</p>
+									<p className='post-tag'>{post.tag}</p>
+								</div>
 							</div>
 						</div>
-					</div>
-				))}
+					))}
+				</div>
 			</div>
 		</div>
 	);

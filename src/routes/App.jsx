@@ -4,7 +4,6 @@ import SideNav from '../newui/sideNav/SideNav';
 import Dashboard from './dashboard/Dashboard';
 
 import '../newui/main.css';
-
 import '../newui/variables.scss';
 
 function App() {

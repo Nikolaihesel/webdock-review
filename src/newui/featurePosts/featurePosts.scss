@@ -12,7 +12,7 @@
 	border-radius: 12px;
 	background: $background;
 	box-shadow: $shadow;
-
+	margin: 0 1em;
 	font-family: $primFont;
 }
 
@@ -20,10 +20,9 @@
 	width: 100%; /* Set width as 40% of viewport width */
 	min-height: 150px; /* Minimum height for the preview */
 	max-height: 300px; /* Maximum height for the preview */
-
+	gap: 1em;
 	border-radius: 8px;
 	padding: 0.8em;
-	margin: 1em;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -102,4 +101,7 @@
 }
 .width-container {
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 2em;
 }

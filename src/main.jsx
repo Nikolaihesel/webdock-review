@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './routes/App';
-import './index.css';
 import ErrorPage from './error-page';
 
 // import { AuthProvider } from './assets/contexts/AuthContext';

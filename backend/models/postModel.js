@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema(
 	{
+		feature_request_id: { type: String },
 		title: {
 			type: String,
 			required: true,
@@ -13,7 +14,8 @@ const postSchema = new mongoose.Schema(
 
 		featureStatus: {
 			type: String,
-			required: true,
+			enum: ['Under Review', 'Planned', 'In Progress', 'Completed', 'Closed'],
+			default: 'Under Review',
 		},
 		tags: {
 			type: Array,

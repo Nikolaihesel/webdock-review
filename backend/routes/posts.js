@@ -9,7 +9,7 @@ const {
 	createPostComment,
 	getUsersPost,
 	addLikeToPost,
-	handleStatusChange,
+	updatePostStatusByFeatureRequestId,
 	getSearchRequest,
 	addTagsToPost,
 	updatePostTags,
@@ -39,9 +39,6 @@ router.post('/:id/tags', addTagsToPost);
 // Update tags of a post
 router.patch('/:id/tags', updatePostTags);
 
-// Search
-router.get('/search', getSearchRequest);
-
 // Get single post
 router.get('/:id', getPost);
 
@@ -53,6 +50,11 @@ router.delete('/:id', deletePost);
 
 // UPDATE post
 router.patch('/:id', updatePost);
+
+router.post(
+	'/update-feature-request-status',
+	updatePostStatusByFeatureRequestId
+);
 
 //CREATE comment
 router.post('/:id/comment', createPostComment);

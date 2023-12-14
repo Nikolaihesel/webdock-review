@@ -1,4 +1,5 @@
 require('dotenv').config();
+const https = require('https');
 const postModel = require('../models/postModel');
 const commentModel = require('../models/commentModel');
 const mongoose = require('mongoose');
@@ -155,9 +156,9 @@ const createPost = async (req, res) => {
 		upvotes,
 		tags,
 		featureStatus,
+		feature_request_id,
 	} = req.body;
 
-	// add post to the database
 	try {
 		const post = await postModel.create({
 			title,
@@ -168,6 +169,7 @@ const createPost = async (req, res) => {
 			comments,
 			upvotes,
 			tags,
+			feature_request_id,
 		});
 
 		await client.sendEmail({
@@ -176,12 +178,63 @@ const createPost = async (req, res) => {
 			Subject: 'New Post Created',
 			TextBody: `A new post "${title}" has been created.`,
 		});
+
+		const requestData = JSON.stringify({
+			userID: user.id,
+			title: title,
+			description: bodyText,
+			category: featureStatus,
+		});
+
+		const options = {
+			hostname: 'webdock.io',
+			port: 443,
+			path: '/en/platform_data/feature_requests/new',
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Content-Length': Buffer.byteLength(requestData),
+			},
+		};
+
+		const request = https.request(options, (response) => {
+			let responseData = '';
+			response.on('data', (chunk) => {
+				responseData += chunk;
+			});
+			response.on('end', async () => {
+				console.log('Response from feature request endpoint:', responseData);
+				try {
+					const parsedResponse = JSON.parse(responseData);
+					const featureRequestId = parsedResponse.id;
+
+					await postModel.findByIdAndUpdate(post._id, {
+						feature_request_id: featureRequestId,
+					});
+
+					console.log(parsedResponse);
+				} catch (parseError) {
+					console.error('Error parsing response:', parseError);
+				}
+			});
+		});
+
+		request.on('error', (error) => {
+			console.error('Error sending feature request:', error);
+
+			res.status(500).json({ error: 'Internal Server Error' });
+		});
+
+		request.write(requestData);
+		request.end();
+
 		res.status(200).json(post);
 	} catch (error) {
+		console.error('Error creating post:', error);
+
 		res.status(400).json({ error: error.message });
 	}
 };
-
 // delete post from db
 const deletePost = async (req, res) => {
 	const { id } = req.params;
@@ -219,6 +272,32 @@ const updatePost = async (req, res) => {
 	}
 
 	res.status(200).json(post);
+};
+
+const updatePostStatusByFeatureRequestId = async (req, res) => {
+	const { feature_request_id, status } = req.body; // Matching field names
+
+	try {
+		// Find the post by the given feature_request_id
+		const post = await postModel.findOne({
+			feature_request_id: feature_request_id,
+		});
+
+		if (!post) {
+			return res.status(404).json({ error: 'Post not found' });
+		}
+
+		// Update the status of the post using status field
+		post.featureStatus = status; // Assigning status to featureStatus
+		await post.save();
+
+		return res
+			.status(200)
+			.json({ message: 'Post status updated successfully' });
+	} catch (error) {
+		console.error('Error updating post status:', error);
+		return res.status(500).json({ error: 'Internal Server Error' });
+	}
 };
 
 //Add comment to post
@@ -280,4 +359,5 @@ module.exports = {
 	addTagsToPost,
 	updatePostTags,
 	getPostStatus,
+	updatePostStatusByFeatureRequestId,
 };

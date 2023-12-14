@@ -58,19 +58,29 @@
 		}
 	}
 	.all-posts {
-		background: $background;
-		box-shadow: $shadow;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: flex-start;
 		gap: 1em;
-		width: 100%;
-		height: 90%;
+		width: 90%;
+		height: 100%;
+		background: $background;
+		box-shadow: $shadow;
 		overflow-x: auto;
 
+		padding: 1em;
 		margin: 2em;
 		border-radius: 12px;
+
+		.all-posts-container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			gap: 1em;
+		}
 
 		h3 {
 			text-align: center;
@@ -79,14 +89,6 @@
 
 		.all-posts-post {
 			width: 100%;
-			margin: 1em 0;
-			padding: 2em;
-			hr {
-				background: black;
-				height: 1px;
-				width: 100%;
-				opacity: 100%;
-			}
 		}
 	}
 }
