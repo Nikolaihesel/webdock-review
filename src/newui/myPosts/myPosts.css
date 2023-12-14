@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+.my-posts {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 55%;
+  height: 100%;
+  background: #d8dee3;
+  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  font-family: "poppins", "sans-serif";
+}
+.my-posts .pagination-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  max-width: 50%;
+  flex-wrap: wrap;
+}
+.pagination li {
+  list-style: none;
+}
+.pagination li button {
+  border: none;
+  background: #d8dee3;
+  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  padding: 0.5em;
+  border-radius: 8px;
+}
+.pagination li .current-btn {
+  background: rgb(116, 215, 175);
+  border-radius: 8px;
+  width: 1;
+  color: black;
+}/*# sourceMappingURL=myPosts.css.map */

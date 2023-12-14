@@ -10,10 +10,7 @@ const postSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		// status: {
-		// 	type: String,
-		// 	required: false,
-		// },
+
 		featureStatus: {
 			type: String,
 			required: true,
@@ -49,7 +46,7 @@ const postSchema = new mongoose.Schema(
 		},
 		likes: [
 			{
-				type: String, // Type might vary based on the SSO user identifier
+				type: String,
 			},
 		],
 	},

@@ -1,0 +1,55 @@
+@import '../variables.scss';
+
+.mainboard-routes {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 1em;
+	margin: 1em;
+	gap: 1em;
+
+	.mainboard-flex {
+		display: flex;
+		gap: 1em;
+	}
+
+	.neumorphic-route-box {
+		border-radius: 10px;
+		box-shadow: $shadow;
+		transition: box-shadow 1s ease-in-out;
+		background: $background;
+
+		color: $textColor;
+		font-family: $primFont;
+		font-weight: font;
+	}
+
+	.box-inside-wrap {
+		height: 150px;
+		width: 150px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.mainboard-headings {
+			font-family: $primFont;
+			color: #1f1f1f;
+			font-weight: $fontMedium;
+			font-size: 1rem;
+		}
+	}
+}
+
+.active .neumorphic-route-box {
+	box-shadow: $insetShadow;
+	.box-inside-wrap .mainboard-headings {
+		color: $sideNavicon;
+		font-weight: bold;
+	}
+}
+
+a {
+	border-radius: 10px;
+	text-decoration: none;
+}

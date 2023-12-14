@@ -1,0 +1,92 @@
+@import '../../newui/variables.scss';
+.new-post {
+	display: flex;
+	justify-content: space-between;
+	align-items: cemter;
+	width: 100%;
+	height: 100vh;
+
+	font-family: $primFont;
+
+	.create-post {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 50%;
+		.form-wrap {
+			display: flex;
+			flex-direction: column;
+
+			form {
+				display: flex;
+				flex-direction: column;
+				gap: 3em;
+				padding: 2em;
+				margin: 1em;
+				width: 40vw;
+				font-family: $primFont;
+
+				input {
+					border: none;
+					background: $background;
+					box-shadow: $shadow;
+					padding: 0.4em;
+					font-size: 1.2em;
+					border-radius: 8px;
+				}
+
+				textarea {
+					border: none;
+					background: $background;
+					box-shadow: $shadow;
+					height: 10em;
+					font-size: 1em;
+					padding: 0.4em;
+					border-radius: 8px;
+					font-family: $primFont;
+				}
+				button {
+					border: none;
+					box-shadow: $shadow;
+					background: $background;
+					padding: 1em;
+					border-radius: 12px;
+					font-size: 1.2em;
+				}
+			}
+		}
+	}
+	.all-posts {
+		background: $background;
+		box-shadow: $shadow;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		gap: 1em;
+		width: 100%;
+		height: 90%;
+		overflow-x: auto;
+
+		margin: 2em;
+		border-radius: 12px;
+
+		h3 {
+			text-align: center;
+			width: 100%;
+		}
+
+		.all-posts-post {
+			width: 100%;
+			margin: 1em 0;
+			padding: 2em;
+			hr {
+				background: black;
+				height: 1px;
+				width: 100%;
+				opacity: 100%;
+			}
+		}
+	}
+}

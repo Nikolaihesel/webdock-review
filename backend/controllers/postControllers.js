@@ -6,24 +6,27 @@ const postmark = require('postmark');
 
 const client = new postmark.ServerClient(process.env.POSTMARK_KEY);
 
+const getPostStatus = async (req, res) => {
+	const { status } = req.query;
+	try {
+		const userPosts = await postModel
+			.find({ featureStatus: status })
+			.sort({ createdAt: -1 });
+		res.json(userPosts);
+	} catch (err) {
+		console.error('Error fetching posts by status:', err);
+		res
+			.status(500)
+			.json({ message: 'Error fetching posts by status', error: err.message });
+	}
+};
+
 //GET all posts of user with ID
 const getUsersPost = async (req, res) => {
 	const { userId } = req.params;
 
 	try {
 		const userPosts = await postModel.find({ 'user.id': userId });
-		res.json(userPosts);
-	} catch (err) {
-		res.status(500).json({ message: err.message });
-	}
-};
-
-//GET all posts with status being x
-const getPostStatus = async (req, res) => {
-	const { featureStatus } = req.query;
-
-	try {
-		const userPosts = await postModel.find({ featureStatus: featureStatus });
 		res.json(userPosts);
 	} catch (err) {
 		res.status(500).json({ message: err.message });
@@ -115,11 +118,13 @@ const getSearchRequest = async (req, res) => {
 	}
 };
 
-// Hent alle posts
 const getPosts = async (req, res) => {
-	const posts = await postModel.find({}).sort({ createdAt: -1 });
-
-	res.status(200).json(posts);
+	try {
+		const posts = await postModel.find({}).sort({ createdAt: -1 });
+		res.status(200).json(posts);
+	} catch (err) {
+		res.status(500).json({ message: err.message });
+	}
 };
 
 //Get single post

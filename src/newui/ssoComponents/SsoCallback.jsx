@@ -35,7 +35,7 @@ function SsoCallback() {
 		if (!userData && !token) {
 			fetchData();
 		} else if (token) {
-			window.location.href = '/roadmap';
+			window.location.href = '/';
 			console.log(userData);
 		}
 	}, [userData]);

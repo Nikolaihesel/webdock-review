@@ -1,0 +1,42 @@
+@import '../variables';
+
+.side-nav {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 6em;
+	height: 100vh;
+	background: $navBg;
+
+	box-shadow: 7px 7px 8px $darkShadowColor;
+	border-radius: 12px 12px 12px 0px;
+
+	.logo {
+		img {
+			height: 45px;
+			margin: 4em 0;
+		}
+	}
+}
+.icon-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 3em;
+}
+
+.icons {
+	fill: $sideNavicon;
+	background: $background;
+	box-shadow: $shadow;
+	border-radius: 50%;
+	padding: 0.1em;
+	font-size: 60px;
+}
+
+.active .icons {
+	box-shadow: $insetShadow;
+	border-radius: 50%;
+}

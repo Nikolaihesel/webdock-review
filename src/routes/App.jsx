@@ -1,23 +1,20 @@
-import '../App.css'
-import '../index.css'
-import Footer from '../assets/components/footer/Footer'
+import { NavLink, Routes, Route, Outlet } from 'react-router-dom';
 //components
-import Nav from '../assets/components/nav/Nav'
+import SideNav from '../newui/sideNav/SideNav';
+import Dashboard from './dashboard/Dashboard';
 
+import '../newui/main.css';
+
+import '../newui/variables.scss';
 
 function App() {
+	return (
+		<div className='header-wrapper'>
+			<SideNav />
 
-
-  return (
-    <>
-     <main>
-      <Nav />
-
-      <Footer />
-      
-     </main>
-    </>
-  )
+			<Outlet />
+		</div>
+	);
 }
 
-export default App
+export default App;

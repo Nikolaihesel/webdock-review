@@ -18,10 +18,14 @@ const {
 
 const router = express.Router();
 
+//get post by status
+router.get('/status', getPostStatus);
+
+// Get all posts
+router.get('/', getPosts);
+
 //get all specific user posts
 router.get('/user/:userId', getUsersPost);
-
-router.get('/featureStatus', getPostStatus)
 
 //add like to post
 router.patch('/:id/likes', addLikeToPost);
@@ -41,9 +45,6 @@ router.get('/search', getSearchRequest);
 // Get single post
 router.get('/:id', getPost);
 
-// Get all posts
-router.get('/', getPosts);
-
 // Create a new post
 router.post('/', createPost);
 
@@ -58,7 +59,5 @@ router.post('/:id/comment', createPostComment);
 
 // //CHANGE status
 // router.patch('/:id/status', handleStatusChange);
-
-
 
 module.exports = router;

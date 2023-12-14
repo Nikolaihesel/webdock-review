@@ -1,12 +1,14 @@
 import { useState, useContext } from 'react';
-
+import '../newPost/newPost.css';
 //User details
-import { TokenContext } from '../../contexts/TokenContext';
+import { TokenContext } from '../../assets/contexts/TokenContext';
 
 function PostForm({ onSubmit }) {
 	// States for inputs
 	const [title, setTitle] = useState('');
 	const [bodyText, setBodyText] = useState('');
+
+	const [tag, setTag] = useState('');
 
 	//User Data set
 	const { token } = useContext(TokenContext);
@@ -54,6 +56,14 @@ function PostForm({ onSubmit }) {
 					placeholder='Text'
 					onChange={(e) => setBodyText(e.target.value)}
 					value={bodyText}
+				/>
+				<input
+					className='test-input '
+					type='text'
+					name='tags'
+					placeholder='tags'
+					onChange={(e) => setTag(e.target.value)}
+					value={tag}
 				/>
 				<button>Send Post</button>
 			</form>

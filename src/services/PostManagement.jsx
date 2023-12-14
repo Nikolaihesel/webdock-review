@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { TokenContext } from '../assets/contexts/TokenContext';
-export function usePostManagement() {
+export function usePostManagement(featureStatus) {
 	const [fetchedPosts, setFetchedPosts] = useState([]);
 	const [user, setUser] = useState({});
 	const { token } = useContext(TokenContext);
@@ -21,6 +21,7 @@ export function usePostManagement() {
 			if (response.ok) {
 				const json = await response.json();
 				setFetchedPosts(json);
+				console.log(fetchedPosts);
 			} else {
 				console.log('Failed to fetch posts');
 			}
@@ -29,11 +30,10 @@ export function usePostManagement() {
 		}
 	};
 
-	// skal laves til dynamisk ID
-	const fetchPostsById = async () => {
+	const fetchPostsById = async (postId) => {
 		try {
 			const response = await fetch(
-				`http://localhost:4000/api/posts/user/22786`
+				`http://localhost:4000/api/posts/user/${postId}`
 			);
 			if (response.ok) {
 				const json = await response.json();
@@ -46,11 +46,11 @@ export function usePostManagement() {
 		}
 	};
 
-	const fetchPostsWithStatus = async (status) => {
+	const fetchPostsWithStatus = async (featureStatus) => {
 		try {
-			const encodedStatus = encodeURIComponent(status);
+			console.log(`http://localhost:4000/api/posts/?status=${featureStatus}`);
 			const response = await fetch(
-				`http://localhost:4000/api/posts/?featureStatus=${encodedStatus}`
+				`http://localhost:4000/api/posts/status?status=${featureStatus}`
 			);
 			if (response.ok) {
 				const json = await response.json();
@@ -62,8 +62,20 @@ export function usePostManagement() {
 			console.error('Error fetching posts:', error);
 		}
 	};
-	
-	
+
+	const searchPosts = async (searchTerm) => {
+		try {
+			const response = await fetch(
+				`http://localhost:4000/api/posts/search/?q=${searchTerm}`
+			);
+			const data = await response.json();
+			console.log(`http://localhost:4000/api/posts/search/?q=${searchTerm}`);
+			const searchData = Array.isArray(data) ? data : [];
+			setFetchedPosts(searchData);
+		} catch (error) {
+			console.error('Error fetching search results:', error);
+		}
+	};
 
 	const handleLike = async (postId) => {
 		try {
@@ -125,5 +137,6 @@ export function usePostManagement() {
 		handleDelete,
 		fetchPostsById,
 		fetchPostsWithStatus,
+		searchPosts,
 	};
 }

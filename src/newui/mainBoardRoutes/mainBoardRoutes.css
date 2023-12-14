@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+.mainboard-routes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  margin: 1em;
+  gap: 1em;
+}
+.mainboard-routes .mainboard-flex {
+  display: flex;
+  gap: 1em;
+}
+.mainboard-routes .neumorphic-route-box {
+  border-radius: 10px;
+  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  transition: box-shadow 1s ease-in-out;
+  background: #d8dee3;
+  color: #333333;
+  font-family: "poppins", "sans-serif";
+  font-weight: font;
+}
+.mainboard-routes .box-inside-wrap {
+  height: 150px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mainboard-routes .box-inside-wrap .mainboard-headings {
+  font-family: "poppins", "sans-serif";
+  color: #1f1f1f;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.active .neumorphic-route-box {
+  box-shadow: inset 10px 10px 12px rgba(186, 192, 197, 0.9), inset -10px -10px 12px rgba(246, 252, 255, 0.9);
+}
+.active .neumorphic-route-box .box-inside-wrap .mainboard-headings {
+  color: rgb(116, 215, 175);
+  font-weight: bold;
+}
+
+a {
+  border-radius: 10px;
+  text-decoration: none;
+}/*# sourceMappingURL=mainBoardRoutes.css.map */

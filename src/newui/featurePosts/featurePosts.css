@@ -1,0 +1,93 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+.feature-posts-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0em 4em;
+  padding: 1em;
+  border-radius: 12px;
+  background: #d8dee3;
+  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  font-family: "poppins", "sans-serif";
+}
+
+.post-preview {
+  width: 100%; /* Set width as 40% of viewport width */
+  min-height: 150px; /* Minimum height for the preview */
+  max-height: 300px; /* Maximum height for the preview */
+  border-radius: 8px;
+  padding: 0.8em;
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  cursor: pointer; /* Indicates the box is clickable */
+  transition: transform 0.2s ease-in-out;
+}
+.post-preview:hover {
+  box-shadow: inset 10px 10px 12px rgba(186, 192, 197, 0.9), inset -10px -10px 12px rgba(246, 252, 255, 0.9);
+}
+.post-preview .upvote-button {
+  padding: 8px 12px;
+  background-color: rgb(106, 194, 200);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  border: none;
+}
+.post-preview .upvote-button:hover {
+  background-color: rgb(116, 215, 175);
+}
+.post-preview .upvote-button .post-meta {
+  display: flex;
+  align-items: center;
+}
+.post-preview .upvote-button .post-meta .post-comments,
+.post-preview .upvote-button .post-meta .post-tag {
+  margin: 0;
+  margin-left: 10px;
+  font-size: 0.9em;
+  color: #555;
+}
+.post-preview .post-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+.post-preview .post-author {
+  font-size: 0.9em;
+  color: #888;
+  margin-bottom: 8px;
+}
+.post-preview .post-preview-text {
+  font-size: 1em;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  margin-bottom: 10px;
+}
+.post-preview .post-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9em;
+  color: #555;
+}
+.post-preview .post-upvotes,
+.post-preview .post-comments,
+.post-preview .post-tag {
+  margin: 0;
+}
+
+.width-container {
+  width: 100%;
+}/*# sourceMappingURL=featurePosts.css.map */

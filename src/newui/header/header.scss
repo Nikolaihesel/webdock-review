@@ -1,0 +1,38 @@
+@import '../variables.scss';
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	gap: 4em;
+	margin: 1em 0;
+	width: 100%;
+
+	h1 {
+		margin-left: 2em;
+		font-family: $primFont;
+		color: $textColor;
+	}
+
+	.header-wrap {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+		margin: 0 10em;
+
+		input {
+			padding: 1em;
+			font-size: 14px;
+			width: 20em;
+			border-radius: 12px;
+			border: none;
+			background: $background;
+			box-shadow: $shadow;
+		}
+	}
+}
+
+.icon {
+	font-size: 2em;
+	fill: $textColor;
+}
