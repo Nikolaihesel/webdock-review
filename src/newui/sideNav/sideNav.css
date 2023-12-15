@@ -6,9 +6,10 @@
   align-items: center;
   width: 6em;
   height: 100vh;
-  background: #d8dee3;
+  background-image: url("../../assets/img/banner.jpg");
+  background-size: cover;
   box-shadow: 7px 7px 8px rgba(186, 192, 197, 0.9);
-  border-radius: 12px 12px 12px 0px;
+  border-radius: 0px 12px 12px 0px;
 }
 .side-nav .logo img {
   height: 45px;
@@ -24,15 +25,15 @@
 }
 
 .icons {
-  fill: rgb(116, 215, 175);
-  background: #d8dee3;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  fill: white;
+  background: #157f7d;
+  box-shadow: 5px 5px 12px rgba(0, 97, 95, 0.9), -5px -5px 12px rgba(51, 157, 155, 0.9);
   border-radius: 50%;
   padding: 0.1em;
   font-size: 60px;
 }
 
 .active .icons {
-  box-shadow: inset 10px 10px 12px rgba(186, 192, 197, 0.9), inset -10px -10px 12px rgba(246, 252, 255, 0.9);
+  box-shadow: inset 10px 10px 12px rgba(0, 97, 95, 0.9), inset -10px -10px 12px rgba(51, 157, 155, 0.9);
   border-radius: 50%;
 }/*# sourceMappingURL=sideNav.css.map */

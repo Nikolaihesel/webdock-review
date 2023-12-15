@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { usePostManagement } from '../../services/PostManagement';
-import PostMarkup from '../postMarkup/PostMarkup';
-
+import { FaLongArrowAltRight } from 'react-icons/fa';
 //style
 import './myPosts.css';
 //icon
 
 function MyPosts() {
-	const { fetchPostsById, fetchedPosts, user } = usePostManagement();
+	function truncateTitle(title) {
+		return title.length > 15 ? title.substring(0, 12) + '...' : title;
+	}
+	const { fetchPostByUserId, fetchedPosts, user } = usePostManagement();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [login, setLogin] = useState(null);
 	const [username, setUsername] = useState('');
@@ -31,7 +33,7 @@ function MyPosts() {
 	useEffect(() => {
 		// Fetch posts when the user ID changes
 		if (user && user.id) {
-			fetchPostsById(user.id);
+			fetchPostByUserId(user.id);
 		}
 	}, [user]); // Update posts when user changes
 
@@ -62,11 +64,13 @@ function MyPosts() {
 			</div>
 			{currentPosts.length > 0 ? (
 				currentPosts.map((post) => (
-					<PostMarkup
-						key={post._id}
-						FirstLetter={username}
-						Description={post.bodyText}
-					/>
+					<div
+						className='small-post-preview'
+						key={post._id}>
+						<div className='post-title'>{truncateTitle(post.title)}</div>
+						<div className='post-upvotes'>{post.upvotes}</div>
+						<FaLongArrowAltRight className='icon' />
+					</div>
 				))
 			) : (
 				<p>User not logged in</p>

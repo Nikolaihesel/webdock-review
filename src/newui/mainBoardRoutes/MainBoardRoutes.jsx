@@ -6,7 +6,7 @@ function MainBoardRoutes() {
 	return (
 		<div className='mainboard-routes'>
 			<div className='mainboard-flex'>
-				<NavLink to='/mostliked'>
+				<NavLink to='mostliked'>
 					<div className='neumorphic-route-box  '>
 						<div className='box-inside-wrap'>
 							<h2 className='mainboard-headings'>All posts</h2>

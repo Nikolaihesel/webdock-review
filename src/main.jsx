@@ -15,7 +15,7 @@ import SsoCallback from './newui/ssoComponents/SsoCallback';
 import { TokenProvider } from './assets/contexts/TokenContext';
 
 import UnderReviewRoute from './services/UnderReviewRoute';
-
+import PostDetail from './routes/PostDetail';
 import Dashboard from './routes/dashboard/Dashboard';
 import NewPost from './routes/NewPost/NewPost';
 import AllPostsRoute from './services/AllPostsRoute';
@@ -26,22 +26,17 @@ const router = createBrowserRouter([
 		element: <App />,
 		errorElement: <ErrorPage />,
 		children: [
+			{ index: true, element: <Navigate to='/dashboard/mostliked' /> },
 			{
-				index: true,
-				element: <Navigate to='/mostliked' />,
-			},
-			{
-				path: '/',
+				path: 'dashboard',
 				element: <Dashboard />,
 				children: [
+					{ path: 'mostliked', element: <AllPostsRoute /> },
 					{
-						path: '/mostliked', // Relative path to '/dashboard'
-						element: <AllPostsRoute />,
-					},
-					{
-						path: 'underreview', // Relative path to '/dashboard'
+						path: 'underreview',
 						element: <UnderReviewRoute featureStatus={'Under%20Review'} />,
 					},
+
 					{
 						path: 'implemented', // Relative path to '/dashboard'
 						element: <UnderReviewRoute featureStatus={'Implemented'} />,
@@ -51,6 +46,10 @@ const router = createBrowserRouter([
 						element: <UnderReviewRoute featureStatus={'In%20Progress'} />,
 					},
 				],
+			},
+			{
+				path: 'posts/:postId',
+				element: <PostDetail />,
 			},
 			{
 				path: 'newPost', // Absolute path

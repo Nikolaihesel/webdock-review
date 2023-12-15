@@ -1,0 +1,72 @@
+@import '../newui/variables.scss';
+
+.post-full-view {
+	background: $background;
+	padding: 40px;
+	border-radius: 20px;
+	box-shadow: $shadow;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+
+	.post-header {
+		margin-bottom: 30px;
+	}
+
+	.post-title {
+		color: $sideNavicon;
+		margin-bottom: 10px;
+	}
+
+	.post-author {
+		color: darken($sideNavicon, 10%);
+		font-style: italic;
+		margin-bottom: 20px;
+	}
+
+	.post-content {
+		flex-grow: 1;
+	}
+
+	.post-body {
+		color: darken($sideNavicon, 20%);
+		margin-bottom: 30px;
+	}
+
+	.post-interactions {
+		display: flex;
+		align-items: center;
+		margin-bottom: 20px;
+
+		.upvote-button,
+		.delete-button {
+			background: #e0e0e0;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 10px;
+			box-shadow: $insetShadow;
+			color: $sideNavicon;
+			cursor: pointer;
+			margin-right: 15px;
+			transition: background-color 0.3s ease, color 0.3s ease;
+
+			&:hover {
+				background: lighten($sideNavicon, 40%);
+				color: #fff;
+			}
+		}
+	}
+
+	.post-meta {
+		color: darken($sideNavicon, 20%);
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.comments-section {
+		margin-top: 40px;
+		// Additional styles for comments
+	}
+}

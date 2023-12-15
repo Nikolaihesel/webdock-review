@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+.post-full-view {
+  background: #d8dee3;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.post-full-view .post-header {
+  margin-bottom: 30px;
+}
+.post-full-view .post-title {
+  color: rgb(116, 215, 175);
+  margin-bottom: 10px;
+}
+.post-full-view .post-author {
+  color: #4ccc98;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+.post-full-view .post-content {
+  flex-grow: 1;
+}
+.post-full-view .post-body {
+  color: #33b27f;
+  margin-bottom: 30px;
+}
+.post-full-view .post-interactions {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.post-full-view .post-interactions .upvote-button,
+.post-full-view .post-interactions .delete-button {
+  background: #e0e0e0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: inset 10px 10px 12px rgba(186, 192, 197, 0.9), inset -10px -10px 12px rgba(246, 252, 255, 0.9);
+  color: rgb(116, 215, 175);
+  cursor: pointer;
+  margin-right: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.post-full-view .post-interactions .upvote-button:hover,
+.post-full-view .post-interactions .delete-button:hover {
+  background: white;
+  color: #fff;
+}
+.post-full-view .post-meta {
+  color: #33b27f;
+  display: flex;
+  justify-content: space-between;
+}
+.post-full-view .comments-section {
+  margin-top: 40px;
+}/*# sourceMappingURL=postDetail.css.map */

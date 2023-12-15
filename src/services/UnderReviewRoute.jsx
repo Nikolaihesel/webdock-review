@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import PostMarkup from '../newui/postMarkup/PostMarkup';
-
+import { useNavigate } from 'react-router-dom';
 import '../newui/featurePosts/featurePosts.css';
+
 import { usePostManagement } from './PostManagement';
 
 const UnderReviewRoute = ({ featureStatus }) => {
+	const navigate = useNavigate();
+
 	function truncateText(text, maxLength) {
 		if (text.length > maxLength) {
 			return text.slice(0, maxLength) + '...';
@@ -14,7 +16,7 @@ const UnderReviewRoute = ({ featureStatus }) => {
 	const { fetchPostsWithStatus, fetchedPosts, handleLike } =
 		usePostManagement(featureStatus);
 	const [currentPage, setCurrentPage] = useState(1);
-	const postsPerPage = 4;
+	const postsPerPage = 3;
 
 	useEffect(() => {
 		fetchPostsWithStatus(featureStatus);
@@ -45,7 +47,8 @@ const UnderReviewRoute = ({ featureStatus }) => {
 				currentPosts.map((post) => (
 					<div
 						className='post-preview'
-						key={post._id}>
+						key={post._id}
+						onClick={() => navigate(`/posts/${post._id}`)}>
 						<p className='post-title'>{post.title}</p>
 						<p className='post-author'>{post.user.name}</p>
 						<p className='post-preview-text'>

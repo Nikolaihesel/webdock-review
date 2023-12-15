@@ -5,8 +5,11 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
-	width: 55%;
+	width: 63%;
 	height: 100%;
+	gap: 1em;
+	padding: 1em;
+	border-radius: 12px;
 
 	background: $background;
 	box-shadow: $shadow;
@@ -45,5 +48,38 @@
 			width: 1;
 			color: black;
 		}
+	}
+}
+
+.small-post-preview {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%; // Adjust width as needed
+	height: 30%;
+	padding: 0.3em;
+	background-color: $background;
+	border-radius: 5px;
+	box-shadow: $shadow;
+
+	.post-title {
+		font-size: 0.8em;
+		color: #333;
+		flex-grow: 1;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.post-upvotes {
+		font-size: 0.8em;
+		color: #666;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+	.icon {
+		color: #007bff; // Example color for the icon
+		font-size: 1.2em;
 	}
 }

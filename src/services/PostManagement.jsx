@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { TokenContext } from '../assets/contexts/TokenContext';
 export function usePostManagement(featureStatus) {
 	const [fetchedPosts, setFetchedPosts] = useState([]);
@@ -30,10 +30,29 @@ export function usePostManagement(featureStatus) {
 		}
 	};
 
-	const fetchPostsById = async (postId) => {
+	const fetchPostById = useCallback(
+		async (postId) => {
+			console.log('Fetching post with ID:', postId);
+			try {
+				const response = await fetch(
+					`http://localhost:4000/api/posts/${postId}`
+				);
+				if (response.ok) {
+					const json = await response.json();
+					setFetchedPosts(json);
+				} else {
+					console.log('Failed to fetch posts');
+				}
+			} catch (error) {
+				console.error('Error fetching posts:', error);
+			}
+		},
+		[setFetchedPosts]
+	);
+	const fetchPostByUserId = async (userId) => {
 		try {
 			const response = await fetch(
-				`http://localhost:4000/api/posts/user/${postId}`
+				`http://localhost:4000/api/posts/user/${userId}`
 			);
 			if (response.ok) {
 				const json = await response.json();
@@ -135,7 +154,8 @@ export function usePostManagement(featureStatus) {
 		user,
 		handleLike,
 		handleDelete,
-		fetchPostsById,
+		fetchPostById,
+		fetchPostByUserId,
 		fetchPostsWithStatus,
 		searchPosts,
 	};

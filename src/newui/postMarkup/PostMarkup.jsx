@@ -1,15 +1,7 @@
 import React from 'react';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 //style
-import './postMarkup.css';
-function PostMarkup({
-	FirstLetter,
-	Title,
-	Description,
-	Upvotes,
-	LikePost,
-	ButtonText,
-}) {
+function p({ FirstLetter, Title, Description, Upvotes, LikePost, ButtonText }) {
 	const admin = false;
 	return (
 		<div className='user-post'>
@@ -32,4 +24,4 @@ function PostMarkup({
 	);
 }
 
-export default PostMarkup;
+export default p;
