@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { usePostManagement } from '../services/PostManagement';
 
 import './postDetail.css';
@@ -7,20 +7,25 @@ import './postDetail.css';
 const PostDetail = () => {
 	const isAdmin = true;
 	const { postId } = useParams();
+	const navigate = useNavigate(); // Added for navigation
 	const { fetchPostById, fetchedPost, user } = usePostManagement();
+	const [post, setPost] = useState(null);
 
 	useEffect(() => {
-		if (postId) {
-			fetchPostById(postId);
-		}
-		console.log(1);
+		fetchPostById(postId);
+
+		setPost(fetchPostById);
 	}, [postId, fetchPostById]);
 
+	// Check if data is still loading
+	if (!fetchedPost) {
+		return <div>Loading...</div>; // Show loading or spinner
+	}
 	return (
 		<div
 			className='post-full-view'
 			key={fetchedPost?._id}>
-			<h1 className='post-title'>{fetchedPost.title}</h1>
+			<h1 className='post-title'>{fetchedPost?.title}</h1>
 			<p className='post-author'>{user.name}</p>
 			<p className='post-body'>{fetchedPost?.bodyText}</p>
 			<div className='post-details'>
