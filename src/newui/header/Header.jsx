@@ -29,7 +29,7 @@ function Header() {
 				{isLoggedIn ? (
 					<button onClick={logOut}>Log out</button>
 				) : (
-					<NavLink to='ssologin'>
+					<NavLink to='/ssologin'>
 						<button>Log in</button>
 					</NavLink>
 				)}
