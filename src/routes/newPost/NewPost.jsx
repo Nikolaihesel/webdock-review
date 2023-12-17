@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../newPost/newPost.css';
-import '../../newui/featurePosts/featureposts.css';
+import '../../newui/featurePosts/featurePosts.css';
 
 import { usePostManagement } from '../../services/PostManagement';
 import SendPosts from '../../services/SendPosts';
