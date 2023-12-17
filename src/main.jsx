@@ -10,15 +10,15 @@ import App from './routes/App';
 import ErrorPage from './error-page';
 
 // import { AuthProvider } from './assets/contexts/AuthContext';
-import SsoLogin from './newui/ssoComponents/SsoLogin';
-import SsoCallback from './newui/ssoComponents/SsoCallback';
-import { TokenProvider } from './assets/contexts/TokenContext';
+import SsoLogin from './newui/ssoComponents/SsoLogin.jsx';
+import SsoCallback from './newui/ssoComponents/SsoCallback.jsx';
+import { TokenProvider } from './assets/contexts/TokenContext.jsx';
 
-import UnderReviewRoute from './services/UnderReviewRoute';
-import PostDetail from './routes/PostDetail';
-import Dashboard from './routes/dashboard/Dashboard';
-import NewPost from './routes/NewPost/NewPost';
-import AllPostsRoute from './services/AllPostsRoute';
+import UnderReviewRoute from './services/UnderReviewRoute.jsx';
+import PostDetail from './routes/PostDetail.jsx';
+import Dashboard from './routes/dashboard/Dashboard.jsx';
+import NewPost from './routes/NewPost/NewPost.jsx';
+import AllPostsRoute from './services/AllPostsRoute.jsx';
 
 const router = createBrowserRouter([
 	{
