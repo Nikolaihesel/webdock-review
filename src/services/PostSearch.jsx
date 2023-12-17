@@ -8,7 +8,7 @@ export function usePostSearch() {
 	const searchPosts = async (searchTerm) => {
 		try {
 			const response = await fetch(
-				`http://localhost:4000/api/posts/search/?q=${searchTerm}`
+				`http://45.136.70.229/api/posts/search/?q=${searchTerm}`
 			);
 			const data = await response.json();
 			const searchData = Array.isArray(data) ? data : [];

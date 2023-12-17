@@ -25,7 +25,7 @@ app.post('/verify', async (req, res) => {
 });
 
 app.listen(port, () => {
-	console.log(`Server is runing at http://localhost:${port}`);
+	console.log(`Server is runing at http://45.136.70.229/${port}`);
 });
 
 //Mongoose

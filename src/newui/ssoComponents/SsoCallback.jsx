@@ -8,7 +8,7 @@ function SsoCallback() {
 		try {
 			const urlParams = new URLSearchParams(window.location.search);
 			const ssoToken = urlParams.get('ssoToken');
-			const response = await fetch('http://localhost:3000/verify', {
+			const response = await fetch('http://45.136.70.229/verify', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
