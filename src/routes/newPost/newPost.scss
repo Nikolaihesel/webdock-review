@@ -1,11 +1,11 @@
 @import '../../newui/variables.scss';
+
 .new-post {
 	display: flex;
 	justify-content: space-between;
-	align-items: cemter;
+	align-items: center;
 	width: 100%;
 	height: 100vh;
-
 	font-family: $primFont;
 
 	.create-post {
@@ -14,6 +14,7 @@
 		justify-content: center;
 		align-items: center;
 		width: 50%;
+
 		.form-wrap {
 			display: flex;
 			flex-direction: column;
@@ -34,6 +35,7 @@
 					padding: 0.4em;
 					font-size: 1.2em;
 					border-radius: 8px;
+					width: 100%;
 				}
 
 				textarea {
@@ -45,7 +47,9 @@
 					padding: 0.4em;
 					border-radius: 8px;
 					font-family: $primFont;
+					width: 100%;
 				}
+
 				button {
 					border: none;
 					box-shadow: $shadow;
@@ -53,10 +57,12 @@
 					padding: 1em;
 					border-radius: 12px;
 					font-size: 1.2em;
+					width: 100%;
 				}
 			}
 		}
 	}
+
 	.all-posts {
 		display: flex;
 		flex-direction: column;
@@ -64,11 +70,10 @@
 		align-items: flex-start;
 		gap: 1em;
 		width: 90%;
-		height: 100%;
+		height: 90%;
 		background: $background;
 		box-shadow: $shadow;
 		overflow-x: auto;
-
 		padding: 1em;
 		margin: 2em;
 		border-radius: 12px;
@@ -89,6 +94,34 @@
 
 		.all-posts-post {
 			width: 100%;
+		}
+	}
+}
+.search-field {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 20px;
+
+	input[type='text'] {
+		flex: 1;
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 8px;
+	}
+
+	.search-btn,
+	.clearsearch-btn {
+		padding: 0.5em 1.3em;
+		border: none;
+		border-radius: 4px;
+		background-color: $background;
+		color: black;
+		box-shadow: $shadow;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #0056b3;
 		}
 	}
 }

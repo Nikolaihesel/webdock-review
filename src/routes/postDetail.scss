@@ -1,27 +1,24 @@
 @import '../newui/variables.scss';
 
 .post-full-view {
-	background: $background;
 	padding: 40px;
-	border-radius: 20px;
-	box-shadow: $shadow;
 	width: 100vw;
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	overflow-y: auto;
+	font-family: $primFont;
+	color: #333;
 
 	.post-header {
 		margin-bottom: 30px;
 	}
 
 	.post-title {
-		color: $sideNavicon;
 		margin-bottom: 10px;
 	}
 
 	.post-author {
-		color: darken($sideNavicon, 10%);
 		font-style: italic;
 		margin-bottom: 20px;
 	}
@@ -31,7 +28,6 @@
 	}
 
 	.post-body {
-		color: darken($sideNavicon, 20%);
 		margin-bottom: 30px;
 	}
 
@@ -60,13 +56,63 @@
 	}
 
 	.post-meta {
-		color: darken($sideNavicon, 20%);
 		display: flex;
 		justify-content: space-between;
 	}
 
 	.comments-section {
 		margin-top: 40px;
+		color: #333;
 		// Additional styles for comments
+	}
+}
+.toggle-box {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+
+	// Hide the default checkbox
+	input[type='checkbox'] {
+		opacity: 0;
+		width: 0;
+		height: 0;
+	}
+
+	// Custom toggle styles
+	.toggle-label {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: #ccc;
+		transition: 0.4s;
+		border-radius: 34px;
+
+		&:before {
+			position: absolute;
+			content: '';
+			height: 26px;
+			width: 26px;
+			left: 4px;
+			bottom: 4px;
+			background-color: white;
+			transition: 0.4s;
+			border-radius: 50%;
+		}
+	}
+
+	input:checked + .toggle-label {
+		background-color: #2196f3;
+	}
+
+	input:focus + .toggle-label {
+		box-shadow: 0 0 1px #2196f3;
+	}
+
+	input:checked + .toggle-label:before {
+		transform: translateX(26px);
 	}
 }

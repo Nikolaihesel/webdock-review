@@ -5,39 +5,52 @@ import { usePostManagement } from '../services/PostManagement';
 import './postDetail.css';
 
 const PostDetail = () => {
-	const isAdmin = true;
+	const [admin, setAdmin] = useState(false);
 	const { postId } = useParams();
-	const navigate = useNavigate(); // Added for navigation
-	const { fetchPostById, fetchedPost, user } = usePostManagement();
-	const [post, setPost] = useState(null);
+	const navigate = useNavigate();
+	const { fetchPostsById, fetchedPosts, user, handleDelete, handleLike } =
+		usePostManagement();
 
 	useEffect(() => {
-		fetchPostById(postId);
+		fetchPostsById(postId);
+	}, [postId]);
 
-		setPost(fetchPostById);
-	}, [postId, fetchPostById]);
-
-	// Check if data is still loading
-	if (!fetchedPost) {
-		return <div>Loading...</div>; // Show loading or spinner
-	}
+	const handleToggle = () => {
+		setAdmin(!admin);
+	};
 	return (
 		<div
 			className='post-full-view'
-			key={fetchedPost?._id}>
-			<h1 className='post-title'>{fetchedPost?.title}</h1>
-			<p className='post-author'>{user.name}</p>
-			<p className='post-body'>{fetchedPost?.bodyText}</p>
+			key={fetchedPosts?._id}>
+			<div className='toggle-box'>
+				<input
+					id='admin-toggle'
+					type='checkbox'
+					checked={admin}
+					onChange={handleToggle}
+				/>
+				<label
+					htmlFor='admin-toggle'
+					className='toggle-label'></label>
+			</div>
+
+			<label>{admin ? 'admin' : 'Not admin'}</label>
+			<h1 className='post-title'>{fetchedPosts?.title}</h1>
+			<p className='post-author'>
+				{' '}
+				By <i>{fetchedPosts.user ? fetchedPosts.user.name : 'user'}</i>
+			</p>
+			<p className='post-body'>{fetchedPosts?.bodyText}</p>
 			<div className='post-details'>
 				<button
-					onClick={() => handleLike(fetchedPost?._id)}
+					onClick={() => handleLike(fetchedPosts?._id)}
 					className='upvote-button'>
-					Upvote ({fetchedPost?.upvotes})
+					Upvote ({fetchedPosts?.upvotes})
 				</button>
-				{isAdmin && (
+				{admin && (
 					<button
 						onClick={() => {
-							handleDelete(fetchedPost?._id);
+							handleDelete(fetchedPosts?._id);
 							navigate('/');
 						}}
 						className='delete-button'>
@@ -45,14 +58,20 @@ const PostDetail = () => {
 					</button>
 				)}
 				<div className='post-meta'>
-					<p className='post-comments'>{fetchedPost?.comments} Comments</p>
-					<p className='post-tag'>{fetchedPost?.tag}</p>
+					<p className='post-comments'>
+						{' '}
+						{fetchedPosts.comments ? fetchedPosts.comments.length : ''} Comments
+					</p>
+					<p className='post-tag'>{fetchedPosts?.tag}</p>
 				</div>
 			</div>
 			{/* Comment Section */}
 			<div className='comments-section'>
-				<h2>Comments</h2>
-				{/* Implement comment display and functionality here */}
+				{fetchedPosts?.comments && fetchedPosts.comments.length > 0 ? (
+					<h2>Comments</h2>
+				) : (
+					<h2>No one has commented yet</h2>
+				)}
 			</div>
 		</div>
 	);

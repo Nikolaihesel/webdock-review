@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import PostMarkup from '../newui/postMarkup/PostMarkup';
 
+import { useNavigate } from 'react-router-dom';
 import '../newui/featurePosts/featurePosts.css';
 import { usePostManagement } from './PostManagement';
 
 const AllPostsRoute = ({ featureStatus }) => {
+	const navigate = useNavigate();
 	function truncateText(text, maxLength) {
 		if (text.length > maxLength) {
 			return text.slice(0, maxLength) + '...';
@@ -44,7 +45,8 @@ const AllPostsRoute = ({ featureStatus }) => {
 				currentPosts.map((post) => (
 					<div
 						className='post-preview'
-						key={post._id}>
+						key={post._id}
+						onClick={() => navigate(`/posts/${post._id}`)}>
 						<p className='post-title'>{post.title}</p>
 						<p className='post-author'>{post.user.name}</p>
 						<p className='post-preview-text'>

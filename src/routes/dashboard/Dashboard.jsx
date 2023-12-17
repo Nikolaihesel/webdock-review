@@ -2,7 +2,6 @@ import MainBoardRoutes from '../../newui/mainBoardRoutes/MainBoardRoutes';
 import Header from '../../newui/header/Header';
 
 import '../../newui/main.css';
-import '../../newui/neumorphismBox/neumorphicBox';
 import '../../newui/variables.scss';
 import './dashboard.css';
 import MyPosts from '../../newui/myPosts/MyPosts';

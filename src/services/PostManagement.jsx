@@ -30,25 +30,21 @@ export function usePostManagement(featureStatus) {
 		}
 	};
 
-	const fetchPostById = useCallback(
-		async (postId) => {
-			console.log('Fetching post with ID:', postId);
-			try {
-				const response = await fetch(
-					`http://localhost:4000/api/posts/${postId}`
-				);
-				if (response.ok) {
-					const json = await response.json();
-					setFetchedPosts(json);
-				} else {
-					console.log('Failed to fetch posts');
-				}
-			} catch (error) {
-				console.error('Error fetching posts:', error);
+	const fetchPostsById = async (postId) => {
+		try {
+			const response = await fetch(`http://localhost:4000/api/posts/${postId}`);
+			if (response.ok) {
+				const json = await response.json();
+				setFetchedPosts(json);
+				console.log(fetchedPosts);
+			} else {
+				console.log('Failed to fetch posts');
 			}
-		},
-		[setFetchedPosts]
-	);
+		} catch (error) {
+			console.error('Error fetching posts:', error);
+		}
+	};
+
 	const fetchPostByUserId = async (userId) => {
 		try {
 			const response = await fetch(
@@ -154,7 +150,7 @@ export function usePostManagement(featureStatus) {
 		user,
 		handleLike,
 		handleDelete,
-		fetchPostById,
+		fetchPostsById,
 		fetchPostByUserId,
 		fetchPostsWithStatus,
 		searchPosts,

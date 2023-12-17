@@ -1,38 +1,30 @@
 @import '../variables.scss';
+
 .header {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
-	gap: 4em;
-	margin: 1em 0;
-	width: 100%;
 
+	margin: 0.3em 3em;
+	width: 100%;
 	h1 {
-		margin-left: 2em;
 		font-family: $primFont;
-		color: $textColor;
+		font-size: 2em;
+		margin-right: 25em;
 	}
 
 	.header-wrap {
 		display: flex;
 		align-items: center;
 		gap: 1em;
-		margin: 0 10em;
-
-		input {
-			padding: 1em;
-			font-size: 14px;
-			width: 20em;
-			border-radius: 12px;
-			border: none;
-			background: $background;
-			box-shadow: $shadow;
-		}
 	}
-}
 
-.icon {
-	font-size: 2em;
-	fill: $textColor;
+	.log-btn {
+		padding: 0.5em 1em;
+		border-radius: 4px;
+		font-family: $primFont;
+		font-size: 1em;
+		cursor: pointer;
+	}
 }

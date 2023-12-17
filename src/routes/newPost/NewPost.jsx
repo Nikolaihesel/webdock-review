@@ -43,14 +43,24 @@ function NewPost() {
 
 			<div className='all-posts'>
 				<div className='all-posts-container'>
-					<input
-						type='text'
-						value={searchTerm}
-						onChange={(e) => setSearchTerm(e.target.value)}
-						placeholder='Search posts...'
-					/>
-					<button onClick={handleSearch}>Search</button>
-					<button onClick={clearSearch}>Search</button>
+					<div className='search-field'>
+						<input
+							type='text'
+							value={searchTerm}
+							onChange={(e) => setSearchTerm(e.target.value)}
+							placeholder='Search posts...'
+						/>
+						<button
+							className='search-btn'
+							onClick={handleSearch}>
+							Search
+						</button>
+						<button
+							className='clearsearch-btn'
+							onClick={clearSearch}>
+							Clear
+						</button>
+					</div>
 
 					<h3>All feature Request</h3>
 					{fetchedPosts.map((post) => (
