@@ -7,7 +7,7 @@ function SsoLogin() {
 	useEffect(() => {
 		// Redirect to the Identity Provider's login page.
 		window.location.href =
-			'http://webdock.io/en/login?companyID=ucl_feedback_tool&redirect=http://wpc.vps.webdock.cloud:5173/dashboard/mostliked';
+			'http://webdock.io/en/login?companyID=ucl_feedback_tool&redirect=http://wpc.vps.webdock.cloud:5173';
 	}, []);
 
 	return <div>Redirecting to SSO login...</div>;
