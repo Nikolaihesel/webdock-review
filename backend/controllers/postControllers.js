@@ -305,6 +305,7 @@ const createPostComment = async (req, res) => {
 	const { id } = req.params; //destruct - tager værdier i en variable der hedder det samme
 	const comment = new commentModel({
 		bodyText: req.body.comment,
+		user: req.body.user,
 		post: id,
 	});
 
