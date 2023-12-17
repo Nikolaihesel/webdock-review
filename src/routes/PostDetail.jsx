@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { usePostManagement } from '../services/PostManagement';
-
+import MakeComment from '../services/MakeComment';
 import './postDetail.css';
 
 const PostDetail = () => {
@@ -72,6 +72,7 @@ const PostDetail = () => {
 				) : (
 					<h2>No one has commented yet</h2>
 				)}
+				<MakeComment />
 			</div>
 		</div>
 	);

@@ -57,7 +57,7 @@ router.post(
 );
 
 //CREATE comment
-router.post('/:id/comment', createPostComment);
+router.post('/:id/comments', createPostComment);
 
 // //CHANGE status
 // router.patch('/:id/status', handleStatusChange);
