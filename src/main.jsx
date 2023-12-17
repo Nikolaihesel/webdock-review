@@ -17,7 +17,7 @@ import { TokenProvider } from './assets/contexts/TokenContext.jsx';
 import UnderReviewRoute from './services/UnderReviewRoute.jsx';
 import PostDetail from './routes/PostDetail.jsx';
 import Dashboard from './routes/dashboard/Dashboard.jsx';
-import NewPost from './routes/NewPost/NewPost.jsx';
+import NewPost from './routes/newPost/NewPost.jsx';
 import AllPostsRoute from './services/AllPostsRoute.jsx';
 
 const router = createBrowserRouter([
