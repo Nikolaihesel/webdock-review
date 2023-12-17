@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../newPost/newPost.css';
 import '../../newui/featurePosts/featurePosts.css';
 
@@ -6,6 +7,7 @@ import { usePostManagement } from '../../services/PostManagement';
 import SendPosts from '../../services/SendPosts';
 
 function NewPost() {
+	const navigate = useNavigate();
 	const { user, fetchPosts, fetchedPosts, searchPosts } = usePostManagement();
 	const [searchTerm, setSearchTerm] = useState('');
 
@@ -29,8 +31,6 @@ function NewPost() {
 
 	useEffect(() => {
 		fetchPosts();
-		console.log(1);
-		console.log(fetchedPosts);
 	}, []);
 
 	console.log;
@@ -64,7 +64,10 @@ function NewPost() {
 
 					<h3>All feature Request</h3>
 					{fetchedPosts.map((post) => (
-						<div className='post-preview'>
+						<div
+							className='post-preview'
+							key={post._id}
+							onClick={() => navigate(`/posts/${post._id}`)}>
 							<p className='post-title'>{post.title}</p>
 							<p className='post-author'>{post.user.name}</p>
 							<p className='post-preview-text'>

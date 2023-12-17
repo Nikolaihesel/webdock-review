@@ -1,19 +1,24 @@
 import { useState } from 'react';
-import { usePostManagement } from '../services/PostManagement';
-import SendPosts from './SendPosts';
+import { useParams } from 'react-router-dom';
+import { usePostManagement } from '../PostManagement';
+import '../comments/comments.css';
 function MakeComment() {
 	const { user } = usePostManagement();
 	const [comment, setComment] = useState('');
 	const [error, setError] = useState(null);
+	const { postId } = useParams();
 
 	const sendComment = async (comment) => {
-		const response = await fetch(`http://ttp://45.136.70.229/api/posts`, {
-			method: 'POST',
-			body: JSON.stringify(comment),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
+		const response = await fetch(
+			`http://45.136.70.229/api/posts/${postId}/comments`,
+			{
+				method: 'POST',
+				body: JSON.stringify(comment),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			}
+		);
 		const json = await response.json();
 		if (!response.ok) {
 			setError(json.error);
@@ -23,10 +28,12 @@ function MakeComment() {
 		}
 	};
 
+	let bodyText = comment;
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const newComment = {
-			comment,
+			bodyText,
 			user: {
 				id: user.id,
 				name: user.name,
@@ -35,7 +42,7 @@ function MakeComment() {
 			upvotes: 0,
 		};
 		console.log(newComment);
-		onSubmit(sendComment);
+		sendComment(newComment);
 		setComment('');
 	};
 	return (

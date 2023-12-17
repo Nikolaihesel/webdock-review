@@ -21,7 +21,6 @@ export function usePostManagement(featureStatus) {
 			if (response.ok) {
 				const json = await response.json();
 				setFetchedPosts(json);
-				console.log(fetchedPosts);
 			} else {
 				console.log('Failed to fetch posts');
 			}
@@ -36,7 +35,6 @@ export function usePostManagement(featureStatus) {
 			if (response.ok) {
 				const json = await response.json();
 				setFetchedPosts(json);
-				console.log(fetchedPosts);
 			} else {
 				console.log('Failed to fetch posts');
 			}
@@ -63,7 +61,6 @@ export function usePostManagement(featureStatus) {
 
 	const fetchPostsWithStatus = async (featureStatus) => {
 		try {
-			console.log(`http://45.136.70.229/api/posts/?status=${featureStatus}`);
 			const response = await fetch(
 				`http://45.136.70.229/api/posts/status?status=${featureStatus}`
 			);
@@ -84,7 +81,7 @@ export function usePostManagement(featureStatus) {
 				`http://45.136.70.229/api/posts/search/?q=${searchTerm}`
 			);
 			const data = await response.json();
-			console.log(`http://localhost:4000/api/posts/search/?q=${searchTerm}`);
+
 			const searchData = Array.isArray(data) ? data : [];
 			setFetchedPosts(searchData);
 		} catch (error) {

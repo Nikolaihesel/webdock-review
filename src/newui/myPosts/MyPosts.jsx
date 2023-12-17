@@ -19,15 +19,11 @@ function MyPosts() {
 		if (user && user.name && user.name.length > 0) {
 			setUsername(user.name[0]);
 		} else {
-			console.log("User or user's name is undefined or empty.");
 		}
 	}, []);
 
-	console.log(username);
-
 	useEffect(() => {
 		user;
-		console.log(user);
 	});
 
 	useEffect(() => {
