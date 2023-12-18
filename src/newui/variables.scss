@@ -1,13 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 //fonts
-$primFont: "poppins", "sans-serif";
+$primFont: 'poppins', 'sans-serif';
 $fontBold: 700;
 $fontMedium: 600;
 $fontRegular: 400;
 $fontThin: 200;
 
 // colors
-$background: #d8dee3; //#87a196;
+$background: #f2f3f7; //#87a196;
 $textColor: #333333;
 $navBg: $background;
 $sideNavicon: rgba(116, 215, 175, 247);
@@ -15,22 +15,22 @@ $navBackground: #157f7d;
 
 //calc shadow colors for soft ui
 @function calculateShadowColors($background) {
-  $red: red($background);
-  $green: green($background);
-  $blue: blue($background);
+	$red: red($background);
+	$green: green($background);
+	$blue: blue($background);
 
-  $lightRed: min($red + 30, 255);
-  $lightGreen: min($green + 30, 255);
-  $lightBlue: min($blue + 30, 255);
+	$lightRed: min($red + 30, 255);
+	$lightGreen: min($green + 30, 255);
+	$lightBlue: min($blue + 30, 255);
 
-  $darkRed: max($red - 30, 0);
-  $darkGreen: max($green - 30, 0);
-  $darkBlue: max($blue - 30, 0);
+	$darkRed: max($red - 30, 0);
+	$darkGreen: max($green - 30, 0);
+	$darkBlue: max($blue - 30, 0);
 
-  $lightShadowColor: rgba($lightRed, $lightGreen, $lightBlue, 0.9);
-  $darkShadowColor: rgba($darkRed, $darkGreen, $darkBlue, 0.9);
+	$lightShadowColor: rgba($lightRed, $lightGreen, $lightBlue, 0.9);
+	$darkShadowColor: rgba($darkRed, $darkGreen, $darkBlue, 0.9);
 
-  @return (light: $lightShadowColor, dark: $darkShadowColor);
+	@return (light: $lightShadowColor, dark: $darkShadowColor);
 }
 
 $shadowColors: calculateShadowColors($background);
@@ -45,10 +45,10 @@ $navDarkShadowColor: map-get($navShadowColors, dark);
 $shadow: 5px 5px 12px $darkShadowColor, -5px -5px 12px $lightShadowColor;
 
 $insetShadow: inset 10px 10px 12px $darkShadowColor,
-  inset -10px -10px 12px $lightShadowColor;
+	inset -10px -10px 12px $lightShadowColor;
 
 $navShadow: 5px 5px 12px $navDarkShadowColor,
-  -5px -5px 12px $navLightShadowColor;
+	-5px -5px 12px $navLightShadowColor;
 
 $navInsetShadow: inset 10px 10px 12px $navDarkShadowColor,
-  inset -10px -10px 12px $navLightShadowColor;
+	inset -10px -10px 12px $navLightShadowColor;

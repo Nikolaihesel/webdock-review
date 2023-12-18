@@ -14,9 +14,9 @@
 }
 .mainboard-routes .neumorphic-route-box {
   border-radius: 10px;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
   transition: box-shadow 1s ease-in-out;
-  background: #d8dee3;
+  background: #f2f3f7;
   color: #333333;
   font-family: "poppins", "sans-serif";
   font-weight: font;
@@ -36,7 +36,7 @@
 }
 
 .active .neumorphic-route-box {
-  box-shadow: inset 10px 10px 12px rgba(186, 192, 197, 0.9), inset -10px -10px 12px rgba(246, 252, 255, 0.9);
+  box-shadow: inset 10px 10px 12px rgba(212, 213, 217, 0.9), inset -10px -10px 12px rgba(255, 255, 255, 0.9);
 }
 .active .neumorphic-route-box .box-inside-wrap .mainboard-headings {
   color: rgb(116, 215, 175);

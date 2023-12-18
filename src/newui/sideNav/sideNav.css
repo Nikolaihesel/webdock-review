@@ -8,7 +8,7 @@
   height: 100vh;
   background-image: url("../../assets/img/banner.jpg");
   background-size: cover;
-  box-shadow: 7px 7px 8px rgba(186, 192, 197, 0.9);
+  box-shadow: 7px 7px 8px rgba(212, 213, 217, 0.9);
   border-radius: 0px 12px 12px 0px;
 }
 .side-nav .logo img {

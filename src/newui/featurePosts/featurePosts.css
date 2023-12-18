@@ -8,8 +8,8 @@
   max-height: 100%;
   padding: 1em;
   border-radius: 12px;
-  background: #d8dee3;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  background: #f2f3f7;
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
   font-family: "poppins", "sans-serif";
 }
 
@@ -23,12 +23,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
   cursor: pointer; /* Indicates the box is clickable */
   transition: transform 0.2s ease-in-out;
 }
 .post-preview:hover {
-  box-shadow: inset 10px 10px 12px rgba(186, 192, 197, 0.9), inset -10px -10px 12px rgba(246, 252, 255, 0.9);
+  box-shadow: inset 10px 10px 12px rgba(212, 213, 217, 0.9), inset -10px -10px 12px rgba(255, 255, 255, 0.9);
 }
 .post-preview .upvote-button {
   padding: 8px 12px;

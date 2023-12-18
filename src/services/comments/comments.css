@@ -15,8 +15,8 @@
 }
 .comment-form-container form textarea {
   border: none;
-  background: #d8dee3;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  background: #f2f3f7;
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
   height: 10em;
   width: 400px;
   border-radius: 10px;
@@ -24,8 +24,8 @@
 }
 .comment-form-container form button {
   border: none;
-  background: #d8dee3;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  background: #f2f3f7;
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
   padding: 1em;
   border-radius: 8px;
 }

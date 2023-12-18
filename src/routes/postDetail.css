@@ -36,7 +36,7 @@
   border: none;
   padding: 10px 20px;
   border-radius: 10px;
-  box-shadow: inset 10px 10px 12px rgba(186, 192, 197, 0.9), inset -10px -10px 12px rgba(246, 252, 255, 0.9);
+  box-shadow: inset 10px 10px 12px rgba(212, 213, 217, 0.9), inset -10px -10px 12px rgba(255, 255, 255, 0.9);
   color: rgb(116, 215, 175);
   cursor: pointer;
   margin-right: 15px;

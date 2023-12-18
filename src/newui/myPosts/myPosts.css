@@ -9,8 +9,8 @@
   gap: 1em;
   padding: 1em;
   border-radius: 12px;
-  background: #d8dee3;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  background: #f2f3f7;
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
   font-family: "poppins", "sans-serif";
 }
 .my-posts .pagination-wrapper {
@@ -33,8 +33,8 @@
 }
 .pagination li button {
   border: none;
-  background: #d8dee3;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  background: #f2f3f7;
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
   padding: 0.5em;
   border-radius: 8px;
 }
@@ -52,9 +52,9 @@
   width: 100%;
   height: 30%;
   padding: 0.3em;
-  background-color: #d8dee3;
+  background-color: #f2f3f7;
   border-radius: 5px;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
 }
 .small-post-preview .post-title {
   font-size: 0.8em;

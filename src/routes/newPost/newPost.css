@@ -29,8 +29,8 @@
 }
 .new-post .create-post .form-wrap form input {
   border: none;
-  background: #d8dee3;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  background: #f2f3f7;
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
   padding: 0.4em;
   font-size: 1.2em;
   border-radius: 8px;
@@ -38,8 +38,8 @@
 }
 .new-post .create-post .form-wrap form textarea {
   border: none;
-  background: #d8dee3;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  background: #f2f3f7;
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
   height: 10em;
   font-size: 1em;
   padding: 0.4em;
@@ -49,8 +49,8 @@
 }
 .new-post .create-post .form-wrap form button {
   border: none;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
-  background: #d8dee3;
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
+  background: #f2f3f7;
   padding: 1em;
   border-radius: 12px;
   font-size: 1.2em;
@@ -64,8 +64,8 @@
   gap: 1em;
   width: 90%;
   height: 90%;
-  background: #d8dee3;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  background: #f2f3f7;
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
   overflow-x: auto;
   padding: 1em;
   margin: 2em;
@@ -104,9 +104,9 @@
   padding: 0.5em 1.3em;
   border: none;
   border-radius: 4px;
-  background-color: #d8dee3;
+  background-color: #f2f3f7;
   color: black;
-  box-shadow: 5px 5px 12px rgba(186, 192, 197, 0.9), -5px -5px 12px rgba(246, 252, 255, 0.9);
+  box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
   cursor: pointer;
 }
 .search-field .search-btn:hover,
