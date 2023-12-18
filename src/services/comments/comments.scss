@@ -32,3 +32,21 @@
 		}
 	}
 }
+
+.comment {
+	border-top: 1px solid #eaeaea;
+	border-bottom: 1px solid #eaeaea;
+	padding: 10px;
+	margin: 1em 0;
+
+	max-width: 400px;
+	.name {
+		font-weight: bold;
+		color: #333;
+		margin-bottom: 5px;
+	}
+	.body-text {
+		color: #666;
+		line-height: 1.6;
+	}
+}

@@ -70,12 +70,15 @@ const PostDetail = () => {
 				</div>
 				{/* Comment Section */}
 				<div className='comments-section'>
+					<MakeComment />
+
+					<br />
+
 					{fetchedPosts?.comments && fetchedPosts.comments.length > 0 ? (
 						<h2>Comments</h2>
 					) : (
 						<h2>No one has commented yet</h2>
 					)}
-					<MakeComment />
 
 					{fetchedPosts?.comments &&
 						fetchedPosts.comments.map((comment) => (

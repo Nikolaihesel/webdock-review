@@ -5,8 +5,8 @@ function CommentMarkup({ Name, BodyText }) {
 	return (
 		<div>
 			<div className='comment'>
-				<p>{Name}</p>
-				<p>{BodyText}</p>
+				<p className='name'>{Name}</p>
+				<p className='body-text'>{BodyText}</p>
 			</div>
 		</div>
 	);
