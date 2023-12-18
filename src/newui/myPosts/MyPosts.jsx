@@ -69,7 +69,7 @@ function MyPosts() {
 					</div>
 				))
 			) : (
-				<p>User not logged in</p>
+				<p>No user posts to show</p>
 			)}
 		</div>
 	);
