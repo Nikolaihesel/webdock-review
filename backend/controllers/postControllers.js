@@ -320,11 +320,14 @@ const createPostComment = async (req, res) => {
 };
 
 const handleCommentDelete = async (req, res) => {
-  const { commentId } = req.params;
+  const { id, commentId } = req.params;
 
   try {
     // Use the deleteComment function to delete the comment
-    const deletedComment = await deleteComment(commentId);
+    const deletedComment = await commentModel.findOneAndDelete({
+      _id: commentId,
+      post: id,
+    });
 
     res.status(200).json({
       message: "Comment deleted successfully",

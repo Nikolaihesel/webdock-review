@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "export NODE_ENV=development || set NODE_ENV=development&& nodemon index.js",
+    "prod": "export NODE_ENV=production || set NODE_ENV=production&& nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

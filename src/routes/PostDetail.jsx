@@ -94,7 +94,7 @@ const PostDetail = () => {
                 {admin && (
                   <button
                     onClick={() => {
-                      handleCommentDelete(comment._id);
+                      handleCommentDelete(fetchedPosts._id, comment._id);
                       // You may want to refresh the comments after deletion
                       // You can fetch the updated comments or update the state accordingly
                     }}

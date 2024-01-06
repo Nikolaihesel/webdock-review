@@ -17,7 +17,7 @@ export function usePostManagement(featureStatus) {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch(`http://45.136.70.229/api/posts/`);
+      const response = await fetch(`/api/posts/`);
       if (response.ok) {
         const json = await response.json();
         setFetchedPosts(json);
@@ -31,7 +31,7 @@ export function usePostManagement(featureStatus) {
 
   const fetchPostsById = async (postId) => {
     try {
-      const response = await fetch(`http://45.136.70.229/api/posts/${postId}`);
+      const response = await fetch(`/api/posts/${postId}`);
       if (response.ok) {
         const json = await response.json();
         setFetchedPosts(json);
@@ -45,9 +45,7 @@ export function usePostManagement(featureStatus) {
 
   const fetchPostByUserId = async (userId) => {
     try {
-      const response = await fetch(
-        `http://45.136.70.229/api/posts/user/${userId}`
-      );
+      const response = await fetch(`/api/posts/user/${userId}`);
       if (response.ok) {
         const json = await response.json();
         setFetchedPosts(json);
@@ -61,9 +59,7 @@ export function usePostManagement(featureStatus) {
 
   const fetchPostsWithStatus = async (featureStatus) => {
     try {
-      const response = await fetch(
-        `http://45.136.70.229/api/posts/status?status=${featureStatus}`
-      );
+      const response = await fetch(`/api/posts/status?status=${featureStatus}`);
       if (response.ok) {
         const json = await response.json();
         setFetchedPosts(json);
@@ -77,9 +73,7 @@ export function usePostManagement(featureStatus) {
 
   const searchPosts = async (searchTerm) => {
     try {
-      const response = await fetch(
-        `http://45.136.70.229/api/posts/search/?q=${searchTerm}`
-      );
+      const response = await fetch(`/api/posts/search/?q=${searchTerm}`);
       const data = await response.json();
 
       const searchData = Array.isArray(data) ? data : [];
@@ -91,16 +85,13 @@ export function usePostManagement(featureStatus) {
 
   const handleLike = async (postId) => {
     try {
-      const response = await fetch(
-        `http://45.136.70.229/api/posts/${postId}/likes`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId: user.id }),
-        }
-      );
+      const response = await fetch(`/api/posts/${postId}/likes`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: user.id }),
+      });
 
       if (response.ok) {
         const updatedPosts = fetchedPosts.map((post) =>
@@ -122,7 +113,7 @@ export function usePostManagement(featureStatus) {
 
   const handleDelete = async (postId) => {
     try {
-      const response = await fetch(`http://45.136.70.229/api/posts/${postId}`, {
+      const response = await fetch(`/api/posts/${postId}`, {
         method: "DELETE",
       });
 
@@ -138,12 +129,12 @@ export function usePostManagement(featureStatus) {
     }
   };
 
-  const handleCommentDelete = async (commentId) => {
+  const handleCommentDelete = async (postId, commentId) => {
     try {
       // Add your logic to delete a comment here
       // You might want to send a request to your server
       const response = await fetch(
-        `http://45.136.70.229/api/comments/${commentId}`, // Replace with your actual API endpoint for deleting comments
+        `/api/posts/${postId}/comments/${commentId}`, // Replace with your actual API endpoint for deleting comments
         {
           method: "DELETE",
         }

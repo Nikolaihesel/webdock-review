@@ -1,11 +1,15 @@
-require("dotenv").config();
+const path = require("path");
+
+require("dotenv").config({
+  path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`),
+});
+
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const app = express();
 const port = 3000;
 const cors = require("cors");
 const mongoose = require("mongoose");
-const path = require("path");
 
 // Middleware to enable Cross-Origin Resource Sharing (CORS)
 app.use(
@@ -20,7 +24,7 @@ const privateKey = process.env.PRIVATE_KEY;
 app.use(express.json());
 
 // Endpoint for verifying JWT token
-app.post("/verify", async (req, res) => {
+app.post("/api/verify", async (req, res) => {
   const { ssoToken } = req.body;
   const user = jwt.verify(ssoToken, privateKey);
   console.log(user);
