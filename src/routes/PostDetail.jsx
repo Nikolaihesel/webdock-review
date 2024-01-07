@@ -19,6 +19,21 @@ const PostDetail = () => {
 	const handleToggle = () => {
 		setAdmin(!admin);
 	};
+
+	const handleAdminUpdateStatus = async (newStatus) => {
+		try {
+		  // Send a PATCH request to the admin endpoint
+		  await axios.patch(`/api/posts/admin/update-status/${fetchedPosts._id}`, {
+			status: newStatus,
+		  });
+	
+		  // Refresh the post details after updating status
+		  fetchPostsById(postId);
+		} catch (error) {
+		  console.error('Error updating post status by admin:', error);
+		}
+	  };
+
 	return (
 		<>
 			{' '}
@@ -58,6 +73,17 @@ const PostDetail = () => {
 							className='delete-button'>
 							Delete Post
 						</button>
+					)}
+					{admin && (
+						<div>
+						<button
+							onClick={() => handleAdminUpdateStatus('Planned')}
+							className='admin-update-status-button'
+						>
+							Update Status to Planned
+						</button>
+						{/* Add more buttons for other status options */}
+						</div>
 					)}
 					<div className='post-meta'>
 						<p className='post-comments'>
