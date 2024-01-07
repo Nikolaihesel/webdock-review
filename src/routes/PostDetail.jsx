@@ -25,6 +25,7 @@ const PostDetail = () => {
   const handleToggle = () => {
     setAdmin(!admin);
   };
+
   return (
     <>
       {" "}
