@@ -20,19 +20,19 @@ const PostDetail = () => {
 		setAdmin(!admin);
 	};
 
-	const handleAdminUpdateStatus = async (newStatus) => {
+	const handleStatusChange = async (newStatus) => {
 		try {
-		  // Send a PATCH request to the admin endpoint
-		  await axios.patch(`/api/posts/admin/update-status/${fetchedPosts._id}`, {
-			status: newStatus,
+		  // Send a PATCH request to the general status change endpoint
+		  await axios.patch(`/api/posts/${fetchedPosts._id}/status`, {
+			newStatus,
 		  });
 	
 		  // Refresh the post details after updating status
 		  fetchPostsById(postId);
 		} catch (error) {
-		  console.error('Error updating post status by admin:', error);
+		  console.error('Error updating post status:', error);
 		}
-	  };
+	};
 
 	return (
 		<>
@@ -76,13 +76,31 @@ const PostDetail = () => {
 					)}
 					{admin && (
 						<div>
+						<p>Update Status to:</p>
 						<button
-							onClick={() => handleAdminUpdateStatus('Planned')}
+							onClick={() => handleStatusChange('Under Review')}
 							className='admin-update-status-button'
 						>
-							Update Status to Planned
+							Under Review
 						</button>
-						{/* Add more buttons for other status options */}
+						<button
+							onClick={() => handleStatusChange('Planned')}
+							className='admin-update-status-button'
+						>
+							Planned
+						</button>
+						<button
+							onClick={() => handleStatusChange('In Progress')}
+							className='admin-update-status-button'
+						>
+							In Progress
+						</button>
+						<button
+							onClick={() => handleStatusChange('Complete')}
+							className='admin-update-status-button'
+						>
+							Complete
+						</button>
 						</div>
 					)}
 					<div className='post-meta'>

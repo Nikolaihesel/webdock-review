@@ -346,6 +346,30 @@ const createPostComment = async (req, res) => {
 //   }
 // };
 
+const handleStatusChange = async (req, res) => {
+	const { id } = req.params;
+	const { newStatus } = req.body;
+  
+	try {
+	  // Find the post by the given post ID
+	  const post = await postModel.findById(id);
+  
+	  if (!post) {
+		return res.status(404).json({ error: 'Post not found' });
+	  }
+  
+	  // Update the featureStatus field in your post model
+	  post.featureStatus = newStatus;
+  
+	  // Save the updated post
+	  await post.save();
+  
+	  return res.status(200).json({ message: 'Post status updated successfully', post });
+	} catch (err) {
+	  res.status(500).json({ message: err.message });
+	}
+  };
+
 module.exports = {
 	getPosts,
 	getPost,
