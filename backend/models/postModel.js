@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' }); // Definer stien, hvor billederne skal gemmes
 
 const postSchema = new mongoose.Schema(
 	{
@@ -10,6 +12,11 @@ const postSchema = new mongoose.Schema(
 		bodyText: {
 			type: String,
 			required: true,
+		},
+		//tilføjer image, så det gemmes
+		image: {
+			type: Buffer, // Buffer gemmer billedet som en binær data
+			required: false, 
 		},
 
 		featureStatus: {

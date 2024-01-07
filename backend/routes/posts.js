@@ -1,36 +1,43 @@
 const express = require('express');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' }); // Define the path where images will be saved
 
 const {
-	getPosts,
-	getPost,
-	createPost,
-	deletePost,
-	updatePost,
-	createPostComment,
-	getUsersPost,
-	addLikeToPost,
-	updatePostStatusByFeatureRequestId,
-	getSearchRequest,
-	addTagsToPost,
-	updatePostTags,
-	getPostStatus,
+    getPosts,
+    getPost,
+    createPost,
+    deletePost,
+    updatePost,
+    createPostComment,
+    getUsersPost,
+    addLikeToPost,
+    updatePostStatusByFeatureRequestId,
+    getSearchRequest,
+    addTagsToPost,
+    updatePostTags,
+    getPostStatus,
 } = require('../controllers/postControllers');
 
 const router = express.Router();
 
-//get post by status
+// Define your middleware to handle image upload
+const uploadImage = upload.single('image');
+
+// Routes
+
+// Get post by status
 router.get('/status', getPostStatus);
 
 // Get all posts
 router.get('/', getPosts);
 
-//get all specific user posts
+// Get all specific user posts
 router.get('/user/:userId', getUsersPost);
 
-//add like to post
+// Add like to post
 router.patch('/:id/likes', addLikeToPost);
 
-//search for specific post
+// Search for specific post
 router.get('/search', getSearchRequest);
 
 // Add tags to post
@@ -42,24 +49,19 @@ router.patch('/:id/tags', updatePostTags);
 // Get single post
 router.get('/:id', getPost);
 
-// Create a new post
-router.post('/', createPost);
+// Tilføjelse: Create a new post with image upload
+router.post('/', uploadImage, createPost);
 
-// DELETE a post
+// Delete a post
 router.delete('/:id', deletePost);
 
-// UPDATE post
+// Update post
 router.patch('/:id', updatePost);
 
-router.post(
-	'/update-feature-request-status',
-	updatePostStatusByFeatureRequestId
-);
+// Update feature request status
+router.post('/update-feature-request-status', updatePostStatusByFeatureRequestId);
 
-//CREATE comment
+// Create comment
 router.post('/:id/comments', createPostComment);
-
-// //CHANGE status
-// router.patch('/:id/status', handleStatusChange);
 
 module.exports = router;

@@ -7,35 +7,44 @@ function PostForm({ onSubmit }) {
 	// States for inputs
 	const [title, setTitle] = useState('');
 	const [bodyText, setBodyText] = useState('');
-
+	
 	const [tag, setTag] = useState('');
+	const [image, setImage] = useState(null); //Tilføjet state for billede
 
 	//User Data set
 	const { token } = useContext(TokenContext);
 
 	const submitForm = async (e) => {
 		e.preventDefault();
-
-		const post = {
-			title,
-			featureStatus: 'Under Review',
-			// status: 'Under Review',
-			bodyText,
-
-			user: {
-				id: token.id,
-				name: token.name,
-				email: token.email,
-			},
-			upvotes: 0,
-			tags: ['første', 'anden'],
-		};
-		onSubmit(post);
-		setTitle('');
-		setBodyText('');
+	
+		if (token && token.id) {
+			// Brug token.id sikkert her
+			const post = {
+				title,
+				featureStatus: 'Under Review',
+				bodyText,
+				user: {
+					id: token.id,
+					name: token.name,
+					email: token.email,
+				},
+				upvotes: 0,
+				tags: ['første', 'anden'],
+				image: image,
+			};
+			onSubmit(post);
+			setTitle('');
+			setBodyText('');
+			setImage(null);
+		} 
 	};
 
-	return (
+	const handleImageChange = (e) => {
+		const file = e.target.files[0];
+		setImage(file);
+	};
+
+	return ( 
 		<div className='form-wrap'>
 			<form
 				onSubmit={submitForm}
@@ -65,10 +74,19 @@ function PostForm({ onSubmit }) {
 					onChange={(e) => setTag(e.target.value)}
 					value={tag}
 				/>
+
+				<input 
+					//className='test-input'
+					type='file'
+					name="image"
+					accept='.jpg, .jpeg, .png'
+					onChange={handleImageChange}
+				/>
+
 				<button>Send Post</button>
 			</form>
 		</div>
 	);
-}
+};
 
 export default PostForm;

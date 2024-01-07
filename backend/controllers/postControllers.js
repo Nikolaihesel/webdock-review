@@ -4,8 +4,14 @@ const postModel = require('../models/postModel');
 const commentModel = require('../models/commentModel');
 const mongoose = require('mongoose');
 const postmark = require('postmark');
+const multer = require('multer');
+
 
 const client = new postmark.ServerClient(process.env.POSTMARK_KEY);
+
+//multer
+const upload = multer({ dest: 'uploads/' });
+const uploadImage = upload.single('postImage');
 
 const getPostStatus = async (req, res) => {
 	const { status } = req.query;
@@ -147,94 +153,113 @@ const getPost = async (req, res) => {
 
 // create a new post
 const createPost = async (req, res) => {
-	const {
-		title,
-		status,
-		bodyText,
-		user,
-		comments,
-		upvotes,
-		tags,
-		featureStatus,
-		feature_request_id,
-	} = req.body;
-
 	try {
-		const post = await postModel.create({
-			title,
-			status,
-			featureStatus,
-			bodyText,
-			user,
-			comments,
-			upvotes,
-			tags,
-			feature_request_id,
-		});
+		uploadImage(req, res, async function (err) {
+			if (err instanceof multer.MulterError) {
+				console.error('Multer Error:', err);
+				return res.status(500).json({ error: 'File upload error'});
+			} else if(err) {
+				console.error('Error', err);
+				return res.status(500).json ({ error: err});
+			}
+			const {
+				title,
+				status,
+				bodyText,
+				user,
+				comments,
+				upvotes,
+				tags,
+				featureStatus,
+				feature_request_id,
+			} = req.body;
 
-		await client.sendEmail({
-			From: 'uclfeedback@webdock.io',
-			To: 'nikolaihesel@icloud.com',
-			Subject: 'New Post Created',
-			TextBody: `A new post "${title}" has been created.`,
-		});
+			// Get the path to the saved image from 'req.file.path'
+			const imagePath = req.file.path; 
 
-		const requestData = JSON.stringify({
-			userID: user.id,
-			title: title,
-			description: bodyText,
-			category: featureStatus,
-		});
+			try {
+				const post = await postModel.create({
+					title,
+					status,
+					featureStatus,
+					bodyText,
+					user,
+					comments,
+					upvotes,
+					tags,
+					feature_request_id,
+					image: imagePath, // Save the path of the image in the post model
+				});
 
-		const options = {
-			hostname: 'webdock.io',
-			port: 443,
-			path: '/en/platform_data/feature_requests/new',
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'Content-Length': Buffer.byteLength(requestData),
-			},
-		};
+				await client.sendEmail({
+					From: 'uclfeedback@webdock.io',
+					To: 'nikolaihesel@icloud.com',
+					Subject: 'New Post Created',
+					TextBody: `A new post "${title}" has been created.`,
+				});
 
-		const request = https.request(options, (response) => {
-			let responseData = '';
-			response.on('data', (chunk) => {
-				responseData += chunk;
-			});
-			response.on('end', async () => {
-				console.log('Response from feature request endpoint:', responseData);
-				try {
-					const parsedResponse = JSON.parse(responseData);
-					const featureRequestId = parsedResponse.id;
+				const requestData = JSON.stringify({
+					userID: user.id,
+					title: title,
+					description: bodyText,
+					category: featureStatus,
+				});
 
-					await postModel.findByIdAndUpdate(post._id, {
-						feature_request_id: featureRequestId,
+				const options = {
+					hostname: 'webdock.io',
+					port: 443,
+					path: '/en/platform_data/feature_requests/new',
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Content-Length': Buffer.byteLength(requestData),
+					},
+				};
+
+				const request = https.request(options, (response) => {
+					let responseData = '';
+					response.on('data', (chunk) => {
+						responseData += chunk;
 					});
+					response.on('end', async () => {
+						console.log('Response from feature request endpoint:', responseData);
+						try {
+							const parsedResponse = JSON.parse(responseData);
+							const featureRequestId = parsedResponse.id;
 
-					console.log(parsedResponse);
-				} catch (parseError) {
-					console.error('Error parsing response:', parseError);
-				}
-			});
-		});
+							await postModel.findByIdAndUpdate(post._id, {
+								feature_request_id: featureRequestId,
+							});
 
-		request.on('error', (error) => {
-			console.error('Error sending feature request:', error);
+							console.log(parsedResponse);
+						} catch (parseError) {
+							console.error('Error parsing response:', parseError);
+						}
+					});
+				});
 
-			res.status(500).json({ error: 'Internal Server Error' });
-		});
+				request.on('error', (error) => {
+					console.error('Error sending feature request:', error);
 
-		request.write(requestData);
-		request.end();
+					res.status(500).json({ error: 'Internal Server Error' });
+				});
 
-		res.status(200).json(post);
+				request.write(requestData);
+				request.end();
+
+				res.status(200).json(post);	
+			} catch (error) {
+    			console.error('Error creating post:', error);
+    			res.status(400).json({ error: error.message });
+			}
+		}); 
 	} catch (error) {
-		console.error('Error creating post:', error);
-
-		res.status(400).json({ error: error.message });
+    	console.error('Error handling file upload:', error);
+    	res.status(400).json({ error: error.message });
 	}
-};
+}; 
+
+
 // delete post from db
 const deletePost = async (req, res) => {
 	const { id } = req.params;
