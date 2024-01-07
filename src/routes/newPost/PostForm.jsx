@@ -41,6 +41,8 @@ function PostForm({ onSubmit }) {
 
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
+		console.log('Valgt fil:', file);
+
 		setImage(file);
 	};
 
@@ -86,6 +88,6 @@ function PostForm({ onSubmit }) {
 			</form>
 		</div>
 	);
-}
+};
 
 export default PostForm;
