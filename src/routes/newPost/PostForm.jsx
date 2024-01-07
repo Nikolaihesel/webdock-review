@@ -76,7 +76,6 @@ function PostForm({ onSubmit }) {
 				/>
 
 				<input 
-					//className='test-input'
 					type='file'
 					name="image"
 					accept='.jpg, .jpeg, .png'
@@ -87,6 +86,6 @@ function PostForm({ onSubmit }) {
 			</form>
 		</div>
 	);
-};
+}
 
 export default PostForm;

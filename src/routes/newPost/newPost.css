@@ -27,7 +27,7 @@
   width: 40vw;
   font-family: "poppins", "sans-serif";
 }
-.new-post .create-post .form-wrap form input {
+.new-post .create-post .form-wrap form input[type='file'] {
   border: none;
   background: #f2f3f7;
   box-shadow: 5px 5px 12px rgba(212, 213, 217, 0.9), -5px -5px 12px rgba(255, 255, 255, 0.9);
