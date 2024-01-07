@@ -78,6 +78,7 @@ function PostForm({ onSubmit }) {
 				/>
 
 				<input 
+					className="custom-image-button"
 					type='file'
 					name="image"
 					accept='.jpg, .jpeg, .png'

@@ -8,7 +8,7 @@ function SendPosts() {
 
 	// create post, send database
 	const submitForm = async (post) => {
-		const response = await fetch(`http://45.136.70.229/api/posts`, {
+		const response = await fetch(`/api/posts`, {
 			method: 'POST',
 			body: JSON.stringify(post),
 			headers: {

@@ -10,7 +10,7 @@ function MakeComment() {
 
 	const sendComment = async (comment) => {
 		const response = await fetch(
-			`http://45.136.70.229/api/posts/${postId}/comments`,
+			`/api/posts/${postId}/comments`,
 			{
 				method: 'POST',
 				body: JSON.stringify(comment),

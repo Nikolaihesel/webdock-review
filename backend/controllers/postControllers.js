@@ -188,7 +188,7 @@ const createPost = async (req, res) => {
 					upvotes,
 					tags,
 					feature_request_id,
-					image: imagePath, // Save the path of the image in the post model
+					// image: imagePath, // Save the path of the image in the post model
 				});
 
 				await client.sendEmail({
