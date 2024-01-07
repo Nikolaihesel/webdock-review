@@ -338,55 +338,6 @@ const handleCommentDelete = async (req, res) => {
   }
 };
 
-const replyToComment = async (req, res) => {
-  const { postId, commentId } = req.params;
-  const { bodyText, user } = req.body;
-
-  if (
-    !mongoose.Types.ObjectId.isValid(postId) ||
-    !mongoose.Types.ObjectId.isValid(commentId)
-  ) {
-    return res.status(404).json({ error: "Invalid post or comment ID" });
-  }
-
-  try {
-    // Find the post to which the comment belongs
-    const post = await postModel.findById(postId);
-
-    if (!post) {
-      return res.status(404).json({ error: "No such post found" });
-    }
-
-    // Find the comment to which the user wants to reply
-    const parentComment = await commentModel.findById(commentId);
-
-    if (!parentComment) {
-      return res.status(404).json({ error: "No such comment found" });
-    }
-
-    // Create a new comment for the reply
-    const replyComment = new commentModel({
-      bodyText,
-      user,
-      post: postId,
-      parentComment: commentId, // Reference to the parent comment
-    });
-
-    await replyComment.save();
-
-    // Add the reply comment to the post's comments array
-    post.comments.push(replyComment);
-
-    // Save the updated post
-    await post.save();
-
-    res.status(200).json(replyComment);
-  } catch (error) {
-    console.error("Error replying to comment:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
-
 // const handleStatusChange = async (req, res) => {
 //   const { id } = req.params;
 //   const { newStatus } = req.body;
@@ -430,5 +381,4 @@ module.exports = {
   getPostStatus,
   updatePostStatusByFeatureRequestId,
   handleCommentDelete,
-  replyToComment,
 };

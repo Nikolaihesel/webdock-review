@@ -1,6 +1,8 @@
 const path = require("path");
 
+// Import the dotenv package
 require("dotenv").config({
+  // Configure dotenv with a path to the .env file based on the current working directory and NODE_ENV
   path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`),
 });
 

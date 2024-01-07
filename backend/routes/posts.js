@@ -15,7 +15,6 @@ const {
   updatePostTags,
   getPostStatus,
   handleCommentDelete,
-  replyToComment,
 } = require("../controllers/postControllers");
 
 const router = express.Router();
@@ -60,9 +59,6 @@ router.post(
 
 //CREATE comment
 router.post("/:id/comments", createPostComment);
-
-// CREATE comment reply
-router.post("/:postId/comments/:commentId/reply", replyToComment);
 
 //DELETE comment
 router.delete("/:id/comments/:commentId", handleCommentDelete);
