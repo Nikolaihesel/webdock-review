@@ -7,6 +7,8 @@ const {
   deletePost,
   updatePost,
   createPostComment,
+  createPostReply,
+  //getPostComment,
   getUsersPost,
   addLikeToPost,
   updatePostStatusByFeatureRequestId,
@@ -18,6 +20,9 @@ const {
 } = require("../controllers/postControllers");
 
 const router = express.Router();
+
+// CREATE comment reply (for replies to comments)
+router.post('/replies', createPostReply);
 
 //get post by status
 router.get("/status", getPostStatus);

@@ -2,6 +2,7 @@ require("dotenv").config();
 const https = require("https");
 const postModel = require("../models/postModel");
 const commentModel = require("../models/commentModel");
+const replyModel = require("../models/commentReplies")
 const mongoose = require("mongoose");
 const postmark = require("postmark");
 
@@ -300,24 +301,88 @@ const updatePostStatusByFeatureRequestId = async (req, res) => {
   }
 };
 
-//Add comment to post
 const createPostComment = async (req, res) => {
-  const { id } = req.params; //destruct - tager værdier i en variable der hedder det samme
-  const comment = new commentModel({
-    bodyText: req.body.bodyText,
-    user: req.body.user,
-    post: id,
-  });
+  const { id } = req.params; // henter postens id
+  const { parentCommentId } = req.body; // hvis der er en parentCommentId i req.body, betyder det, at det er en reply på en eksisterende kommentar
 
-  await comment.save(); //venter på db gemmer så den kan gå videre
+  let comment; // initialiser variabel til kommentar
 
-  const postRelated = await postModel.findById(id);
+  // Tjekker om det er et svar på en eksisterende kommentar
+  if (parentCommentId) {
+    const parentComment = await commentModel.findById(parentCommentId); // finder den eksisterende kommentar
 
-  postRelated.comments.push(comment); //sætter noget lokalt i array
-  await postRelated.save();
+    // Opretter en ny kommentar som svar (reply) til den eksisterende kommentar
+    comment = new commentModel({
+      bodyText: req.body.bodyText,
+      user: req.body.user,
+      post: id,
+      parentComment: parentCommentId, // markerer den nye kommentar som svar på den eksisterende kommentar
+    });
 
-  res.status(200).json(comment);
+    await comment.save(); // gemmer den nye kommentar
+    parentComment.replies.push(comment); // tilføjer den nye kommentar som svar til den eksisterende kommentar
+    await parentComment.save(); // gemmer ændringerne til den eksisterende kommentar
+  } else {
+    // Hvis det ikke er et svar på en eksisterende kommentar, opret en ny kommentar til posten
+    comment = new commentModel({
+      bodyText: req.body.bodyText,
+      user: req.body.user,
+      post: id,
+    });
+
+    await comment.save(); // gemmer den nye kommentar
+
+    const postRelated = await postModel.findById(id); // finder den tilknyttede post
+    postRelated.comments.push(comment); // tilføjer den nye kommentar til posten
+    await postRelated.save(); // gemmer ændringerne til posten
+  }
+
+  res.status(200).json(comment); // returnerer den oprettede kommentar som svar
 };
+
+// create a new post reply
+const createPostReply = async (req, res) => {
+  const { post, parentComment, bodyText, user } = req.body;
+
+  try {
+    // Check if parentComment ID is provided
+    if (!parentComment) {
+      return res.status(400).json({ message: "Parent comment ID is required" });
+    }
+
+    // Create a new reply
+    const newReply = new replyModel({
+      bodyText,
+      user,
+      post,
+      parentComment,
+    });
+
+    // Save the new reply
+    const savedReply = await newReply.save();
+
+    // Find the parent comment and add the new reply
+    const parentCommentReply = await replyModel.findById(parentComment);
+
+    if (!parentCommentReply) {
+      return res.status(404).json({ message: "Parent comment not found" });
+    }
+
+    if (!parentCommentReply.replies) {
+      parentCommentReply.replies = []; // Initialize replies array if it doesn't exist
+    }
+
+    parentCommentReply.replies.push(savedReply._id);
+    await parentCommentReply.save();
+
+    res.status(201).json(savedReply);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+
 
 const handleCommentDelete = async (req, res) => {
   const { id, commentId } = req.params;
@@ -379,5 +444,6 @@ module.exports = {
   updatePostTags,
   getPostStatus,
   updatePostStatusByFeatureRequestId,
+  createPostReply,
   handleCommentDelete,
 };

@@ -1,12 +1,16 @@
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { usePostManagement } from "../services/PostManagement";
 import MakeComment from "../services/comments/MakeComment";
-import "./postDetail.css";
 import CommentMarkup from "../services/comments/CommentMarkup";
+import "./postDetail.css";
 
 const PostDetail = () => {
   const [admin, setAdmin] = useState(false);
+  const [showReplyForm, setShowReplyForm] = useState(false);
+  const [parentCommentId, setParentCommentId] = useState(null);
+  const [replyText, setReplyText] = useState(""); // Tilstand for tekstfeltet
+
   const { postId } = useParams();
   const navigate = useNavigate();
   const {
@@ -26,9 +30,53 @@ const PostDetail = () => {
     setAdmin(!admin);
   };
 
+  const handleReply = (parentCommentId) => {
+    setShowReplyForm(true);
+    setParentCommentId(parentCommentId);
+  };
+
+  const handleReplyTextChange = (e) => {
+    setReplyText(e.target.value);
+  };
+
+  const handleReplySubmit = () => {
+    // Her kan du håndtere logikken for at sende svaret til backenden
+    // F.eks. bruge fetch og sende replyText og parentCommentId
+    console.log("Reply text:", replyText);
+    console.log("Parent comment ID:", parentCommentId);
+
+    // Nulstil tilstandene efter at svaret er sendt
+    setShowReplyForm(false);
+    setReplyText("");
+    setParentCommentId(null);
+  };
+
+  const sendReply = async (replyData) => {
+    try {
+      const response = await fetch(`/api/posts/${postId}/comments/${parentCommentId}/replies`, {
+        method: "POST",
+        body: JSON.stringify(replyData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      const json = await response.json();
+  
+      if (!response.ok) {
+        // Handle error here if needed
+        console.error("Error posting reply:", json.error);
+      } else {
+        // Handle successful reply submission
+        console.log("New reply added:", json);
+      }
+    } catch (error) {
+      console.error("Error posting reply:", error);
+    }
+  };
+
   return (
     <>
-      {" "}
       <div className="toggle-box">
         <input
           id="admin-toggle"
@@ -75,7 +123,11 @@ const PostDetail = () => {
         </div>
         {/* Comment Section */}
         <div className="comments-section">
-          <MakeComment />
+          <MakeComment
+            parentCommentId={parentCommentId}
+            showReplyForm={showReplyForm}
+            setShowReplyForm={setShowReplyForm}
+          />
 
           <br />
 
@@ -91,7 +143,27 @@ const PostDetail = () => {
                 <CommentMarkup
                   Name={comment.user.name}
                   BodyText={comment.bodyText}
+                  replies={comment.replies} // Assuming replies are available in comments
                 />
+                <button
+                  onClick={() => handleReply(comment._id)}
+                  className="reply-button"
+                >
+                  Reply
+                </button>
+
+                {/* Tjek for showReplyForm og vis tekstfeltet, hvis det er sandt */}
+                {showReplyForm && parentCommentId === comment._id && (
+                  <div className="reply-text-field">
+                    <textarea
+                      value={replyText}
+                      onChange={handleReplyTextChange}
+                      placeholder="Type your reply here..."
+                    ></textarea>
+                    <button onClick={handleReplySubmit}>Submit Reply</button>
+                  </div>
+                )}
+
                 {admin && (
                   <button
                     onClick={() => {

@@ -9,14 +9,15 @@ function CommentMarkup({ Name, BodyText, replies }) {
         <p className="body-text">{BodyText}</p>
       </div>
 
-      {replies && (
+      {/* Tjekker for svar (replies) og viser dem rekursivt */}
+      {replies && replies.length > 0 && (
         <div className="replies">
           {replies.map((reply) => (
             <CommentMarkup
               key={reply._id}
-              Name={reply.Name}
-              BodyText={reply.BodyText}
-              replies={reply.replies} // Recursive rendering for nested replies
+              Name={reply.user.name}
+              BodyText={reply.bodyText}
+              replies={reply.replies} // Viser svar til dette svar (rekursion)
             />
           ))}
         </div>

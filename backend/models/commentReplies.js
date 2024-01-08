@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const commentSchema = new Schema(
+const replySchema = new Schema(
   {
     bodyText: {
       type: String,
@@ -22,15 +22,15 @@ const commentSchema = new Schema(
       },
     },
     post: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "postModel",
+    type: String,
+    required: true,
     },
-    replies: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "commentReplies",
-    }],
+    parentComment: {
+    type: String,
+    required: true,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("commentModel", commentSchema);
+module.exports = mongoose.model("replyModel", replySchema);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { usePostManagement } from "../PostManagement";
 import "../comments/comments.css";
@@ -10,11 +10,11 @@ function MakeComment() {
   const [error, setError] = useState(null);
   const { postId } = useParams();
 
-  const sendComment = async (comment) => {
+  const sendComment = async (commentData) => {
     try {
       const response = await fetch(`/api/posts/${postId}/comments`, {
         method: "POST",
-        body: JSON.stringify(comment),
+        body: JSON.stringify(commentData),
         headers: {
           "Content-Type": "application/json",
         },
@@ -26,7 +26,6 @@ function MakeComment() {
         setError(json.error);
       } else {
         setError(null);
-        // Update the local state with the new comment
         setComments((prevComments) => [...prevComments, json]);
         console.log("New comment added");
       }
@@ -51,6 +50,22 @@ function MakeComment() {
     setComment("");
   };
 
+  const handleReply = (parentCommentId) => {
+    // Logic to handle replies to a comment
+    // For example:
+    const replyComment = {
+      bodyText: "Your reply text",
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
+      upvotes: 0,
+      parentCommentId: parentCommentId, // Use the received parent comment's ID
+    };
+    sendComment(replyComment);
+  };
+
   return (
     <div className="comment-form-container">
       <form onSubmit={handleSubmit}>
@@ -63,16 +78,8 @@ function MakeComment() {
         ></textarea>
         <button>Comment</button>
       </form>
-
-      {/* Display existing comments and the newly added comment */}
-      <div className="comments-container">
-        {comments.map((comment) => (
-          <div key={comment.id}>
-            <p>{comment.user.name}:</p>
-            <p>{comment.bodyText}</p>
-          </div>
-        ))}
-      </div>
+      
+      
     </div>
   );
 }
