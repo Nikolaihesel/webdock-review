@@ -14,7 +14,7 @@ const postSchema = new mongoose.Schema(
 
 		featureStatus: {
 			type: String,
-			enum: ['Under Review', 'Planned', 'In Progress', 'Completed', 'Closed'],
+			enum: ['Under Review', 'In Progress', 'Implemented'],
 			default: 'Under Review',
 		},
 		tags: {

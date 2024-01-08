@@ -14,6 +14,7 @@ const {
 	addTagsToPost,
 	updatePostTags,
 	getPostStatus,
+	handleStatusChange,
 } = require('../controllers/postControllers');
 
 const router = express.Router();
@@ -60,6 +61,6 @@ router.post(
 router.post('/:id/comments', createPostComment);
 
 // //CHANGE status
-// router.patch('/:id/status', handleStatusChange);
+router.patch('/:id/status', handleStatusChange);
 
 module.exports = router;

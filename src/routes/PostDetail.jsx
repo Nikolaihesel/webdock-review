@@ -4,6 +4,7 @@ import { usePostManagement } from '../services/PostManagement';
 import MakeComment from '../services/comments/MakeComment';
 import './postDetail.css';
 import CommentMarkup from '../services/comments/CommentMarkup';
+import axios from 'axios';
 
 const PostDetail = () => {
 	const [admin, setAdmin] = useState(false);
@@ -23,7 +24,7 @@ const PostDetail = () => {
 	const handleStatusChange = async (newStatus) => {
 		try {
 		  // Send a PATCH request to the general status change endpoint
-		  await axios.patch(`/api/posts/${fetchedPosts._id}/status`, {
+		  await axios.patch(`http://localhost:4000/api/posts/${fetchedPosts._id}/status`, {
 			newStatus,
 		  });
 	
@@ -84,22 +85,16 @@ const PostDetail = () => {
 							Under Review
 						</button>
 						<button
-							onClick={() => handleStatusChange('Planned')}
-							className='admin-update-status-button'
-						>
-							Planned
-						</button>
-						<button
 							onClick={() => handleStatusChange('In Progress')}
 							className='admin-update-status-button'
 						>
 							In Progress
 						</button>
 						<button
-							onClick={() => handleStatusChange('Complete')}
+							onClick={() => handleStatusChange('Implemented')}
 							className='admin-update-status-button'
 						>
-							Complete
+							Implemented
 						</button>
 						</div>
 					)}

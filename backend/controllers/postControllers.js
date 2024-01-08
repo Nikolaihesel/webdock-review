@@ -379,7 +379,7 @@ module.exports = {
 	createPostComment,
 	getUsersPost,
 	addLikeToPost,
-	// handleStatusChange,
+	handleStatusChange,
 	getSearchRequest,
 	addTagsToPost,
 	updatePostTags,

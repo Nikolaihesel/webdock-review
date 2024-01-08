@@ -17,7 +17,7 @@ export function usePostManagement(featureStatus) {
 
 	const fetchPosts = async () => {
 		try {
-			const response = await fetch(`http://45.136.70.229/api/posts/`);
+			const response = await fetch(`http://localhost:4000/api/posts/`);
 			if (response.ok) {
 				const json = await response.json();
 				setFetchedPosts(json);
@@ -31,7 +31,7 @@ export function usePostManagement(featureStatus) {
 
 	const fetchPostsById = async (postId) => {
 		try {
-			const response = await fetch(`http://45.136.70.229/api/posts/${postId}`);
+			const response = await fetch(`http://localhost:4000/api/posts/${postId}`);
 			if (response.ok) {
 				const json = await response.json();
 				setFetchedPosts(json);
@@ -46,7 +46,7 @@ export function usePostManagement(featureStatus) {
 	const fetchPostByUserId = async (userId) => {
 		try {
 			const response = await fetch(
-				`http://45.136.70.229/api/posts/user/${userId}`
+				`http://localhost:4000/api/posts/user/${userId}`
 			);
 			if (response.ok) {
 				const json = await response.json();
@@ -62,7 +62,7 @@ export function usePostManagement(featureStatus) {
 	const fetchPostsWithStatus = async (featureStatus) => {
 		try {
 			const response = await fetch(
-				`http://45.136.70.229/api/posts/status?status=${featureStatus}`
+				`http://localhost:4000/api/posts/status?status=${featureStatus}`
 			);
 			if (response.ok) {
 				const json = await response.json();
@@ -78,7 +78,7 @@ export function usePostManagement(featureStatus) {
 	const searchPosts = async (searchTerm) => {
 		try {
 			const response = await fetch(
-				`http://45.136.70.229/api/posts/search/?q=${searchTerm}`
+				`http://localhost:4000/api/posts/search/?q=${searchTerm}`
 			);
 			const data = await response.json();
 
@@ -92,7 +92,7 @@ export function usePostManagement(featureStatus) {
 	const handleLike = async (postId) => {
 		try {
 			const response = await fetch(
-				`http://45.136.70.229/api/posts/${postId}/likes`,
+				`http://localhost:4000/api/posts/${postId}/likes`,
 				{
 					method: 'PATCH',
 					headers: {
@@ -122,7 +122,7 @@ export function usePostManagement(featureStatus) {
 
 	const handleDelete = async (postId) => {
 		try {
-			const response = await fetch(`http://45.136.70.229/api/posts/${postId}`, {
+			const response = await fetch(`http://localhost:4000/api/posts/${postId}`, {
 				method: 'DELETE',
 			});
 
