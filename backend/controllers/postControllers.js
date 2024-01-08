@@ -301,7 +301,7 @@ const updatePostStatusByFeatureRequestId = async (req, res) => {
 };
 
 //Add comment to post
-const createPostComment = async (req, res) => {
+/*const createPostComment = async (req, res) => {
   const { id } = req.params; //destruct - tager værdier i en variable der hedder det samme
   const comment = new commentModel({
     bodyText: req.body.bodyText,
@@ -317,6 +317,56 @@ const createPostComment = async (req, res) => {
   await postRelated.save();
 
   res.status(200).json(comment);
+};*/
+
+const createPostComment = async (req, res) => {
+  const { id } = req.params;
+  const { bodyText, user, parentCommentId } = req.body;
+
+  try {
+    let comment;
+
+    if (parentCommentId) {
+      // If parentCommentId is provided, create a reply
+      const parentComment = await commentModel.findById(parentCommentId);
+      if (!parentComment) {
+        return res.status(404).json({ error: "Parent comment not found" });
+      }
+
+      comment = new commentModel({
+        bodyText,
+        user,
+        post: id,
+        parentComment: parentCommentId,
+      });
+
+      // Ensure parentComment.replies is defined before pushing
+      parentComment.replies = parentComment.replies || [];
+      parentComment.replies.push(comment);
+      await parentComment.save();
+    } else {
+      // If no parentCommentId, create a top-level comment
+      comment = new commentModel({
+        bodyText,
+        user,
+        post: id,
+      });
+    }
+
+    await comment.save();
+
+    const postRelated = await postModel.findById(id);
+
+    // Ensure postRelated.comments is defined before pushing
+    postRelated.comments = postRelated.comments || [];
+    postRelated.comments.push(comment);
+    await postRelated.save();
+
+    res.status(200).json(comment);
+  } catch (error) {
+    console.error("Error creating comment:", error);
+    res.status(500).json({ error: error.message });
+  }
 };
 
 const handleCommentDelete = async (req, res) => {
