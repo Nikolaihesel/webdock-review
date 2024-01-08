@@ -111,3 +111,19 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   z-index: 9999;
 }
+
+.admin-update-status-button {
+  background: #6ac2c8;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: Poppins;
+}
+
+.admin-update-status-button:hover {
+  background-color: rgb(116, 215, 175);
+}
