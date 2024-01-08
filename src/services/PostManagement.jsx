@@ -131,17 +131,14 @@ export function usePostManagement(featureStatus) {
 
   const handleCommentDelete = async (postId, commentId) => {
     try {
-      // Add your logic to delete a comment here
-      // You might want to send a request to your server
       const response = await fetch(
-        `/api/posts/${postId}/comments/${commentId}`, // Replace with your actual API endpoint for deleting comments
+        `/api/posts/${postId}/comments/${commentId}`,
         {
           method: "DELETE",
         }
       );
 
       if (response.ok) {
-        // Refresh the post details after comment deletion
         await fetchPostsById(postId);
         console.log("Comment deleted successfully");
       } else {

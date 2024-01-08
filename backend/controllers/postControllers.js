@@ -323,7 +323,6 @@ const handleCommentDelete = async (req, res) => {
   const { id, commentId } = req.params;
 
   try {
-    // Use the deleteComment function to delete the comment
     const deletedComment = await commentModel.findOneAndDelete({
       _id: commentId,
       post: id,
