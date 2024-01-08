@@ -319,32 +319,7 @@ const createPostComment = async (req, res) => {
 	res.status(200).json(comment);
 };
 
-// const handleStatusChange = async (req, res) => {
-//   const { id } = req.params;
-//   const { newStatus } = req.body;
 
-//   if (!mongoose.Types.ObjectId.isValid(id)) {
-//     return res.status(404).json({ error: "No such post found" });
-//   }
-
-//   try {
-//     let post = await postModel.findById(id);
-
-//     if (!post) {
-//       return res.status(404).json({ error: "No such post found" });
-//     }
-
-//     // Update the status field in your post model
-//     post.status = newStatus;
-
-//     // Save the updated post
-//     post = await post.save();
-
-//     res.status(200).json({ message: "Post status updated successfully", post });
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
 
 const handleStatusChange = async (req, res) => {
 	const { id } = req.params;

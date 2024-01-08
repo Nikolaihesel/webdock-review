@@ -33,7 +33,23 @@ const PostDetail = () => {
 		} catch (error) {
 		  console.error('Error updating post status:', error);
 		}
+		showPopup(`Status updated to: ${newStatus}`);
 	};
+
+	// Funktion til at vise popup
+const showPopup = (message) => {
+	const popup = document.createElement('div');
+	popup.className = 'popup';
+	popup.textContent = message;
+  
+	// Tilføj popup til body
+	document.body.appendChild(popup);
+  
+	// Fjern popup efter nogle sekunder (f.eks. 3 sekunder)
+	setTimeout(() => {
+	  document.body.removeChild(popup);
+	}, 1000); // 1000 ms = 1 sekunder
+  };	
 
 	return (
 		<>
