@@ -1,17 +1,15 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import '../newPost/newPost.css';
-//User details
-import { TokenContext } from '../../assets/contexts/TokenContext';
+import { useAuthContext } from '../../assets/hooks/useAuthContext';
 
 function PostForm({ onSubmit }) {
+	const { user } = useAuthContext();
 	// States for inputs
 	const [title, setTitle] = useState('');
 	const [bodyText, setBodyText] = useState('');
-
 	const [tag, setTag] = useState('');
 
 	//User Data set
-	const { token } = useContext(TokenContext);
 
 	const submitForm = async (e) => {
 		e.preventDefault();
@@ -23,9 +21,9 @@ function PostForm({ onSubmit }) {
 			bodyText,
 
 			user: {
-				id: token.id,
-				name: token.name,
-				email: token.email,
+				id: user.id,
+				name: user.name,
+				email: user.email,
 			},
 			upvotes: 0,
 			tags: ['første', 'anden'],

@@ -1,13 +1,12 @@
-import { useState, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { usePostManagement } from '../../services/PostManagement';
-import { TokenContext } from '../../assets/contexts/TokenContext';
+
+import { useAuthContext } from '../../assets/hooks/useAuthContext';
 
 import './header.scss';
 
 function Header() {
-	const { token, setToken } = useContext(TokenContext);
-	const isLoggedIn = !!token;
+	const { user } = useAuthContext();
+	const isLoggedIn = !!user;
 
 	function logOut() {
 		localStorage.removeItem('token');

@@ -1,23 +1,13 @@
-import { useState, useEffect, useContext, useCallback } from 'react';
-import { TokenContext } from '../assets/contexts/TokenContext';
-export function usePostManagement(featureStatus) {
-	const [fetchedPosts, setFetchedPosts] = useState([]);
-	const [user, setUser] = useState({});
-	const { token } = useContext(TokenContext);
+import { useState, useEffect } from 'react';
+import { useAuthContext } from '../assets/hooks/useAuthContext';
 
-	useEffect(() => {
-		if (token) {
-			setUser({
-				id: token.id,
-				name: token.name,
-				email: token.email,
-			});
-		}
-	}, [token]);
+export function usePostManagement() {
+	const [fetchedPosts, setFetchedPosts] = useState([]);
+	const { user } = useAuthContext();
 
 	const fetchPosts = async () => {
 		try {
-			const response = await fetch(`http://45.136.70.229/api/posts/`);
+			const response = await fetch(`http://localhost:4000/api/posts/`);
 			if (response.ok) {
 				const json = await response.json();
 				setFetchedPosts(json);
@@ -31,7 +21,7 @@ export function usePostManagement(featureStatus) {
 
 	const fetchPostsById = async (postId) => {
 		try {
-			const response = await fetch(`http://45.136.70.229/api/posts/${postId}`);
+			const response = await fetch(`http://localhost:4000/api/posts/${postId}`);
 			if (response.ok) {
 				const json = await response.json();
 				setFetchedPosts(json);
@@ -46,7 +36,7 @@ export function usePostManagement(featureStatus) {
 	const fetchPostByUserId = async (userId) => {
 		try {
 			const response = await fetch(
-				`http://45.136.70.229/api/posts/user/${userId}`
+				`http://localhost:4000/api/posts/user/${userId}`
 			);
 			if (response.ok) {
 				const json = await response.json();
@@ -59,10 +49,10 @@ export function usePostManagement(featureStatus) {
 		}
 	};
 
-	const fetchPostsWithStatus = async (featureStatus) => {
+	const fetchPostsWithStatus = async (status) => {
 		try {
 			const response = await fetch(
-				`http://45.136.70.229/api/posts/status?status=${featureStatus}`
+				`http://localhost:4000/api/posts/status?status=${status}`
 			);
 			if (response.ok) {
 				const json = await response.json();
@@ -78,12 +68,14 @@ export function usePostManagement(featureStatus) {
 	const searchPosts = async (searchTerm) => {
 		try {
 			const response = await fetch(
-				`http://45.136.70.229/api/posts/search/?q=${searchTerm}`
+				`http://localhost:4000/api/posts/search/?q=${searchTerm}`
 			);
-			const data = await response.json();
-
-			const searchData = Array.isArray(data) ? data : [];
-			setFetchedPosts(searchData);
+			if (response.ok) {
+				const json = await response.json();
+				setFetchedPosts(json);
+			} else {
+				console.log('Failed to fetch posts');
+			}
 		} catch (error) {
 			console.error('Error fetching search results:', error);
 		}
@@ -92,7 +84,7 @@ export function usePostManagement(featureStatus) {
 	const handleLike = async (postId) => {
 		try {
 			const response = await fetch(
-				`http://45.136.70.229/api/posts/${postId}/likes`,
+				`http://localhost:4000/api/posts/${postId}/likes`,
 				{
 					method: 'PATCH',
 					headers: {
@@ -122,9 +114,12 @@ export function usePostManagement(featureStatus) {
 
 	const handleDelete = async (postId) => {
 		try {
-			const response = await fetch(`http://45.136.70.229/api/posts/${postId}`, {
-				method: 'DELETE',
-			});
+			const response = await fetch(
+				`http://localhost:4000/api/posts/${postId}`,
+				{
+					method: 'DELETE',
+				}
+			);
 
 			if (response.ok) {
 				const updatedPosts = fetchedPosts.filter((post) => post._id !== postId);
@@ -141,7 +136,6 @@ export function usePostManagement(featureStatus) {
 	return {
 		fetchedPosts,
 		fetchPosts,
-		user,
 		handleLike,
 		handleDelete,
 		fetchPostsById,

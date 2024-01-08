@@ -319,6 +319,35 @@ const createPostComment = async (req, res) => {
 	res.status(200).json(comment);
 };
 
+const addReplyToComment = async (req, res) => {
+	const { postId } = req.params;
+	const { commentId, reply } = req.body;
+
+	try {
+		// Find the post and populate the comments
+		const post = await postModel.findById(postId).populate('comments');
+
+		if (!post) {
+			return res.status(404).send('Post not found');
+		}
+
+		// Find the specific comment in the populated comments
+		const comment = post.comments.find((c) => c._id.toString() === commentId);
+
+		if (!comment) {
+			return res.status(404).send('Comment not found');
+		}
+
+		// Assuming the Comment model has a method to handle adding replies
+		await commentModel.addReply(comment._id, reply);
+
+		res.status(200).json({ message: 'Reply added successfully' });
+	} catch (error) {
+		console.error(error);
+		res.status(500).send('Server Error');
+	}
+};
+
 // const handleStatusChange = async (req, res) => {
 //   const { id } = req.params;
 //   const { newStatus } = req.body;
@@ -361,4 +390,5 @@ module.exports = {
 	updatePostTags,
 	getPostStatus,
 	updatePostStatusByFeatureRequestId,
+	addReplyToComment,
 };

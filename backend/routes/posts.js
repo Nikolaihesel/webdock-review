@@ -14,9 +14,12 @@ const {
 	addTagsToPost,
 	updatePostTags,
 	getPostStatus,
+	addReplyToComment,
 } = require('../controllers/postControllers');
 
 const router = express.Router();
+
+router.post('/:postId/comments/replies', addReplyToComment);
 
 //get post by status
 router.get('/status', getPostStatus);

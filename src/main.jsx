@@ -12,7 +12,7 @@ import ErrorPage from './error-page';
 // import { AuthProvider } from './assets/contexts/AuthContext';
 import SsoLogin from './newui/ssoComponents/SsoLogin.jsx';
 import SsoCallback from './newui/ssoComponents/SsoCallback.jsx';
-import { TokenProvider } from './assets/contexts/TokenContext.jsx';
+import { AuthContextProvider } from './assets/contexts/TokenContext.jsx';
 
 import UnderReviewRoute from './services/UnderReviewRoute.jsx';
 import PostDetail from './routes/PostDetail.jsx';
@@ -68,8 +68,8 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
-		<TokenProvider>
+		<AuthContextProvider>
 			<RouterProvider router={router} />
-		</TokenProvider>
+		</AuthContextProvider>
 	</React.StrictMode>
 );

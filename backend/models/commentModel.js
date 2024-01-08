@@ -7,6 +7,16 @@ const commentSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		replies: [
+			{
+				bodyText: String,
+				user: {
+					id: String,
+					name: String,
+					email: String,
+				},
+			},
+		],
 
 		user: {
 			id: {
@@ -30,5 +40,13 @@ const commentSchema = new Schema(
 	},
 	{ timestamps: true }
 );
+
+commentSchema.statics.addReply = async function (commentId, reply) {
+	return this.findByIdAndUpdate(
+		commentId,
+		{ $push: { replies: reply } },
+		{ new: true }
+	);
+};
 
 module.exports = mongoose.model('commentModel', commentSchema);
