@@ -10,6 +10,7 @@ const PostDetail = () => {
   // 2 ny const 
   const [showReplyBox, setShowReplyBox] = useState(false);
   const [replyText, setReplyText] = useState('');
+
   const { postId } = useParams();
   const navigate = useNavigate();
   const {
@@ -38,27 +39,28 @@ const PostDetail = () => {
     setReplyText(e.target.value);
   };
 
-  // tilføj function
-  const sendReply = async (commentId) => {
+  // forbedring
+  const sendReply = async (postId, commentId, reply) => {
+    
     try {
-      // Udfør et API-opkald til din backend for at tilføje svaret til den pågældende kommentar
+      // Udfør et API-opkald til backend for at tilføje svaret til kommentaren
       const response = await fetch(`/api/posts/${postId}/comments/${commentId}/replies`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          commentId: commentId, // Erstat med det aktuelle kommentar-id, som du svarer på
-          reply: replyText, // Brug replyText-variablen, der indeholder det skrevne svar
+          commentId: commentId, 
+          reply: replyText, 
         }),
       });
   
-      // Tjek om svaret blev sendt korrekt (status 200)
+      // Tjek om svaret blev sendt korrekt
       if (response.ok) {
         // Hvis svaret blev sendt med succes, nulstil replyText og luk svareboksen
         setReplyText('');
         setShowReplyBox(false);
-        // Du kan også udføre en handling, f.eks. opdatering af kommentarlisten efter tilføjelse af svaret
+      
       } else {
         // Håndter fejl, hvis svaret ikke blev sendt korrekt
         throw new Error('Svar kunne ikke sendes');
@@ -106,7 +108,7 @@ const PostDetail = () => {
                   BodyText={comment.bodyText}
                 />
   
-                {/* Add a "Reply" button to each comment */}
+                {/* Reply under hver knap */}
                 <button onClick={toggleReplyBox} className="reply-button">
                   Reply
                 </button>
