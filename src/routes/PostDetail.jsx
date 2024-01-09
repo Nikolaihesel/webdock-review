@@ -51,7 +51,7 @@ const PostDetail = () => {
         },
         body: JSON.stringify({
           commentId: commentId, 
-          reply: replyText, 
+          reply: reply, 
         }),
       });
   
@@ -136,18 +136,16 @@ const PostDetail = () => {
                   Reply
                 </button>
 
-                {/* Display the reply box if showReplyBox is true */}
                 {showReplyBox && (
-                  <form onSubmit={(e) => handleSubmit(e, comment._id)}>
-                    <div className="reply-box">
-                      <textarea
-                        value={replyText}
-                        onChange={handleReplyTextChange}
-                        placeholder="Write your reply here..."
-                      ></textarea>
-                      {/* Call sendReply function with commentId when clicking the button */}
-                      <button type="submit">Send Reply</button>
-                    </div>
+                  <form onSubmit={handleSubmit}>
+                    <textarea 
+                    type="text"
+                    name="reply"
+                    placeholder="Write your reply here"
+                    onChange={(e) => setReplyText(e.target.value)}
+                    value={replyText}>
+                    </textarea>
+                    <button>Send Reply</button>
                   </form>
                 )}
 
