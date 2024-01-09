@@ -1,6 +1,5 @@
 import React from "react";
 import "./comments.css";
-import CommentReply from './CommentReply';
 
 function CommentMarkup({ Name, BodyText, replies }) {
   return (
@@ -9,8 +8,7 @@ function CommentMarkup({ Name, BodyText, replies }) {
         <p className="name">{Name}</p>
         <p className="body-text">{BodyText}</p>
       </div>
-      <CommentReply />
-     
+
       {replies && (
         <div className="replies">
           {replies.map((reply) => (
@@ -22,7 +20,6 @@ function CommentMarkup({ Name, BodyText, replies }) {
             />
           ))}
         </div>
-        
       )}
     </div>
   );
