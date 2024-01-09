@@ -74,19 +74,15 @@ const PostDetail = () => {
   const handleSubmit = async (e, commentId) => {
     e.preventDefault();
     const newReply = {
-      postId,
-      commentId,
-      reply: {
         bodyText: replyText,
-        user: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-        },
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
       },
     };
     try {
-      await sendReply(newReply);
+      await sendReply(postId, commentId, newReply);
       setReplyText('');
       setShowReplyBox(false);
     } catch (error) {
@@ -142,7 +138,7 @@ const PostDetail = () => {
                     type="text"
                     name="reply"
                     placeholder="Write your reply here"
-                    onChange= {handleReplyTextChange} //setReplyText(e.target.value)}
+                    onChange= {handleReplyTextChange}
                     value={replyText}>
                     </textarea>
                     <button>Send Reply</button>
