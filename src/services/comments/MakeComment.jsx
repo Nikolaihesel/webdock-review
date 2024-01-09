@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { usePostManagement } from '../PostManagement';
+import { useAuthContext } from '../../assets/hooks/useAuthContext';
 import '../comments/comments.css';
+
+import CommentReply from './CommentReply';
 function MakeComment() {
-	const { user } = usePostManagement();
+	const { user } = useAuthContext();
 	const [comment, setComment] = useState('');
 	const [error, setError] = useState(null);
 	const { postId } = useParams();

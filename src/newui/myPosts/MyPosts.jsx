@@ -1,43 +1,32 @@
 import { useEffect, useState } from 'react';
 import { usePostManagement } from '../../services/PostManagement';
 import { FaLongArrowAltRight } from 'react-icons/fa';
+import { useAuthContext } from '../../assets/hooks/useAuthContext';
 //style
 import './myPosts.css';
 //icon
 
 function MyPosts() {
 	function truncateTitle(title) {
-		return title.length > 15 ? title.substring(0, 12) + '...' : title;
+		return title.length > 15 ? qtitle.substring(0, 12) + '...' : title;
 	}
-	const { fetchPostByUserId, fetchedPosts, user } = usePostManagement();
+	const { fetchPostByUserId, fetchedPosts } = usePostManagement();
 	const [currentPage, setCurrentPage] = useState(1);
-	const [login, setLogin] = useState(null);
-	const [username, setUsername] = useState('');
 	const postsPerPage = 3;
 
-	useEffect(() => {
-		if (user && user.name && user.name.length > 0) {
-			setUsername(user.name[0]);
-		} else {
-		}
-	}, []);
-
-	useEffect(() => {
-		user;
-	});
-
-	useEffect(() => {
-		// Fetch posts when the user ID changes
-		if (user && user.id) {
-			fetchPostByUserId(user.id);
-		}
-	}, [user]); // Update posts when user changes
+	const { user } = useAuthContext();
 
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
 	const currentPosts = fetchedPosts.slice(indexOfFirstPost, indexOfLastPost);
 
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+	useEffect(() => {
+		if (user && user.id) {
+			fetchPostByUserId(user.id);
+		}
+	}, [user]);
 	return (
 		<div className='my-posts'>
 			<div className='pagination-wrapper'>

@@ -3,14 +3,25 @@ import { useAuthContext } from '../assets/hooks/useAuthContext';
 
 export function usePostManagement() {
 	const [fetchedPosts, setFetchedPosts] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [totalPages, setTotalPages] = useState(0);
+	const [postsPerPage] = useState(3);
+
 	const { user } = useAuthContext();
 
-	const fetchPosts = async () => {
+	const fetchPosts = async (page, limit) => {
 		try {
-			const response = await fetch(`http://localhost:4000/api/posts/`);
+			const response = await fetch(
+				`http://localhost:4000/api/posts/?page=${page}&limit=${limit}`
+			);
+			console.log('Response:', response); // Check the raw response
+
 			if (response.ok) {
 				const json = await response.json();
-				setFetchedPosts(json);
+				console.log('Fetched data:', json); // Check the JSON data
+
+				setFetchedPosts(json.posts || []);
+				setTotalPages(json.totalPages);
 			} else {
 				console.log('Failed to fetch posts');
 			}
@@ -18,7 +29,6 @@ export function usePostManagement() {
 			console.error('Error fetching posts:', error);
 		}
 	};
-
 	const fetchPostsById = async (postId) => {
 		try {
 			const response = await fetch(`http://localhost:4000/api/posts/${postId}`);
@@ -133,6 +143,11 @@ export function usePostManagement() {
 		}
 	};
 
+	const changePage = (newPage) => {
+		setCurrentPage(newPage);
+		fetchPosts(newPage);
+	};
+
 	return {
 		fetchedPosts,
 		fetchPosts,
@@ -142,5 +157,6 @@ export function usePostManagement() {
 		fetchPostByUserId,
 		fetchPostsWithStatus,
 		searchPosts,
+		totalPages,
 	};
 }

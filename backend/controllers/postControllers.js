@@ -120,9 +120,21 @@ const getSearchRequest = async (req, res) => {
 };
 
 const getPosts = async (req, res) => {
+	const page = parseInt(req.query.page) || 1;
+	const limit = parseInt(req.query.limit) || 3;
+	const Skip = (page - 1) * limit;
+
 	try {
-		const posts = await postModel.find({}).sort({ createdAt: -1 });
-		res.status(200).json(posts);
+		const posts = await postModel
+			.find({})
+			.sort({ createdAt: -1 })
+			.skip(Skip)
+			.limit(limit);
+
+		const totalPosts = await postModel.countDocuments({});
+		const totalPages = Math.ceil(totalPosts / limit);
+
+		res.status(200).json({ posts, page, totalPages, totalPosts });
 	} catch (err) {
 		res.status(500).json({ message: err.message });
 	}
@@ -345,33 +357,6 @@ const addReplyToComment = async (req, res) => {
 	}
 };
 
-// const handleStatusChange = async (req, res) => {
-//   const { id } = req.params;
-//   const { newStatus } = req.body;
-
-//   if (!mongoose.Types.ObjectId.isValid(id)) {
-//     return res.status(404).json({ error: "No such post found" });
-//   }
-
-//   try {
-//     let post = await postModel.findById(id);
-
-//     if (!post) {
-//       return res.status(404).json({ error: "No such post found" });
-//     }
-
-//     // Update the status field in your post model
-//     post.status = newStatus;
-
-//     // Save the updated post
-//     post = await post.save();
-
-//     res.status(200).json({ message: "Post status updated successfully", post });
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
-
 module.exports = {
 	getPosts,
 	getPost,
@@ -381,7 +366,7 @@ module.exports = {
 	createPostComment,
 	getUsersPost,
 	addLikeToPost,
-	// handleStatusChange,
+
 	getSearchRequest,
 	addTagsToPost,
 	updatePostTags,

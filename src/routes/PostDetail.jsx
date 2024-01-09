@@ -1,9 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { usePostManagement } from '../services/PostManagement';
-import MakeComment from '../services/comments/MakeComment';
+import CommentReply from '../services/comments/CommentReply';
 import './postDetail.css';
-import CommentMarkup from '../services/comments/CommentMarkup';
+import MakeComment from '../services/comments/MakeComment';
 
 const PostDetail = () => {
 	const [admin, setAdmin] = useState(false);
@@ -82,11 +82,13 @@ const PostDetail = () => {
 
 					{fetchedPosts?.comments &&
 						fetchedPosts.comments.map((comment) => (
-							<CommentMarkup
-								key={comment._id}
-								Name={comment.user.name}
-								BodyText={comment.bodyText}
-							/>
+							<div key={comment._id}>
+								<div className='comment'>
+									<p className='name'>{comment.name}</p>
+									<p className='body-text'>{comment.bodyText}</p>
+								</div>
+								<CommentReply commentId={comment._id} />
+							</div>
 						))}
 				</div>
 			</div>
