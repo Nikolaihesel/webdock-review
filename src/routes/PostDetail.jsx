@@ -142,7 +142,7 @@ const PostDetail = () => {
                     type="text"
                     name="reply"
                     placeholder="Write your reply here"
-                    onChange={(e) => setReplyText(e.target.value)}
+                    onChange= {handleReplyTextChange} //setReplyText(e.target.value)}
                     value={replyText}>
                     </textarea>
                     <button>Send Reply</button>
