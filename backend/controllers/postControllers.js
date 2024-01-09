@@ -10,17 +10,22 @@ const client = new postmark.ServerClient(process.env.POSTMARK_KEY);
 const getPostStatus = async (req, res) => {
   const { status } = req.query;
   try {
+    // bruger 'await' til at vente på resultatet af Promise
     const userPosts = await postModel
-      .find({ featureStatus: status })
-      .sort({ createdAt: -1 });
+      .find({ featureStatus: status }) // Asynkront kald til at finde poster baseret på 'featureStatus'
+      .sort({ createdAt: -1 }); // Asynkront kald til at sortere resultaterne efter oprettet dato
+
+    // Returnerer resultatet af den opfyldte Promise
     res.json(userPosts);
   } catch (err) {
+    // Håndtering af fejl, hvis Promise afvises
     console.error("Error fetching posts by status:", err);
     res
       .status(500)
       .json({ message: "Error fetching posts by status", error: err.message });
   }
 };
+
 
 //GET all posts of user with ID
 const getUsersPost = async (req, res) => {
@@ -274,6 +279,33 @@ const updatePost = async (req, res) => {
   res.status(200).json(post);
 };
 
+const addReplyToComment = async (req, res) => {
+  const { postId } = req.params;
+  const { commentId, reply } = req.body;
+
+  try {
+
+      const post = await postModel.findById(postId).populate('comments');
+
+      if (!post) {
+          return res.status(404).send('Post not found');
+      }
+
+      const comment = post.comments.find((c) => c._id.toString() === commentId);
+
+      if (!comment) {
+          return res.status(404).send('Comment not found');
+      }
+
+      await commentModel.addReply(comment._id, reply);
+
+      res.status(200).json({ message: 'Reply added successfully' });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+  }
+};
+
 const updatePostStatusByFeatureRequestId = async (req, res) => {
   const { feature_request_id, status } = req.body; // Matching field names
 
@@ -429,5 +461,6 @@ module.exports = {
   updatePostTags,
   getPostStatus,
   updatePostStatusByFeatureRequestId,
+  addReplyToComment,
   handleCommentDelete,
 };

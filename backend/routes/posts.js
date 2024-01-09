@@ -14,6 +14,7 @@ const {
   addTagsToPost,
   updatePostTags,
   getPostStatus,
+  addReplyToComment,
   handleCommentDelete,
 } = require("../controllers/postControllers");
 
@@ -59,6 +60,9 @@ router.post(
 
 //CREATE comment
 router.post("/:id/comments", createPostComment);
+
+//CREATE reply to comment
+router.post('/:postId/comments/replies', addReplyToComment);
 
 //DELETE comment
 router.delete("/:id/comments/:commentId", handleCommentDelete);

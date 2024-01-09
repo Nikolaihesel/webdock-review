@@ -1,36 +1,48 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
 const commentSchema = new Schema(
-  {
-    bodyText: {
-      type: String,
-      required: true,
-    },
-    user: {
-      id: {
-        type: String,
-        required: true,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      email: {
-        type: String,
-        required: true,
-      },
-    },
-    post: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "postModel",
-    },
-    parentComment: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "commentModel",
-    },
-  },
-  { timestamps: true }
-);
+    {
+        bodyText: {
+            type: String,
+            required: true,
+        },
+        replies: [
+            {
+                bodyText: String,
+                user: {
+                    id: String,
+                    name: String,
+                    email: String,
+                },
+            },
+        ],
 
-module.exports = mongoose.model("commentModel", commentSchema);
+        user: {
+            id: {
+                type: String,
+                required: true,
+            },
+            name: {
+                type: String,
+                required: true,
+            },
+            email: {
+                type: String,
+                required: true,
+            },
+        },
+        post: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'postModel',
+        },
+    },
+    { timestamps: true }
+);
+commentSchema.statics.addReply = async function (commentId, reply) {
+    return this.findByIdAndUpdate(
+        commentId,
+        { $push: { replies: reply } },
+        { new: true }
+    );
+};
+module.exports = mongoose.model('commentModel', commentSchema);
