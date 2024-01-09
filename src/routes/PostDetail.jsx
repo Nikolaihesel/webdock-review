@@ -70,7 +70,30 @@ const PostDetail = () => {
       // Håndter fejl, f.eks. visning af en fejlbesked til brugeren
     }
   };
-  
+
+  const handleSubmit = async (e, commentId) => {
+    e.preventDefault();
+    const newReply = {
+      postId,
+      commentId,
+      reply: {
+        bodyText: replyText,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        },
+      },
+    };
+    try {
+      await sendReply(newReply);
+      setReplyText('');
+      setShowReplyBox(false);
+    } catch (error) {
+      console.error('Fejl ved håndtering af svar:', error);
+      // Håndter fejl, f.eks. visning af en fejlbesked til brugeren
+    }
+  };
 
   return (
     <>
@@ -107,24 +130,27 @@ const PostDetail = () => {
                   Name={comment.user.name}
                   BodyText={comment.bodyText}
                 />
-  
+
                 {/* Reply under hver knap */}
                 <button onClick={toggleReplyBox} className="reply-button">
                   Reply
                 </button>
-  
+
                 {/* Display the reply box if showReplyBox is true */}
                 {showReplyBox && (
-                  <div className="reply-box">
-                    <textarea
-                      value={replyText}
-                      onChange={handleReplyTextChange}
-                      placeholder="Write your reply here..."
-                    ></textarea>
-                    {/* Call sendReply function with commentId when clicking the button */}
-                    <button onClick={() => sendReply(comment._id)}>Send Reply</button>
-                  </div>
+                  <form onSubmit={(e) => handleSubmit(e, comment._id)}>
+                    <div className="reply-box">
+                      <textarea
+                        value={replyText}
+                        onChange={handleReplyTextChange}
+                        placeholder="Write your reply here..."
+                      ></textarea>
+                      {/* Call sendReply function with commentId when clicking the button */}
+                      <button type="submit">Send Reply</button>
+                    </div>
+                  </form>
                 )}
+
   
                 {admin && (
                   <button
