@@ -1,10 +1,17 @@
+// Importing necessary hooks and contexts
 import { useState, useEffect, useContext, useCallback } from 'react';
 import { TokenContext } from '../assets/contexts/TokenContext';
+
+// Custom hook for managing post-related data and actions
 export function usePostManagement(featureStatus) {
+	// State variables to store fetched posts and user information
 	const [fetchedPosts, setFetchedPosts] = useState([]);
 	const [user, setUser] = useState({});
+
+	// Destructuring token from TokenContext
 	const { token } = useContext(TokenContext);
 
+	// Effect to update user information when the token changes
 	useEffect(() => {
 		if (token) {
 			setUser({
@@ -15,6 +22,7 @@ export function usePostManagement(featureStatus) {
 		}
 	}, [token]);
 
+	// Function to fetch all posts
 	const fetchPosts = async () => {
 		try {
 			const response = await fetch(`http://localhost:4000/api/posts/`);
@@ -29,6 +37,7 @@ export function usePostManagement(featureStatus) {
 		}
 	};
 
+	// Function to fetch a specific post by ID
 	const fetchPostsById = async (postId) => {
 		try {
 			const response = await fetch(`http://localhost:4000/api/posts/${postId}`);
@@ -43,6 +52,7 @@ export function usePostManagement(featureStatus) {
 		}
 	};
 
+	// Function to fetch posts created by a specific user
 	const fetchPostByUserId = async (userId) => {
 		try {
 			const response = await fetch(
@@ -59,6 +69,7 @@ export function usePostManagement(featureStatus) {
 		}
 	};
 
+	// Function to fetch posts based on their feature status
 	const fetchPostsWithStatus = async (featureStatus) => {
 		try {
 			const response = await fetch(
@@ -75,6 +86,7 @@ export function usePostManagement(featureStatus) {
 		}
 	};
 
+	// Function to search for posts based on a search term
 	const searchPosts = async (searchTerm) => {
 		try {
 			const response = await fetch(
@@ -89,6 +101,7 @@ export function usePostManagement(featureStatus) {
 		}
 	};
 
+	// Function to handle post likes
 	const handleLike = async (postId) => {
 		try {
 			const response = await fetch(
@@ -120,6 +133,7 @@ export function usePostManagement(featureStatus) {
 		}
 	};
 
+	// Function to handle post deletion
 	const handleDelete = async (postId) => {
 		try {
 			const response = await fetch(`http://localhost:4000/api/posts/${postId}`, {
@@ -138,6 +152,7 @@ export function usePostManagement(featureStatus) {
 		}
 	};
 
+	// Returning the functions and data as an object
 	return {
 		fetchedPosts,
 		fetchPosts,

@@ -1,25 +1,28 @@
+// Importing necessary React hooks and styles
 import { useState, useContext } from 'react';
 import '../newPost/newPost.css';
-//User details
+
+// Importing the TokenContext for user details
 import { TokenContext } from '../../assets/contexts/TokenContext';
 
+// PostForm component definition
 function PostForm({ onSubmit }) {
-	// States for inputs
+	// States for managing input values
 	const [title, setTitle] = useState('');
 	const [bodyText, setBodyText] = useState('');
-
 	const [tag, setTag] = useState('');
 
-	//User Data set
+	// Accessing user data from the TokenContext
 	const { token } = useContext(TokenContext);
 
+	// Function to handle form submission
 	const submitForm = async (e) => {
 		e.preventDefault();
 
+		// Creating a post object with form data and user details
 		const post = {
 			title,
-			featureStatus: 'Under Review',
-			// status: 'Under Review',
+			featureStatus: 'Under Review', // Setting a default feature status
 			bodyText,
 
 			user: {
@@ -27,14 +30,17 @@ function PostForm({ onSubmit }) {
 				name: token.name,
 				email: token.email,
 			},
-			upvotes: 0,
-			tags: ['første', 'anden'],
+			upvotes: 0, // Setting an initial upvote count
+			tags: ['første', 'anden'], // Default tags (can be updated based on user input)
 		};
+
+		// Calling the onSubmit function passed as a prop with the post data
 		onSubmit(post);
 		setTitle('');
 		setBodyText('');
 	};
 
+	// Render the PostForm component
 	return (
 		<div className='form-wrap'>
 			<form
@@ -71,4 +77,5 @@ function PostForm({ onSubmit }) {
 	);
 }
 
+// Exporting the PostForm component as the default export
 export default PostForm;

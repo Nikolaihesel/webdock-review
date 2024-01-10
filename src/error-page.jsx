@@ -1,7 +1,12 @@
+// Importing the useRouteError hook from react-router-dom
 import { useRouteError } from 'react-router-dom';
 
+// Defining the ErrorPage component to handle and display route errors
 export default function ErrorPage() {
+	// Using the useRouteError hook to get information about the route error
 	const error = useRouteError();
+
+	// Logging the error details to the console
 	console.error(error);
 	console.error({
 		statusText: error.statusText,
@@ -9,6 +14,7 @@ export default function ErrorPage() {
 		status: error.status,
 	});
 
+	// Rendering the error page with error details
 	return (
 		<div id='error-page'>
 			<h1>Oops!</h1>

@@ -1,30 +1,43 @@
+// Importing necessary hooks and components
 import { useEffect, useState } from 'react';
-
 import { useNavigate } from 'react-router-dom';
 import '../newui/featurePosts/featurePosts.css';
 import { usePostManagement } from './PostManagement';
 
+// AllPostsRoute component definition
 const AllPostsRoute = ({ featureStatus }) => {
+	// Initializing navigate function from react-router-dom
 	const navigate = useNavigate();
+
+	// Function to truncate text to a specified maxLength
 	function truncateText(text, maxLength) {
 		if (text.length > maxLength) {
 			return text.slice(0, maxLength) + '...';
 		}
 		return text;
 	}
-	const { fetchPosts, fetchedPosts, handleLike } = usePostManagement();
-	const [currentPage, setCurrentPage] = useState(1);
-	const postsPerPage = 3;
 
+	// Destructuring data and functions from usePostManagement hook
+	const { fetchPosts, fetchedPosts, handleLike } = usePostManagement();
+
+	// State for managing the current page number in pagination
+	const [currentPage, setCurrentPage] = useState(1);
+	const postsPerPage = 3; // Number of posts to display per page
+
+	// Fetching posts when the component mounts or when featureStatus changes
 	useEffect(() => {
 		fetchPosts();
 	}, [featureStatus]);
 
+	// Calculating the index range of posts to display on the current page
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
 	const currentPosts = fetchedPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+	// Function to update the current page in pagination
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+	// Render the AllPostsRoute component
 	return (
 		<div className='width-container'>
 			<ul className='pagination'>
@@ -72,4 +85,5 @@ const AllPostsRoute = ({ featureStatus }) => {
 	);
 };
 
+// Exporting the AllPostsRoute component as the default export
 export default AllPostsRoute;

@@ -1,15 +1,19 @@
+// Import necessary modules and libraries
 require('dotenv').config();
 const https = require('https');
-const postModel = require('../models/postModel');
-const commentModel = require('../models/commentModel');
-const mongoose = require('mongoose');
-const postmark = require('postmark');
+const postModel = require('../models/postModel'); // Importing Post model
+const commentModel = require('../models/commentModel'); // Importing Comment model
+const mongoose = require('mongoose'); // Importing mongoose for MongoDB interactions
+const postmark = require('postmark'); // Importing Postmark for email notifications
 
+// Creating a Postmark client using the API key from environment variables
 const client = new postmark.ServerClient(process.env.POSTMARK_KEY);
 
+// Function to get posts with a specific status
 const getPostStatus = async (req, res) => {
 	const { status } = req.query;
 	try {
+		// Fetch posts with the specified feature status and sort them by creation date
 		const userPosts = await postModel
 			.find({ featureStatus: status })
 			.sort({ createdAt: -1 });
@@ -22,11 +26,12 @@ const getPostStatus = async (req, res) => {
 	}
 };
 
-//GET all posts of user with ID
+// Function to get all posts of a specific user using user ID
 const getUsersPost = async (req, res) => {
 	const { userId } = req.params;
 
 	try {
+		// Find and return all posts associated with the given user ID
 		const userPosts = await postModel.find({ 'user.id': userId });
 		res.json(userPosts);
 	} catch (err) {
@@ -34,26 +39,31 @@ const getUsersPost = async (req, res) => {
 	}
 };
 
-//add like to post
+// Function to add a like to a post
 const addLikeToPost = async (req, res) => {
 	const { id } = req.params;
 	const { userId } = req.body;
 
+	// Check if the provided post ID is valid
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		return res.status(404).json({ error: 'No such post found' });
 	}
 
 	try {
+		// Find the post by ID
 		let post = await postModel.findById(id);
 
+		// Check if the post exists
 		if (!post) {
 			return res.status(404).json({ error: 'No such post found' });
 		}
 
+		// Check if the user has already liked the post
 		if (post.likes.includes(userId)) {
 			return res.status(400).json({ error: 'User already liked the post' });
 		}
 
+		// Add user ID to the likes array and increment the upvotes count
 		post.likes.push(userId);
 		post.upvotes += 1;
 		post = await post.save();
@@ -71,6 +81,7 @@ const addTagsToPost = async (postId, tags) => {
 	}
 
 	try {
+		// Find the post by ID and update its tags
 		const post = await postModel.findById(postId);
 
 		if (!post) {
@@ -86,12 +97,13 @@ const addTagsToPost = async (postId, tags) => {
 	}
 };
 
-// update tags of a post, for admin later
+// Function to update tags of a post (for admin)
 const updatePostTags = async (req, res) => {
 	const { id } = req.params;
 	const { tags } = req.body;
 
 	try {
+		// Call the addTagsToPost function to update tags
 		const updatedPost = await addTagsToPost(id, tags);
 
 		res.status(200).json(updatedPost);
@@ -100,13 +112,14 @@ const updatePostTags = async (req, res) => {
 	}
 };
 
-//Search request
+// Function to handle search requests
 const getSearchRequest = async (req, res) => {
-	const searchTerm = req.query.q; // get search term from the query parameter
+	const searchTerm = req.query.q; // Get search term from the query parameter
 
 	try {
+		// Use MongoDB text index for searching posts based on the search term
 		const matchedPosts = await postModel.find({
-			$text: { $search: searchTerm }, // use mongoDB text index
+			$text: { $search: searchTerm },
 		});
 
 		if (matchedPosts.length === 0) {
@@ -119,8 +132,10 @@ const getSearchRequest = async (req, res) => {
 	}
 };
 
+// Function to get all posts sorted by creation date
 const getPosts = async (req, res) => {
 	try {
+		// Fetch all posts and sort them by creation date
 		const posts = await postModel.find({}).sort({ createdAt: -1 });
 		res.status(200).json(posts);
 	} catch (err) {
@@ -128,14 +143,16 @@ const getPosts = async (req, res) => {
 	}
 };
 
-//Get single post
+// Function to get a single post by ID
 const getPost = async (req, res) => {
 	const { id } = req.params;
 
+	// Check if the provided post ID is valid
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		return res.status(404).json({ error: 'No such post found' });
 	}
 
+	// Find the post by ID and populate its comments
 	const post = await postModel.findById(id).populate('comments');
 
 	if (!post) {
@@ -145,7 +162,7 @@ const getPost = async (req, res) => {
 	res.status(200).json(post);
 };
 
-// create a new post
+// Function to create a new post
 const createPost = async (req, res) => {
 	const {
 		title,
@@ -160,6 +177,7 @@ const createPost = async (req, res) => {
 	} = req.body;
 
 	try {
+		// Create a new post using the provided data
 		const post = await postModel.create({
 			title,
 			status,
@@ -172,6 +190,7 @@ const createPost = async (req, res) => {
 			feature_request_id,
 		});
 
+		// Send an email notification about the new post using Postmark
 		await client.sendEmail({
 			From: 'uclfeedback@webdock.io',
 			To: 'nikolaihesel@icloud.com',
@@ -179,6 +198,7 @@ const createPost = async (req, res) => {
 			TextBody: `A new post "${title}" has been created.`,
 		});
 
+		// Prepare data for making a request to a feature request endpoint
 		const requestData = JSON.stringify({
 			userID: user.id,
 			title: title,
@@ -186,6 +206,7 @@ const createPost = async (req, res) => {
 			category: featureStatus,
 		});
 
+		// Make a request to the feature request endpoint
 		const options = {
 			hostname: 'webdock.io',
 			port: 443,
@@ -205,6 +226,7 @@ const createPost = async (req, res) => {
 			response.on('end', async () => {
 				console.log('Response from feature request endpoint:', responseData);
 				try {
+					// Parse the response and update the feature_request_id in the post
 					const parsedResponse = JSON.parse(responseData);
 					const featureRequestId = parsedResponse.id;
 
@@ -235,14 +257,16 @@ const createPost = async (req, res) => {
 		res.status(400).json({ error: error.message });
 	}
 };
-// delete post from db
+// Function to delete a post from the database
 const deletePost = async (req, res) => {
 	const { id } = req.params;
 
+	// Check if the provided post ID is valid
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		return res.status(400).json({ error: 'No such post' });
 	}
 
+	// Find and delete the post by ID
 	const post = await postModel.findOneAndDelete({ _id: id });
 
 	if (!post) {
@@ -252,14 +276,16 @@ const deletePost = async (req, res) => {
 	res.status(200).json(post);
 };
 
-// update a post
+// Function to update a post
 const updatePost = async (req, res) => {
 	const { id } = req.params;
 
+	// Check if the provided post ID is valid
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		return res.status(400).json({ error: 'No such post' });
 	}
 
+	// Find and update the post by ID
 	const post = await postModel.findOneAndUpdate(
 		{ _id: id },
 		{
@@ -274,8 +300,9 @@ const updatePost = async (req, res) => {
 	res.status(200).json(post);
 };
 
+// Function to update post status by feature_request_id
 const updatePostStatusByFeatureRequestId = async (req, res) => {
-	const { feature_request_id, status } = req.body; // Matching field names
+	const { feature_request_id, status } = req.body;
 
 	try {
 		// Find the post by the given feature_request_id
@@ -288,7 +315,7 @@ const updatePostStatusByFeatureRequestId = async (req, res) => {
 		}
 
 		// Update the status of the post using status field
-		post.featureStatus = status; // Assigning status to featureStatus
+		post.featureStatus = status;
 		await post.save();
 
 		return res
@@ -300,27 +327,29 @@ const updatePostStatusByFeatureRequestId = async (req, res) => {
 	}
 };
 
-//Add comment to post
+// Function to create a comment for a post
 const createPostComment = async (req, res) => {
-	const { id } = req.params; //destruct - tager værdier i en variable der hedder det samme
+	const { id } = req.params;
 	const comment = new commentModel({
 		bodyText: req.body.bodyText,
 		user: req.body.user,
 		post: id,
 	});
 
-	await comment.save(); //venter på db gemmer så den kan gå videre
+	await comment.save(); // Wait for the comment to be saved to the database
+
 
 	const postRelated = await postModel.findById(id);
 
-	postRelated.comments.push(comment); //sætter noget lokalt i array
+	// Add the comment to the post's comments array
+	postRelated.comments.push(comment);
 	await postRelated.save();
 
 	res.status(200).json(comment);
 };
 
 
-
+// Function to handle status change for a post
 const handleStatusChange = async (req, res) => {
 	const { id } = req.params;
 	const { newStatus } = req.body;
@@ -345,7 +374,7 @@ const handleStatusChange = async (req, res) => {
 	}
 };
 
-
+// Exporting all the functions as module exports
 module.exports = {
 	getPosts,
 	getPost,

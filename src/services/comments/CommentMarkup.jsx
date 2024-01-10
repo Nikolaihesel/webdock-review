@@ -1,7 +1,10 @@
+// Importing React and component-specific styles
 import React from 'react';
 import './comments.css';
 
+// CommentMarkup component definition
 function CommentMarkup({ Name, BodyText }) {
+	// Render the CommentMarkup component
 	return (
 		<div>
 			<div className='comment'>
@@ -12,4 +15,5 @@ function CommentMarkup({ Name, BodyText }) {
 	);
 }
 
+// Exporting the CommentMarkup component as the default export
 export default CommentMarkup;

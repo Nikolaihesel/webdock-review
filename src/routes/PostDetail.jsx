@@ -1,3 +1,4 @@
+// Importing necessary React hooks, components, and styles
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { usePostManagement } from '../services/PostManagement';
@@ -6,24 +7,35 @@ import './postDetail.css';
 import CommentMarkup from '../services/comments/CommentMarkup';
 import axios from 'axios';
 
+// PostDetail component definition
 const PostDetail = () => {
+	// State to track admin status
 	const [admin, setAdmin] = useState(false);
+
+	// Extracting postId from the route parameters
 	const { postId } = useParams();
+
+	// Navigate hook for programmatic navigation
 	const navigate = useNavigate();
+
+	// Destructuring values from the usePostManagement hook
 	const { fetchPostsById, fetchedPosts, user, handleDelete, handleLike } =
 		usePostManagement();
 
+	// useEffect hook to fetch post details when the component mounts or postId changes	
 	useEffect(() => {
 		fetchPostsById(postId);
 	}, [postId]);
 
+	// Toggle admin status
 	const handleToggle = () => {
 		setAdmin(!admin);
 	};
 
+	// Function to handle status change
 	const handleStatusChange = async (newStatus) => {
 		try {
-		  // Send a PATCH request to the general status change endpoint
+		  // Send a PATCH request to update the post status
 		  await axios.patch(`http://localhost:4000/api/posts/${fetchedPosts._id}/status`, {
 			newStatus,
 		  });
@@ -33,24 +45,27 @@ const PostDetail = () => {
 		} catch (error) {
 		  console.error('Error updating post status:', error);
 		}
+
+		// Show a popup message indicating the status update
 		showPopup(`Status updated to: ${newStatus}`);
 	};
 
-	// Funktion til at vise popup
+// Function to show a popup message
 const showPopup = (message) => {
 	const popup = document.createElement('div');
 	popup.className = 'popup';
 	popup.textContent = message;
   
-	// Tilføj popup til body
+	// Append popup to the body
 	document.body.appendChild(popup);
   
-	// Fjern popup efter nogle sekunder (f.eks. 3 sekunder)
+	// Remove popup after a while
 	setTimeout(() => {
 	  document.body.removeChild(popup);
-	}, 1000); // 1000 ms = 1 sekunder
+	}, 1000); // 1000 ms = 1 second
   };	
 
+  // Render the PostDetail component
 	return (
 		<>
 			{' '}
@@ -149,4 +164,5 @@ const showPopup = (message) => {
 	);
 };
 
+// Exporting the PostDetail component as the default export
 export default PostDetail;

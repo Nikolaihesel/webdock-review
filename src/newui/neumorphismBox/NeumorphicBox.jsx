@@ -1,5 +1,7 @@
+// Importing the styles for NeumorphicBox from the associated stylesheet
 import './NeumorphicBox.scss';
 
+// Definition of NeumorphicBox component
 const NeumorphicBox = ({ RoutesHeading }) => {
 	// const getShadowColor = (color) => {
 	// 	// Extract RGB values from the background color
@@ -28,4 +30,5 @@ const NeumorphicBox = ({ RoutesHeading }) => {
 	);
 };
 
+// Export NeumorphicBox component as the default export
 export default NeumorphicBox;

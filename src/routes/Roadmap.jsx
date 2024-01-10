@@ -1,15 +1,19 @@
+// Importing React and necessary hooks, components, and styles
 import React from 'react';
 import { useState, useEffect, useContext } from 'react';
 import { Routes, Route, NavLink, Link, Outlet } from 'react-router-dom';
 
-//Components
+// Importing components
 import Post from '../assets/components/PostData';
 import ModalButton from '../assets/components/button/Button';
-//Css
+
+// Importing styles
 import '../assets/stylesheet/roadmap.css';
 import RoadmapKPI from '../assets/components/roadmapSidenav/RoadmapKPI';
 
+// Roadmap component definition
 function Roadmap() {
+	// Render the Roadmap component
 	return (
 		<div className='roadmap-container'>
 			<div className='roadmap-nav'>
@@ -87,4 +91,5 @@ function Roadmap() {
 	);
 }
 
+// Exporting the Roadmap component as the default export
 export default Roadmap;

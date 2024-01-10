@@ -1,8 +1,15 @@
+// React library imports
 import React from 'react';
+
+// Styling import
 import './mainBoardRoutes.css';
+
+// React Router imports for navigation
 import { NavLink, Link } from 'react-router-dom';
 
+// MainBoardRoutes component definition
 function MainBoardRoutes() {
+	// Return JSX for rendering the main board routes
 	return (
 		<div className='mainboard-routes'>
 			<div className='mainboard-flex'>
@@ -41,4 +48,5 @@ function MainBoardRoutes() {
 	);
 }
 
+// Export MainBoardRoutes component as the default export
 export default MainBoardRoutes;
